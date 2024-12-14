@@ -10,6 +10,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+
+      - name: Debug SSH
+        run: |
+          echo "Checking SSH configuration..."
+          ls -la ~/.ssh
+          cat ~/.ssh/known_hosts
+          ssh -T git@github.com
+
       - name: Checkout Code
         uses: actions/checkout@v3
         with:
