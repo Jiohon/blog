@@ -1,8 +1,9 @@
-import { useState } from 'react'
-import { useResponsive } from 'antd-style'
+import { useState } from "react"
 
-import { useIsomorphicLayoutEffect } from './useIsomorphicEffect'
-import { useWindowScrolling } from './useWindowScrolling'
+import { useResponsive } from "antd-style"
+
+import { useIsomorphicLayoutEffect } from "./useIsomorphicEffect"
+import { useWindowScrolling } from "./useWindowScrolling"
 
 /**
  * @description Header组件的动画效果。
@@ -21,9 +22,9 @@ export const useStickyHeader = (heights: [desktop: number, mobile: number]) => {
   useIsomorphicLayoutEffect(() => {
     const limit = mobile ? heights[0] : heights[1]
 
-    if (scrollTop >= limit && direction === 'down') {
+    if (scrollTop >= limit && direction === "down") {
       setStickyHeader(true)
-    } else if (direction === 'up' && scrollTop === 0) {
+    } else if (direction === "up" && scrollTop === 0) {
       setStickyHeader(false)
     }
   }, [scrollTop, direction])

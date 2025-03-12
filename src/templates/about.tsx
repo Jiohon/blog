@@ -1,11 +1,14 @@
-import type { HeadFC, PageProps } from 'gatsby'
-import { graphql } from 'gatsby'
-import React from 'react'
+import React from "react"
 
-import SEO from '@/components/SEO'
-import MeSidebar from '@/components/Sidebar/MeSidebar'
-import PrismSyntaxHighlight from '@/components/MDXRenderer'
-import { useStyles } from './styles/about.style'
+import { graphql } from "gatsby"
+
+import PrismSyntaxHighlight from "@/components/MDXRenderer"
+import SEO from "@/components/SEO"
+import MeSidebar from "@/components/Sidebar/MeSidebar"
+
+import { useStyles } from "./styles/about.style"
+
+import type { HeadFC, PageProps } from "gatsby"
 
 /**
  * @description 个人介绍页面
@@ -13,7 +16,7 @@ import { useStyles } from './styles/about.style'
  * @export
  * @return {*}
  */
-const AboutTemplate: React.FC<PageProps<MdxNodesQuery<'me'>, MdxQuery>> = (props) => {
+const AboutTemplate: React.FC<PageProps<MdxNodesQuery<"me">, MdxQuery>> = (props) => {
   const { data, children } = props
   const { styles } = useStyles()
 
@@ -37,7 +40,7 @@ export const Head: HeadFC<MdxQuery> = ({ location, data }) => {
   return (
     <>
       <SEO
-        title={frontmatter?.title || 'About me'}
+        title={frontmatter?.title || "About me"}
         description={frontmatter?.description}
         pathName={location.pathname}
       />

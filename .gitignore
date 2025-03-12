@@ -75,9 +75,12 @@ yarn.lock
 package-lock.json
 
 # pnpm
-pnpm-lock.yaml
+# pnpm-lock.yaml
 
 # bun
 bun.lockb
 
 content/
+
+*local.sh
+.secrets

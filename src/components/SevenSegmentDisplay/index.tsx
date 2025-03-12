@@ -1,8 +1,9 @@
-import React, { useMemo } from 'react'
-import { useStyles } from './style'
-import SevenSegmentDisplayProvider from './Provider'
-import Digit from './Digit'
-import { DigitType } from './types'
+import React, { useMemo } from "react"
+
+import Digit from "./Digit"
+import SevenSegmentDisplayProvider from "./Provider"
+import { useStyles } from "./style"
+import { DigitType } from "./types"
 
 export interface RetroHitCounterProps {
   value: number
@@ -26,17 +27,17 @@ const RetroHitCounter: React.FC<RetroHitCounterProps> = (props) => {
     digitSpacing = digitSize / 4,
     segmentThickness = digitSize / 8,
     segmentSpacing = segmentThickness / 4,
-    segmentActiveColor = '#adb0b8',
-    segmentInactiveColor = '#eff1f5',
-    backgroundColor = '#eff1f5',
+    segmentActiveColor = "#adb0b8",
+    segmentInactiveColor = "#eff1f5",
+    backgroundColor = "#eff1f5",
     padding = digitSize / 4,
     glow = false,
   } = props
 
   const { styles } = useStyles()
 
-  const paddedValue = useMemo(() => value.toString().padStart(minLength, '0'), [value, minLength])
-  const individualDigits = useMemo(() => paddedValue.split(''), [paddedValue])
+  const paddedValue = useMemo(() => value.toString().padStart(minLength, "0"), [value, minLength])
+  const individualDigits = useMemo(() => paddedValue.split(""), [paddedValue])
 
   return (
     <SevenSegmentDisplayProvider
@@ -47,7 +48,10 @@ const RetroHitCounter: React.FC<RetroHitCounterProps> = (props) => {
       segmentInactiveColor={segmentInactiveColor}
       glow={glow}
     >
-      <div className={styles.sevenSegmentDisplay} style={{ padding, backgroundColor, gap: digitSpacing }}>
+      <div
+        className={styles.sevenSegmentDisplay}
+        style={{ padding, backgroundColor, gap: digitSpacing }}
+      >
         {individualDigits.map((digit, idx) => (
           <Digit key={idx} value={Number(digit) as DigitType} />
         ))}

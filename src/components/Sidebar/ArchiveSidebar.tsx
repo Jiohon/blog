@@ -1,8 +1,9 @@
-import { Card } from 'antd'
-import { useStyles } from './style'
+import { Card } from "antd"
 
-import Sticky from '../Sticky'
-import MenuBar from '../MenuBar'
+import MenuBar from "../MenuBar"
+import Sticky from "../Sticky"
+
+import { useStyles } from "./style"
 
 interface ArchiveSidebarProps {
   tags: GroupItem[]
@@ -23,7 +24,7 @@ const ArchiveSidebar: React.FC<ArchiveSidebarProps> = ({ tags }) => {
           <MenuBar.Title>标签</MenuBar.Title>
           {Tags.map((t) => (
             <MenuBar.Tag key={t.name} to={t.path} className={styles.tag}>
-              # {t.name}
+              #{t.name}
             </MenuBar.Tag>
           ))}
         </MenuBar>

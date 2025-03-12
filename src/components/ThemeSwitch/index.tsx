@@ -1,17 +1,20 @@
-import { useMemo, memo } from 'react'
-import type { FC } from 'react'
-import { Button, Dropdown } from 'antd'
-import { useThemeMode } from '@/hooks/useThemeMode'
-import { isSSR } from '@/utils/func'
-import IconAuto from '@/components/Icons/Auto'
-import IconLight from '@/components/Icons/Light'
-import IconDark from '@/components/Icons/Dark'
-import { useStyles } from './style'
+import { memo, useMemo } from "react"
+import type { FC } from "react"
+
+import { Button, Dropdown } from "antd"
+
+import IconAuto from "@/components/Icons/Auto"
+import IconDark from "@/components/Icons/Dark"
+import IconLight from "@/components/Icons/Light"
+import { useThemeMode } from "@/hooks/useThemeMode"
+import { isSSR } from "@/utils/func"
+
+import { useStyles } from "./style"
 
 const items = [
-  { key: 'auto', label: ' 跟随系统', icon: <IconAuto /> },
-  { key: 'light', label: ' 亮色模式', icon: <IconLight /> },
-  { key: 'dark', label: ' 暗色模式', icon: <IconDark /> },
+  { key: "auto", label: " 跟随系统", icon: <IconAuto /> },
+  { key: "light", label: " 亮色模式", icon: <IconLight /> },
+  { key: "dark", label: " 暗色模式", icon: <IconDark /> },
 ]
 
 const ThemeSwitch: FC = memo(() => {
@@ -37,11 +40,14 @@ const ThemeSwitch: FC = memo(() => {
 
     transition.ready.then(() => {
       document.documentElement.animate(
-        [{ clipPath: `circle(0% at ${x}px ${y}px)` }, { clipPath: `circle(100% at ${x}px ${y}px)` }],
+        [
+          { clipPath: `circle(0% at ${x}px ${y}px)` },
+          { clipPath: `circle(100% at ${x}px ${y}px)` },
+        ],
         {
           duration: 500,
-          easing: 'ease-in',
-          pseudoElement: '::view-transition-new(root)',
+          easing: "ease-in",
+          pseudoElement: "::view-transition-new(root)",
         }
       )
     })
@@ -51,7 +57,7 @@ const ThemeSwitch: FC = memo(() => {
     <>
       <Dropdown
         menu={{ items, selectable: true, selectedKeys: [themeMode], subMenuCloseDelay: 0, onClick }}
-        trigger={['click']}
+        trigger={["click"]}
         placement="bottom"
       >
         <Button className={styles.button} type="text">

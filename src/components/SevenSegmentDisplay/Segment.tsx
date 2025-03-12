@@ -1,6 +1,7 @@
-import React, { useContext, useMemo } from 'react'
-import { SevenSegmentDisplayContext } from './Provider'
-import { SegmentID } from './types'
+import React, { useContext } from "react"
+
+import { SevenSegmentDisplayContext } from "./Provider"
+import { SegmentID } from "./types"
 
 export interface SegmentProps {
   segmentId: SegmentID

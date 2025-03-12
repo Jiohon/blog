@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react"
 
 const Gatsby: React.FC<IconProps> = (props) => {
   return (
@@ -12,7 +12,10 @@ const Gatsby: React.FC<IconProps> = (props) => {
       stroke="currentColor"
       {...props}
     >
-      <path fill="#fff" d="M44,24c0,11.044-8.956,20-20,20S4,35.044,4,24S12.956,4,24,4S44,12.956,44,24z"></path>
+      <path
+        fill="#fff"
+        d="M44,24c0,11.044-8.956,20-20,20S4,35.044,4,24S12.956,4,24,4S44,12.956,44,24z"
+      ></path>
       <linearGradient
         id="_QeCb_GwMoodiBb_c5Ynha_gB16AKgvayey_gr1"
         x1="4"

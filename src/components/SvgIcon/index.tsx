@@ -1,4 +1,4 @@
-import { Languages } from '@/utils/code'
+import { Languages } from "@/utils/code"
 
 type SVGIconProps = {
   id: Languages

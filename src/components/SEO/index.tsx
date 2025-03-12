@@ -1,11 +1,35 @@
-import { useSiteMetadata } from '@/hooks/useSiteMetadata'
-import { ReactNode } from 'react'
+import { ReactNode } from "react"
+
+import { useSiteMetadata } from "@/hooks/useSiteMetadata"
 
 interface SEOProps {
   title?: string
   description?: string
   pathName?: string
   children?: ReactNode
+}
+
+interface SchemaOrgJSONLD {
+  "@context": string
+  "@type": string
+  url?: string
+  name?: string
+  alternateName?: string
+  itemListElement?: Array<{
+    "@type": string
+    position: number
+    item: {
+      "@id": string
+      name: string
+      image: string
+    }
+  }>
+  headline?: string
+  image?: {
+    "@type": string
+    url: string
+  }
+  description?: string
 }
 
 const SEO: React.FC<SEOProps> = ({ title, description, pathName, children }) => {
@@ -21,10 +45,10 @@ const SEO: React.FC<SEOProps> = ({ title, description, pathName, children }) => 
     repository: `${site.repository}`,
   }
 
-  const schemaOrgJSONLD: any[] = [
+  const schemaOrgJSONLD: SchemaOrgJSONLD[] = [
     {
-      '@context': 'http://schema.org',
-      '@type': 'WebSite',
+      "@context": "http://schema.org",
+      "@type": "WebSite",
       url: site.siteUrl,
       name: seo.title,
       alternateName: seo.title,
@@ -34,14 +58,14 @@ const SEO: React.FC<SEOProps> = ({ title, description, pathName, children }) => 
   if (pathName) {
     schemaOrgJSONLD.push(
       {
-        '@context': 'http://schema.org',
-        '@type': 'BreadcrumbList',
+        "@context": "http://schema.org",
+        "@type": "BreadcrumbList",
         itemListElement: [
           {
-            '@type': 'ListItem',
+            "@type": "ListItem",
             position: 1,
             item: {
-              '@id': seo.url,
+              "@id": seo.url,
               name: seo.title,
               image: seo.image,
             },
@@ -49,14 +73,14 @@ const SEO: React.FC<SEOProps> = ({ title, description, pathName, children }) => 
         ],
       },
       {
-        '@context': 'http://schema.org',
-        '@type': 'BlogPosting',
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
         url: site.siteUrl,
         name: seo.title,
         alternateName: seo.title,
         headline: seo.title,
         image: {
-          '@type': 'ImageObject',
+          "@type": "ImageObject",
           url: seo.image,
         },
         description: seo.description,
@@ -83,7 +107,7 @@ const SEO: React.FC<SEOProps> = ({ title, description, pathName, children }) => 
       <meta name="twitter:description" content={seo.description} />
       <meta name="twitter:image" content={seo.image} />
 
-      <link rel="shortcut icon" type="image/png" href={'/favicon.ico'} />
+      <link rel="shortcut icon" type="image/png" href={"/favicon.ico"} />
 
       <script type="application/ld+json">{JSON.stringify(schemaOrgJSONLD)}</script>
       {children}

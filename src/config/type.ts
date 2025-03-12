@@ -1,4 +1,4 @@
-import { PrismTheme } from 'prism-react-renderer'
+import { PrismTheme } from "prism-react-renderer"
 
 interface MenuItem {
   url: string
@@ -8,8 +8,7 @@ interface MenuItem {
 }
 
 interface Theme {
-  backgroundColor: string
-  cardBackgroundColor: string
+  colorBgLayout: string
   codeHighlight: PrismTheme
 }
 
@@ -30,7 +29,7 @@ interface Themes {
  * @interface Headers
  */
 interface Headers {
-  menu: Omit<MenuItem, 'icon'>[]
+  menu: Omit<MenuItem, "icon">[]
   // 导航栏右侧的社交链接
   social: MenuItem[]
 }
@@ -54,6 +53,10 @@ interface Footers {
  * @extends {SiteMetadata}
  */
 interface SiteConfig {
+  /**
+   * 评论组件
+   */
+  comment: boolean
   themes: Themes
   headers: Headers
   footers: Footers

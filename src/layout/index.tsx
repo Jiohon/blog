@@ -1,12 +1,13 @@
-import { App, message } from 'antd'
-import { useEventListener } from 'ahooks'
-import SiteThemeProvider from '@/context/siteThemeProvider'
-import SiteStoreProvider from '@/context/siteStoreProvider'
+import { useEventListener } from "ahooks"
+import { App, message } from "antd"
 
-import { Footer } from './footer/index'
-import { Header } from './header/index'
+import Splitter from "@/components/Icons/Splitter"
+import SiteStoreProvider from "@/context/SiteStoreProvider"
+import SiteThemeProvider from "@/context/SiteThemeProvider"
 
-import { useStyles } from './style'
+import { Footer } from "./footer/index"
+import { Header } from "./header/index"
+import { useStyles } from "./style"
 
 interface LayoutProps {
   children: React.ReactNode
@@ -16,10 +17,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const { styles } = useStyles()
   const [messageApi, contextHolder] = message.useMessage()
 
-  useEventListener('copy', () => {
+  useEventListener("copy", () => {
     messageApi.open({
-      type: 'success',
-      content: 'Copied 🎉',
+      type: "success",
+      content: "Copied 🎉",
       duration: 2,
     })
   })
@@ -32,6 +33,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <div className={styles.layout}>
             <Header />
             <main className={styles.content}>{children}</main>
+            <Splitter />
+
             <Footer />
           </div>
         </App>

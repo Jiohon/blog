@@ -1,4 +1,4 @@
-import { createStyles } from 'antd-style'
+import { createStyles } from "antd-style"
 
 export const useStyles = createStyles(({ css, cx, token, prefixCls }) => {
   return {
@@ -23,7 +23,7 @@ export const useStyles = createStyles(({ css, cx, token, prefixCls }) => {
         &::marker {
           font-size: 1.1rem;
           line-height: 1;
-          color: ${token.colorPrimaryHover};
+          color: ${token.colorPrimaryBorderHover};
         }
       `
     ),

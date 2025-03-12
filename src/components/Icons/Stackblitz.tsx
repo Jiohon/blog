@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react"
 
 const Stackblitz: React.FC<IconProps> = (props) => {
   return (

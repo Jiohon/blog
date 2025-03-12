@@ -10,25 +10,51 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Set up SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
-
-      - name: Debug SSH
-        run: |
-          echo "Checking SSH configuration..."
-          ls -la ~/.ssh
-          cat ~/.ssh/known_hosts
-          ssh -T git@github.com
-
       - name: Checkout Code
         uses: actions/checkout@v3
         with:
           submodules: recursive
           ssh-key: ${{ secrets.PRIVATE_KEY }}
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+
+          # 明确设置 GitHub 的 IP 地址
+          echo "140.82.113.4 github.com" | sudo tee -a /etc/hosts
+          
+          # 检查密钥文件是否存在及其权限
+          ls -la ~/.ssh/id_ed25519
+          
+          # 检查密钥的指纹（安全地显示密钥信息）
+          ssh-keygen -l -f ~/.ssh/id_ed25519
+          
+          # 检查 SSH 配置
+          echo "Host github.com
+            HostName github.com
+            User git
+            IdentityFile ~/.ssh/id_ed25519
+            StrictHostKeyChecking no
+            UserKnownHostsFile=/dev/null
+            LogLevel DEBUG3" > ~/.ssh/config
+
+          # 添加 GitHub 的公钥
+          curl -L https://api.github.com/meta | jq -r '.ssh_keys[]' | sed -e 's/^/github.com /' > ~/.ssh/known_hosts
+          
+          
+          # 测试 SSH 连接（使用详细模式）
+          ssh -Tv git@github.com || true
+
+      - name: Update Submodules
+        env:
+          GIT_SSH_COMMAND: "ssh -v -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no"  # 添加这个环境变量
+        run: |
+          rm -rf .git/modules/*
+          git submodule deinit -f .
+          git submodule sync --recursive
+          git submodule update --init --recursive --force
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -50,11 +76,6 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
-
-      - name: Update Submodules
-        run: |
-          git submodule sync
-          git submodule update --init --recursive
 
       - name: Build Project
         run: pnpm build

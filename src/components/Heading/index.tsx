@@ -1,7 +1,9 @@
-import React from 'react'
-import { Link } from 'gatsby'
-import { Typography } from 'antd'
-import { useStyles } from './style'
+import React from "react"
+
+import { Typography } from "antd"
+import { Link } from "gatsby"
+
+import { useStyles } from "./style"
 
 /**
  * @description 标题

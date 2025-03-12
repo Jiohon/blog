@@ -1,12 +1,14 @@
-import React, { useContext, useMemo } from 'react'
-import { DigitType, SegmentID } from './types'
-import Segment from './Segment'
-import { isSegmentActive } from './utils'
-import { SevenSegmentDisplayContext } from './Provider'
-import { useStyles } from './style'
-import color from 'color'
+import React, { useContext, useMemo } from "react"
 
-const segments: SegmentID[] = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+import color from "color"
+
+import { SevenSegmentDisplayContext } from "./Provider"
+import Segment from "./Segment"
+import { useStyles } from "./style"
+import { DigitType, SegmentID } from "./types"
+import { isSegmentActive } from "./utils"
+
+const segments: SegmentID[] = ["a", "b", "c", "d", "e", "f", "g"]
 
 export interface DigitProps {
   value: DigitType
@@ -14,13 +16,21 @@ export interface DigitProps {
 
 const Digit: React.FC<DigitProps> = ({ value }) => {
   const { styles } = useStyles()
-  const { digitSize, segmentThickness, segmentActiveColor, glow } = useContext(SevenSegmentDisplayContext)
+  const { digitSize, segmentThickness, segmentActiveColor, glow } = useContext(
+    SevenSegmentDisplayContext
+  )
 
   const width = digitSize * 0.5
   const height = digitSize
 
-  const activeSegments = useMemo(() => segments.filter((seg) => isSegmentActive(seg, value)), [value])
-  const inactiveSegments = useMemo(() => segments.filter((seg) => !isSegmentActive(seg, value)), [value])
+  const activeSegments = useMemo(
+    () => segments.filter((seg) => isSegmentActive(seg, value)),
+    [value]
+  )
+  const inactiveSegments = useMemo(
+    () => segments.filter((seg) => !isSegmentActive(seg, value)),
+    [value]
+  )
 
   return (
     <div className={styles.digit} style={{ width, height }}>
@@ -41,8 +51,10 @@ const Digit: React.FC<DigitProps> = ({ value }) => {
         className="lighted"
         style={{
           filter: glow
-            ? `drop-shadow(0 0 ${segmentThickness * 1.5}px ${color(segmentActiveColor).fade(0.25).hexa()})`
-            : 'none',
+            ? `drop-shadow(0 0 ${segmentThickness * 1.5}px ${color(segmentActiveColor)
+                .fade(0.25)
+                .hexa()})`
+            : "none",
         }}
         width={width}
         height={height}

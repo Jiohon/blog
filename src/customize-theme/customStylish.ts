@@ -1,6 +1,6 @@
-import { GetCustomStylish } from 'antd-style'
+import { GetCustomStylish } from "antd-style"
 
-declare module 'antd-style' {
+declare module "antd-style" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
   export interface CustomStylish extends SiteStylish {}
 }

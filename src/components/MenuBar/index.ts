@@ -1,9 +1,8 @@
-import InternalMenuBar from './MenuBar'
-
-import Title from './Title'
-import Link from './Link'
-import Text from './Text'
-import Tag from './Tag'
+import Link from "./Link"
+import InternalMenuBar from "./MenuBar"
+import Tag from "./Tag"
+import Text from "./Text"
+import Title from "./Title"
 
 type InternalMenuBarType = typeof InternalMenuBar
 

@@ -1,21 +1,22 @@
-import { HeadFC, navigate } from 'gatsby'
-import { Button } from 'antd'
+import { Button } from "antd"
+import { HeadFC, navigate } from "gatsby"
 
-import SEO from '@/components/SEO'
-import { useStyles } from './styles/_404.style'
+import SEO from "@/components/SEO"
+
+import { useStyles } from "./styles/_404.style"
 
 const FourOhFour = () => {
   const { styles } = useStyles()
 
-  const ToHome = () => {
-    navigate('/')
+  const toHome = () => {
+    navigate("/" as never)
   }
 
   return (
     <>
       <div className={styles.container}>
         <div className="tip">404</div>
-        <Button type="text" onClick={ToHome}>
+        <Button type="text" onClick={toHome}>
           Back to home page
         </Button>
       </div>

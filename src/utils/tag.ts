@@ -6,7 +6,7 @@
  */
 export const extractHref = (str: string): string => {
   const value = /(?<=<a.*href=").*(?=")/.exec(str)
-  return value?.length ? value[0] : ''
+  return value?.length ? value[0] : ""
 }
 
 /**
@@ -17,7 +17,7 @@ export const extractHref = (str: string): string => {
  */
 export const extractValue = (str: string): string => {
   const value = /(?<=">).*(?=<\/a)/.exec(str)
-  return value?.length ? value[0] : ''
+  return value?.length ? value[0] : ""
 }
 
 /**
@@ -28,14 +28,14 @@ export const extractValue = (str: string): string => {
  */
 export const extractID = (str: string): string => {
   const value = str.match(/(?<=<h4.*id=").*(?="\sstyle)/)
-  return value?.length ? value[0].replace(/-/g, ' ') : ''
+  return value?.length ? value[0].replace(/-/g, " ") : ""
 }
 
 /**
  * @description 获取path
  */
 export const extractPathname = (path: string): string => {
-  return path.split('/')[2]
+  return path.split("/")[2]
 }
 
 type TagTypes = React.ElementType
@@ -46,7 +46,7 @@ type TagTypes = React.ElementType
  * @example extractTag('<p>Example</p><div>Test</div>','p')
  * @returns string
  */
-export const extractTag = (str: string, tag: TagTypes = 'div') => {
+export const extractTag = (str: string, tag: TagTypes = "div") => {
   const tagRegExp = new RegExp(`<${tag}.*?${tag}>`)
   const tagRegExpArr = tagRegExp.exec(str)
 

@@ -2,46 +2,114 @@
   "parser": "@typescript-eslint/parser",
   "extends": [
     "eslint:recommended",
+    "plugin:import/recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
     "plugin:react-hooks/recommended",
     "prettier"
   ],
-  "plugins": ["react", "@typescript-eslint/eslint-plugin", "react-hooks", "prettier"],
-  // "globals": {
-  //   "__PATH_PREFIX__": true
-  // },
+  "plugins": ["react", "@typescript-eslint", "react-hooks", "prettier"],
   "parserOptions": {
     "sourceType": "module",
+    "ecmaVersion": 2022,
     "ecmaFeatures": {
       "jsx": true
     }
   },
   "settings": {
     "react": {
-      "version": "16.8" // 告诉eslint-plugin-react自动检测要使用的React版本
-    }
+      "version": "detect"
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": "./tsconfig.json"
+      },
+      "node": {
+        "paths": ["src"],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    },
+    "import/internal-regex": "^@/|^src/"
   },
-
   "rules": {
-    "prettier/prettier": "error",
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": false
+      },
+      {
+        "usePrettierrc": true
+      }
+    ],
+    "sort-imports": [
+      "error",
+      {
+        "ignoreCase": true,
+        "ignoreDeclarationSort": true,
+        "ignoreMemberSort": false,
+        "memberSyntaxSortOrder": ["none", "all", "multiple", "single"],
+        "allowSeparatedGroups": true
+      }
+    ],
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "object",
+          "type"
+        ],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        },
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "builtin",
+            "position": "before"
+          },
+          {
+            "pattern": "@/**",
+            "group": "internal",
+            "position": "after"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["react"]
+      }
+    ],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "react/require-default-props": "off",
-    "@typescript-eslint/explicit-function-return-type": 0,
-    "@typescript-eslint/no-non-null-assertion": 0,
-    "@typescript-eslint/no-empty-interface": 0,
-    "jsx-a11y/accessible-emoji": 0,
-    "jsx-a11y/iframe-has-title": 0,
-    "import/no-unresolved": 0,
-    "no-const-assign": 1,
-    "prefer-const": 1,
-    "@typescript-eslint/no-explicit-any": 0,
-    "react/display-name": 0,
-    "@typescript-eslint/ban-ts-comment": 0,
-    "react/prop-types": 0,
-    "react/react-in-jsx-scope": 0
-    // "import/order":[]
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "ignoreRestSiblings": true
+      }
+    ],
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-explicit-any": "warn",
+    "react/prop-types": "off",
+    "@typescript-eslint/no-non-null-assertion": "warn",
+    "@typescript-eslint/ban-ts-comment": "warn",
+    "react/display-name": "off",
+    "react/no-unescaped-entities": "off",
+    "no-unused-vars": "off",
+    "import/no-unresolved": "error",
+    "import/named": "error",
+    "import/namespace": "error",
+    "import/default": "error",
+    "import/export": "error"
   }
 }

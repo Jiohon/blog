@@ -1,4 +1,4 @@
-import { createStyles } from 'antd-style'
+import { createStyles } from "antd-style"
 
 export const useStyles = createStyles(({ css, stylish, cx, responsive: r, token, prefixCls }) => ({
   home: cx(
@@ -126,7 +126,12 @@ export const useStyles = createStyles(({ css, stylish, cx, responsive: r, token,
       font-weight: 600;
       padding: 0;
       border: 0;
-      background: linear-gradient(to right, ${token.colorTextSecondary}, ${token.colorTextSecondary}) no-repeat;
+      background: linear-gradient(
+          to right,
+          ${token.colorTextSecondary},
+          ${token.colorTextSecondary}
+        )
+        no-repeat;
       background-size: 0 1px;
       background-position: right bottom;
       transition: background-size 0.25s;
@@ -153,7 +158,12 @@ export const useStyles = createStyles(({ css, stylish, cx, responsive: r, token,
       a {
         font-size: 0.75rem;
         color: ${token.colorTextDescription};
-        background: linear-gradient(to right, ${token.colorTextSecondary}, ${token.colorTextSecondary}) no-repeat;
+        background: linear-gradient(
+            to right,
+            ${token.colorTextSecondary},
+            ${token.colorTextSecondary}
+          )
+          no-repeat;
         background-size: 0 1px;
         background-position: right bottom;
         transition: background-size 0.3s;

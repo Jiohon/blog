@@ -1,5 +1,5 @@
-import { createStyles } from 'antd-style'
+import { createStyles } from "antd-style"
 
-export const useStyles = createStyles(({ css, cx, token, stylish, prefixCls }) => {
+export const useStyles = createStyles(() => {
   return {}
 })

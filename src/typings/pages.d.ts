@@ -67,9 +67,9 @@ type AllMdxQuery = {
   }
 }
 
-type MdxNodesQuery<T = 'mdx', V = MdxQuery> = Record<T extends null ? 'mdx' : T, V>
+type MdxNodesQuery<T = "mdx", V = MdxQuery> = Record<T extends null ? "mdx" : T, V>
 
-type allMdxNodesQuery<T = 'allMdx', V = AllMdxQuery> = Record<T extends null ? 'allMdx' : T, V>
+type allMdxNodesQuery<T = "allMdx", V = AllMdxQuery> = Record<T extends null ? "allMdx" : T, V>
 
 interface ImageItem {
   id: number
@@ -94,4 +94,4 @@ interface GroupItem {
   totalCount: number
 }
 
-type Group = Record<'group', GroupItem[]>
+type Group = Record<"group", GroupItem[]>

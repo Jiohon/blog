@@ -1,4 +1,4 @@
-import { useStyles } from './style'
+import { useStyles } from "./style"
 
 interface CodeHighlightProps {
   children: string | React.ReactNode

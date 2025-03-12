@@ -1,8 +1,8 @@
-import { createStyles } from 'antd-style'
+import { createStyles } from "antd-style"
 
 export const useStyles = createStyles(({ css, cx, token, stylish, responsive: r, prefixCls }) => ({
-  article: cx(
-    `${prefixCls}-article-container`,
+  post: cx(
+    `${prefixCls}-post-container`,
     css`
       ${stylish.template}
 
@@ -19,7 +19,7 @@ export const useStyles = createStyles(({ css, cx, token, stylish, responsive: r,
   ),
 
   title: cx(
-    `${prefixCls}-article-title`,
+    `${prefixCls}-post-title`,
     css`
       &.${prefixCls}-typography {
         padding-block-start: 7rem;
@@ -43,12 +43,13 @@ export const useStyles = createStyles(({ css, cx, token, stylish, responsive: r,
   ),
 
   information: cx(
-    `${prefixCls}-article-information`,
+    `${prefixCls}-post-information`,
     css`
       width: 100%;
       border-block-end: 1px dashed ${token.colorBorder};
       padding-block-end: 3.2rem;
       margin-block-end: 3.2rem;
+      font-size: 13px;
 
       .times {
         width: 100%;
@@ -57,13 +58,17 @@ export const useStyles = createStyles(({ css, cx, token, stylish, responsive: r,
       }
 
       .${prefixCls}-tag {
-        color: ${token.colorPrimary};
-        background-color: ${token.colorPrimaryBg};
+        color: ${token.colorTextSecondary};
         padding-block: 0.1rem;
         padding-inline: 0.7rem;
-        border-radius: 2rem;
+        border-radius: ${token.borderRadius}px;
         font-weight: 500;
         cursor: pointer;
+
+        &:hover {
+          color: ${token.colorPrimaryHover};
+          background-color: ${token.colorPrimaryBg};
+        }
       }
     `
   ),

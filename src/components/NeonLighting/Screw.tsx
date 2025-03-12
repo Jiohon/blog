@@ -1,4 +1,4 @@
-import { useStyles } from './style'
+import { useStyles } from "./style"
 
 const Screw: React.FC<{ className: string }> = ({ className }) => {
   const { styles, cx } = useStyles()

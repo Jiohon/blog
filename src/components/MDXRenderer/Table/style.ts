@@ -1,4 +1,4 @@
-import { createStyles } from 'antd-style'
+import { createStyles } from "antd-style"
 
 export const useStyles = createStyles(({ css, cx, token, prefixCls }) => {
   return {
@@ -36,7 +36,7 @@ export const useStyles = createStyles(({ css, cx, token, prefixCls }) => {
           border-block-end: 1px solid ${token.colorBgElevated};
 
           &::before {
-            content: '';
+            content: "";
             position: absolute;
             top: 50%;
             inset-inline-end: 0;
@@ -49,7 +49,7 @@ export const useStyles = createStyles(({ css, cx, token, prefixCls }) => {
 
           &:last-child {
             &::before {
-              content: '';
+              content: "";
               width: 0;
             }
           }

@@ -1,5 +1,6 @@
-import { FunctionComponent, ReactNode, CSSProperties } from 'react'
-import { useStyles } from './style'
+import { CSSProperties, FunctionComponent, ReactNode } from "react"
+
+import { useStyles } from "./style"
 
 interface TextProps {
   className?: string
@@ -9,11 +10,17 @@ interface TextProps {
   marker?: boolean
 }
 
-const Text: FunctionComponent<TextProps> = ({ className, children, marker = true, extra, ...otherProps }) => {
+const Text: FunctionComponent<TextProps> = ({
+  className,
+  children,
+  marker = true,
+  extra,
+  ...otherProps
+}) => {
   const { styles, cx } = useStyles()
 
   const ExtraChildren = () => {
-    if (typeof extra !== 'object') {
+    if (typeof extra !== "object") {
       return <span className="extra">{extra}</span>
     }
 

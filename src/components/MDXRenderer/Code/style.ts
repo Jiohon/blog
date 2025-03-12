@@ -1,6 +1,6 @@
-import { createStyles } from 'antd-style'
+import { createStyles } from "antd-style"
 
-export const useStyles = createStyles(({ css, cx, token, isDarkMode, prefixCls }) => {
+export const useStyles = createStyles(({ css, cx, token, prefixCls }) => {
   return {
     // code
     code: cx(
@@ -8,7 +8,7 @@ export const useStyles = createStyles(({ css, cx, token, isDarkMode, prefixCls }
       css`
         color: ${token.colorPrimary};
         font-size: 0.95rem;
-        background-color: ${isDarkMode ? 'rgba(255, 255, 255, 0.06)' : 'rgba(0, 0, 0, 0.03)'};
+        background-color: ${token.colorFillDefaultBg};
         padding-block: 0.25rem;
         padding-inline: 0.45rem;
         border-radius: ${token.borderRadiusOuter}px;

@@ -1,14 +1,14 @@
-import { createStyles } from 'antd-style'
+import { createStyles } from "antd-style"
 
 export const useStyles = createStyles(({ css, cx, responsive: r, token, prefixCls }) => ({
-  article: cx(
-    `${prefixCls}-article`,
+  post: cx(
+    `${prefixCls}-post`,
     css`
       margin-block-end: 3rem;
     `
   ),
   year: cx(
-    `${prefixCls}-article-year`,
+    `${prefixCls}-post-year`,
     css`
       color: ${token.colorPrimaryHover};
       padding-block-end: 0.8rem;
@@ -25,7 +25,7 @@ export const useStyles = createStyles(({ css, cx, responsive: r, token, prefixCl
   ),
 
   link: cx(
-    `${prefixCls}-article-link`,
+    `${prefixCls}-post-link`,
     css`
       display: flex;
       align-items: center;

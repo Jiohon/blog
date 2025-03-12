@@ -1,4 +1,4 @@
-import { createStyles } from 'antd-style'
+import { createStyles } from "antd-style"
 
 export const useStyles = createStyles(({ css, cx, token, prefixCls }) => {
   const menuBarItem = css`
@@ -99,17 +99,17 @@ export const useStyles = createStyles(({ css, cx, token, prefixCls }) => {
           height: auto;
           line-height: 20px;
           color: ${token.colorTextSecondary};
-          background-color: ${token.colorFillQuaternary};
+          background-color: ${token.colorFillDefaultBg};
           text-transform: capitalize;
           margin-block-start: 0.7rem;
           margin-inline-end: 0.6rem;
           padding-block: 0.2rem;
           padding-inline: 8px;
-          border-radius: ${token.borderRadiusSM}px;
+          border-radius: ${token.borderRadius}px;
 
           &:hover {
             color: ${token.colorPrimaryHover};
-            background-color: ${token.colorPrimaryBgHover};
+            background-color: ${token.colorPrimaryBg};
           }
 
           &:active {

@@ -6,7 +6,7 @@
 export const isSSR = (function () {
   try {
     return (
-      typeof window === 'undefined' ||
+      typeof window === "undefined" ||
       !window.navigator ||
       /ServerSideRendering|^Deno\//.test(window.navigator.userAgent)
     )
@@ -28,10 +28,10 @@ export const randomString = () => Math.random().toString(36).slice(2)
  * @return {*}  {string}
  */
 export const randomColor = () =>
-  '#' +
+  "#" +
   Math.floor(Math.random() * 0xffffff)
     .toString(16)
-    .padEnd(6, '0')
+    .padEnd(6, "0")
 
 /**
  * @description 解析url参数
@@ -51,29 +51,30 @@ export const parseQuery = (url: string) => {
  */
 export function copyToClipboard(text: string) {
   if (navigator.clipboard) {
-    //@ts-ignore
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     copyToClipboard = (text) => navigator.clipboard.writeText(text)
   } else {
-    //@ts-ignore
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     copyToClipboard = (text) => {
-      const textArea = document.createElement('textarea')
+      const textArea = document.createElement("textarea")
       textArea.value = text
 
       // Avoid scrolling to bottom
-      textArea.style.top = '0'
-      textArea.style.left = '0'
-      textArea.style.position = 'fixed'
+      textArea.style.top = "0"
+      textArea.style.left = "0"
+      textArea.style.position = "fixed"
 
       document.body.appendChild(textArea)
       textArea.focus()
       textArea.select()
 
       try {
-        const successful = document.execCommand('copy')
-        const msg = successful ? 'Copied to clipboard successfully!' : 'Could not copy text'
-        console.log(msg)
+        const successful = document.execCommand("copy")
+        successful ? "Copied to clipboard successfully!" : "Could not copy text"
       } catch (err) {
-        console.error('Fallback: Could not copy text: ', err)
+        console.error("Fallback: Could not copy text: ", err)
       }
 
       document.body.removeChild(textArea)

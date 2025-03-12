@@ -1,17 +1,20 @@
-import { useCallback, useEffect, useMemo } from 'react'
-import { useThemeMode as useAntdThemeMode } from 'antd-style'
-import type { ThemeMode, ThemeContextState } from 'antd-style'
-import { useThemeStore } from '@/store/useThemeStore'
-import { safeStartTransition } from '@/utils/safeStartTransition'
-import { isSSR } from '@/utils/func'
+import { useCallback, useMemo } from "react"
 
-const THEME = '(prefers-color-scheme: dark)'
+import { useThemeMode as useAntdThemeMode } from "antd-style"
+
+import { useThemeStore } from "@/store/useThemeStore"
+import { isSSR } from "@/utils/func"
+import { safeStartTransition } from "@/utils/safeStartTransition"
+
+import type { ThemeContextState, ThemeMode } from "antd-style"
+
+const THEME = "(prefers-color-scheme: dark)"
 
 /**
  * @description 获取系统当前外观模式
  * @date 30/09/2022
  */
-const osTheme = () => (!isSSR && window?.matchMedia(THEME).matches ? 'dark' : 'light')
+const osTheme = () => (!isSSR && window?.matchMedia(THEME).matches ? "dark" : "light")
 
 /**
  * @description 主题外观模式。
@@ -24,7 +27,7 @@ export const useThemeMode = (): ThemeContextState => {
   const theme = useAntdThemeMode()
 
   const appearance = useMemo(() => {
-    if (storeTheme === 'auto') {
+    if (storeTheme === "auto") {
       return osTheme()
     } else {
       return storeTheme

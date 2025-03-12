@@ -1,5 +1,6 @@
-import { FunctionComponent } from 'react'
-import { useStyles } from './style'
+import { FunctionComponent } from "react"
+
+import { useStyles } from "./style"
 
 interface StickyProps {
   children

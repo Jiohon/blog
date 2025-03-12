@@ -1,5 +1,6 @@
-import React from 'react'
-import { useStyles } from './style'
+import React from "react"
+
+import { useStyles } from "./style"
 
 /**
  * @description 简介
@@ -13,7 +14,13 @@ interface BriefHeaderProps {
   children?: React.ReactNode
 }
 
-const BriefHeader: React.FC<BriefHeaderProps> = ({ title, greeting, highlight, description, children }) => {
+const BriefHeader: React.FC<BriefHeaderProps> = ({
+  title,
+  greeting,
+  highlight,
+  description,
+  children,
+}) => {
   const { styles } = useStyles()
 
   return (

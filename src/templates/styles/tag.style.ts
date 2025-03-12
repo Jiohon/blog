@@ -1,6 +1,6 @@
-import { createStyles } from 'antd-style'
+import { createStyles } from "antd-style"
 
-export const useStyles = createStyles(({ css, cx, token, stylish, responsive: r, prefixCls }) => ({
+export const useStyles = createStyles(({ css, cx, stylish, responsive: r, prefixCls }) => ({
   tag: cx(
     `${prefixCls}-tag-container`,
     css`

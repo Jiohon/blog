@@ -1,8 +1,8 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const visit = require(`unist-util-visit`)
+import visit from "unist-util-visit"
 
-import type { Plugin, Transformer } from 'unified'
+import type { Plugin, Transformer } from "unified"
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const parseMetaProps = (str): Record<string, any> => {
   const props = {}
   // 正则表达式捕获完整的键值对、简写属性和花括号内容
@@ -22,7 +22,7 @@ const parseMetaProps = (str): Record<string, any> => {
 
       // 去除引号的字符串
       if ([/^\{([^}]+)\}$/, /^"([^}]+)"$/].some((i) => i.test(value))) {
-        value = value.replace(/^[{|"|']([^}]+)[}|"|']$/, '$1')
+        value = value.replace(/^[{|"|']([^}]+)[}|"|']$/, "$1")
       }
 
       // 布尔值处理
@@ -37,7 +37,7 @@ const parseMetaProps = (str): Record<string, any> => {
       const bracesMatch = match[3].match(/^\{([^}]+)\}$/)
 
       if (bracesMatch) {
-        props['highlight'] = bracesMatch[1]
+        props["highlight"] = bracesMatch[1]
       }
     }
   }
@@ -46,6 +46,7 @@ const parseMetaProps = (str): Record<string, any> => {
 }
 
 const transformer: Transformer = (ast) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   visit(ast, `element`, (node: any) => {
     if (node.tagName === `code` && node.data && node.data.meta) {
       const metaProps = parseMetaProps(node.data.meta)

@@ -1,8 +1,9 @@
-import { useResponsive } from 'antd-style'
-import { SpringValue, useSpring } from '@react-spring/web'
-import { useIsomorphicLayoutEffect } from './useIsomorphicEffect'
-import { useStickyHeader } from './useStickyHeader'
-import { useWindowScrolling, SCROLL_DIR } from './useWindowScrolling'
+import { SpringValue, useSpring } from "@react-spring/web"
+import { useResponsive } from "antd-style"
+
+import { useIsomorphicLayoutEffect } from "./useIsomorphicEffect"
+import { useStickyHeader } from "./useStickyHeader"
+import { SCROLL_DIR, useWindowScrolling } from "./useWindowScrolling"
 
 type UseAnimatedHeaderProps = {
   isHeader?: boolean
@@ -54,12 +55,12 @@ export const useAnimatedHeader = ({
    */
   useIsomorphicLayoutEffect(() => {
     const limit = mobile ? heights[0] : heights[1]
-    if (direction === 'down') {
+    if (direction === "down") {
       api.start({
         top: isHeader ? limit * -1 : 0,
         y: isHeader ? limit * -1 : 0,
       })
-    } else if (direction === 'up') {
+    } else if (direction === "up") {
       api.start({
         top: 0,
         y: 0,

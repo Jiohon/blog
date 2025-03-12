@@ -1,6 +1,8 @@
-import { FunctionComponent, ReactNode, CSSProperties } from 'react'
-import { Link as GatsbyLink } from 'gatsby'
-import { useStyles } from './style'
+import { CSSProperties, FunctionComponent, ReactNode } from "react"
+
+import { Link as GatsbyLink } from "gatsby"
+
+import { useStyles } from "./style"
 
 interface TagProps {
   className?: string

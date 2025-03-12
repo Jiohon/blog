@@ -1,4 +1,4 @@
-import React, { createContext, PropsWithChildren } from 'react'
+import React, { createContext, PropsWithChildren } from "react"
 
 export interface SevenSegmentDisplayContext {
   digitSize: number
@@ -9,15 +9,18 @@ export interface SevenSegmentDisplayContext {
   glow: boolean
 }
 
-export interface SevenSegmentDisplayProviderProps extends SevenSegmentDisplayContext {}
+export type SevenSegmentDisplayProviderProps = SevenSegmentDisplayContext
 
 export const SevenSegmentDisplayContext = createContext({} as SevenSegmentDisplayContext)
 
-const SevenSegmentDisplayProvider: React.FC<PropsWithChildren<SevenSegmentDisplayProviderProps>> = ({
-  children,
-  ...rest
-}) => {
-  return <SevenSegmentDisplayContext.Provider value={rest}>{children}</SevenSegmentDisplayContext.Provider>
+const SevenSegmentDisplayProvider: React.FC<
+  PropsWithChildren<SevenSegmentDisplayProviderProps>
+> = ({ children, ...rest }) => {
+  return (
+    <SevenSegmentDisplayContext.Provider value={rest}>
+      {children}
+    </SevenSegmentDisplayContext.Provider>
+  )
 }
 
 export default SevenSegmentDisplayProvider

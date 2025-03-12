@@ -1,6 +1,8 @@
-import { FunctionComponent, ReactNode, CSSProperties } from 'react'
-import { Link as GatsbyLink } from 'gatsby'
-import { useStyles } from './style'
+import { CSSProperties, FunctionComponent, ReactNode } from "react"
+
+import { Link as GatsbyLink } from "gatsby"
+
+import { useStyles } from "./style"
 
 interface LinkProps {
   children: ReactNode
@@ -17,11 +19,18 @@ interface LinkProps {
   to: string
 }
 
-const Link: FunctionComponent<LinkProps> = ({ className, children, marker = true, extra, to, ...otherProps }) => {
+const Link: FunctionComponent<LinkProps> = ({
+  className,
+  children,
+  marker = true,
+  extra,
+  to,
+  ...otherProps
+}) => {
   const { styles, cx } = useStyles()
 
   const ExtraChildren = () => {
-    if (typeof extra !== 'object') {
+    if (typeof extra !== "object") {
       return <span className="extra">{extra}</span>
     }
 
@@ -35,7 +44,7 @@ const Link: FunctionComponent<LinkProps> = ({ className, children, marker = true
           {...otherProps}
           to={to}
           className="link"
-          style={{ paddingInline: marker ? '0' : '0.8em' }}
+          style={{ paddingInline: marker ? "0" : "0.8em" }}
           activeClassName="active"
         >
           <div>

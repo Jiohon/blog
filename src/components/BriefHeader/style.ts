@@ -1,4 +1,4 @@
-import { createStyles } from 'antd-style'
+import { createStyles } from "antd-style"
 
 export const useStyles = createStyles(({ css, cx, responsive: r, token, prefixCls }) => ({
   briefHeader: cx(

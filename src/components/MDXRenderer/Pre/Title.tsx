@@ -1,11 +1,13 @@
-import { Button, Tooltip } from 'antd'
-import stackblitzSdk from '@stackblitz/sdk'
-import { getParameters } from 'codesandbox/lib/api/define'
-import { CodeSandboxOutlined } from '@ant-design/icons'
-import StackblitzSvg from '@/components/Icons/Stackblitz'
-import { Languages } from '@/utils/code'
-import { useStyles } from './style'
-import Copy from './Copy'
+import { CodeSandboxOutlined } from "@ant-design/icons"
+import stackblitzSdk from "@stackblitz/sdk"
+import { Button, Tooltip } from "antd"
+import { getParameters } from "codesandbox/lib/api/define"
+
+import StackblitzSvg from "@/components/Icons/Stackblitz"
+import { Languages } from "@/utils/code"
+
+import Copy from "./Copy"
+import { useStyles } from "./style"
 
 interface TitleProps {
   title: string
@@ -15,21 +17,21 @@ interface TitleProps {
 }
 
 const Title: React.FC<TitleProps> = ({ title, codeString, language, highlightRef }) => {
-  const { styles } = useStyles('syntax-preHighlight')
+  const { styles } = useStyles("syntax-preHighlight")
 
   const handleToStackblitz = () => {
     stackblitzSdk.openProject(
       {
-        title: title || 'index.js',
-        description: '',
-        template: 'javascript',
+        title: title || "index.js",
+        description: "",
+        template: "javascript",
         files: {
-          'index.html': `<div id="app"></div>`,
-          'index.js': codeString,
+          "index.html": `<div id="app"></div>`,
+          "index.js": codeString,
         },
         settings: {
           compile: {
-            trigger: 'auto',
+            trigger: "auto",
             clearConsole: false,
           },
         },
@@ -46,11 +48,11 @@ const Title: React.FC<TitleProps> = ({ title, codeString, language, highlightRef
     try {
       const parameters = getParameters({
         files: {
-          'index.js': {
+          "index.js": {
             content: codeString,
             isBinary: false,
           },
-          'package.json': {
+          "package.json": {
             content: JSON.stringify({ dependencies: {} }),
             isBinary: false,
           },
@@ -59,9 +61,9 @@ const Title: React.FC<TitleProps> = ({ title, codeString, language, highlightRef
 
       const url = `https://codesandbox.io/api/v1/sandboxes/define?parameters=${parameters}&utm_medium=sandpack`
 
-      window.open(url, '_blank')
+      window.open(url, "_blank")
     } catch (error) {
-      console.error('Error creating sandbox:', error)
+      console.error("Error creating sandbox:", error)
     }
   }
 
@@ -71,14 +73,24 @@ const Title: React.FC<TitleProps> = ({ title, codeString, language, highlightRef
 
       <div className={styles.language}>
         <Tooltip title="在 Stackblitz 中打开">
-          <Button className={styles.stackblitz} size="small" type="link" onClick={handleToStackblitz}>
+          <Button
+            className={styles.stackblitz}
+            size="small"
+            type="link"
+            onClick={handleToStackblitz}
+          >
             <StackblitzSvg />
           </Button>
         </Tooltip>
 
         <Tooltip title="在 CodeSandbox 中打开">
-          <Button className={styles.stackblitz} size="small" type="link" onClick={handleToCodeSandbox}>
-            <CodeSandboxOutlined style={{ fontSize: '1.1em' }} />
+          <Button
+            className={styles.codeSandbox}
+            size="small"
+            type="link"
+            onClick={handleToCodeSandbox}
+          >
+            <CodeSandboxOutlined style={{ fontSize: "1.1em" }} />
           </Button>
         </Tooltip>
 

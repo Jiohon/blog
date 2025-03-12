@@ -1,9 +1,12 @@
-import type { GetCustomToken } from 'antd-style'
-import { GeneratePresetTypes } from '@/customize-theme/theme/generate'
+import { FastColor } from "@ant-design/fast-color"
 
-declare module 'antd-style' {
+import { GeneratePresetTypes } from "@/customize-theme/theme/generate"
+
+import type { GetCustomToken } from "antd-style"
+
+declare module "antd-style" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  export interface CustomToken extends SiteToken, GeneratePresetTypes<'gray'> {}
+  export interface CustomToken extends SiteToken, GeneratePresetTypes<"gray"> {}
 }
 
 /**
@@ -38,9 +41,14 @@ export interface SiteToken {
   gradientLogo: string
 
   /**
-   * @title 表格head背景色
+   * @title 代码块高亮背景色
    */
-  tableHeaderBg: string
+  colorBgCodeHighlight: string
+
+  /**
+   * @title 默认填充色
+   */
+  colorFillDefaultBg: string
   /**
    * @title 第四级阴影样式
    */
@@ -49,6 +57,8 @@ export interface SiteToken {
 
 export const createCustomToken: GetCustomToken<SiteToken> = ({ isDarkMode, token }) => {
   return {
+    borderRadius: 8,
+
     headerHeight: 64,
     headerHeightMobile: 50,
 
@@ -57,18 +67,20 @@ export const createCustomToken: GetCustomToken<SiteToken> = ({ isDarkMode, token
     footerHeight: 160,
     footerHeightMobile: 130,
 
-    gradientLogo: `linear-gradient(45deg,#90d5ff 45%,${token.colorPrimary})`,
+    gradientLogo: `linear-gradient(45deg,#90d5ff 20%,${token.colorPrimary})`,
 
     fontFamilyCode: `SF Mono Medium,${token.fontFamilyCode}`,
 
-    colorHighlight: isDarkMode ? '#16182c' : '#ebf1ff',
-    borderRadius: 8,
+    colorHighlight: isDarkMode ? "#16182c" : "#ebf1ff",
 
-    tableHeaderBg: isDarkMode ? '#1d1d1d' : '#fafafa',
+    colorBgCodeHighlight: isDarkMode ? "#1d1d1d" : "#fafafa",
 
-    highlightBackgroundColor: '',
+    colorFillDefaultBg: new FastColor(token.colorFillQuaternary)
+      .onBackground(token.colorBgContainer)
+      .toHexString(),
+
     boxShadowFourth: isDarkMode
-      ? ''
-      : '0px 0.8px 2px rgba(0, 0, 0, 0.028),0px 2.7px 6.7px rgba(0, 0, 0, 0.03),0px 3px 15px rgba(0, 0, 0, 0.052)',
+      ? ""
+      : "0px 0.8px 2px rgba(0, 0, 0, 0.028),0px 2.7px 6.7px rgba(0, 0, 0, 0.03),0px 3px 15px rgba(0, 0, 0, 0.052)",
   }
 }

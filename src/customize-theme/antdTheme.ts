@@ -1,7 +1,8 @@
-import type { GetAntdTheme } from 'antd-style'
-import { darkTheme, lightTheme } from './theme'
+import { darkTheme, lightTheme } from "./theme"
+
+import type { GetAntdTheme } from "antd-style"
 
 export const getAntdTheme: GetAntdTheme = (appearance) => {
-  const theme = appearance === 'dark' ? darkTheme : lightTheme
+  const theme = appearance === "dark" ? darkTheme : lightTheme
   return theme
 }

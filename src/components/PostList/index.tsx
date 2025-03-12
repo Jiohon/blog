@@ -1,24 +1,26 @@
-import React, { useMemo } from 'react'
-import { Link } from 'gatsby'
-import SVGIcon from '@/components/SvgIcon'
-import ArrowRight from '@/components/Icons/ArrowRight'
+import React, { useMemo } from "react"
 
-import { useStyles } from './style'
+import { Link } from "gatsby"
 
-interface ArticleListProps {
+import ArrowRight from "@/components/Icons/ArrowRight"
+import SVGIcon from "@/components/SvgIcon"
+
+import { useStyles } from "./style"
+
+interface PostListProps {
   data: Frontmatter[]
 }
 
 /**
  * @description 文章列表
  */
-const ArticleList: React.FC<ArticleListProps> = ({ data }) => {
+const PostList: React.FC<PostListProps> = ({ data }) => {
   const { styles } = useStyles()
-  const articleByYear = useMemo(() => {
+  const postByYear = useMemo(() => {
     const collection: YearListData = {}
 
     data.forEach((item) => {
-      const year = item.date?.split(', ')[1]
+      const year = item.date?.split(", ")[1]
 
       collection[year] = [...(collection[year] || []), item]
     })
@@ -26,14 +28,14 @@ const ArticleList: React.FC<ArticleListProps> = ({ data }) => {
     return collection
   }, [data])
 
-  const years = useMemo(() => Object.keys(articleByYear).reverse(), [articleByYear])
+  const years = useMemo(() => Object.keys(postByYear).reverse(), [postByYear])
 
   return (
     <>
       {years.map((year) => (
-        <article className={styles.article} key={year}>
+        <div className={styles.post} key={year}>
           <div className={styles.year}>{year}</div>
-          {articleByYear[year].map((node) => (
+          {postByYear[year].map((node) => (
             <Link className={styles.link} to={`/${node.slug}`} key={node.slug}>
               <SVGIcon id={node.icon} width="3em" height="3em"></SVGIcon>
               <div className="infos">
@@ -44,10 +46,10 @@ const ArticleList: React.FC<ArticleListProps> = ({ data }) => {
               <ArrowRight />
             </Link>
           ))}
-        </article>
+        </div>
       ))}
     </>
   )
 }
 
-export default ArticleList
+export default PostList

@@ -1,5 +1,6 @@
-import { FunctionComponent, ReactNode, CSSProperties } from 'react'
-import { useStyles } from './style'
+import { CSSProperties, FunctionComponent, ReactNode } from "react"
+
+import { useStyles } from "./style"
 
 interface MenuBarProps {
   className?: string

@@ -1,4 +1,4 @@
-import { createStyles } from 'antd-style'
+import { createStyles } from "antd-style"
 
 export const useStyles = createStyles(({ css, stylish, responsive: r, cx, prefixCls }) => ({
   heading: cx(

@@ -1,4 +1,4 @@
-import { useStaticQuery, graphql } from 'gatsby'
+import { graphql, useStaticQuery } from "gatsby"
 
 export type SiteMetadata = {
   /**
@@ -41,7 +41,7 @@ export type SiteMetadataType = {
   }
 }
 
-type UseSiteMetadataType = SiteMetadataType['site']['siteMetadata']
+type UseSiteMetadataType = SiteMetadataType["site"]["siteMetadata"]
 
 export const useSiteMetadata = (): UseSiteMetadataType => {
   const { site } = useStaticQuery<SiteMetadataType>(graphql`

@@ -1,4 +1,4 @@
-import { useStyles } from './style'
+import { useStyles } from "./style"
 
 const Table: React.FC<React.TableHTMLAttributes<HTMLTableElement>> = (props) => {
   const { styles } = useStyles()

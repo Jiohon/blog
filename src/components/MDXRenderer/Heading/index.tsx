@@ -1,6 +1,8 @@
-import { useRef } from 'react'
-import { Typography } from 'antd'
-import { useStyles } from './style'
+import { useRef } from "react"
+
+import { Typography } from "antd"
+
+import { useStyles } from "./style"
 
 const { Title, Link } = Typography
 
@@ -26,8 +28,17 @@ const heading =
     }
 
     return (
-      <Title level={level} id={`#${children}`} className={cx(styles.heading, styles.levelStyle, `h${level}`)}>
-        <Link ref={linkRef} id={`${children}`} className={styles.link} onClick={(e) => handleClick(e, children)}>
+      <Title
+        level={level}
+        id={`#${children}`}
+        className={cx(styles.heading, styles.levelStyle, `h${level}`)}
+      >
+        <Link
+          ref={linkRef}
+          id={`${children}`}
+          className={styles.link}
+          onClick={(e) => handleClick(e, children)}
+        >
           #
         </Link>
 

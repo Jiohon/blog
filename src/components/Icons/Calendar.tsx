@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react"
 
 const Calendar: React.FC<IconProps> = (props) => {
   return (
@@ -8,7 +8,7 @@ const Calendar: React.FC<IconProps> = (props) => {
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
-      style={{ display: 'inherit' }}
+      style={{ display: "inherit" }}
       {...props}
     >
       <path

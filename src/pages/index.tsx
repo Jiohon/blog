@@ -1,15 +1,18 @@
-import { Card, Space } from 'antd'
-import type { HeadFC, PageProps } from 'gatsby'
-import { Link, graphql } from 'gatsby'
-import { useMemo } from 'react'
+import { useMemo } from "react"
 
-import BriefHeader from '@/components/BriefHeader'
-import Heading from '@/components/Heading'
-import SEO from '@/components/SEO'
-import SVGIcon from '@/components/SvgIcon'
-import { useSiteStore } from '@/store'
-import { simplifiedQueryData } from '@/utils/helpers'
-import { useStyles } from './styles/_index.style'
+import { Card, Space } from "antd"
+import { graphql, Link } from "gatsby"
+
+import BriefHeader from "@/components/BriefHeader"
+import Heading from "@/components/Heading"
+import SEO from "@/components/SEO"
+import SVGIcon from "@/components/SvgIcon"
+import { useSiteStore } from "@/store"
+import { simplifiedQueryData } from "@/utils/helpers"
+
+import { useStyles } from "./styles/_index.style"
+
+import type { HeadFC, PageProps } from "gatsby"
 
 /**
  * @description 首页
@@ -17,7 +20,9 @@ import { useStyles } from './styles/_index.style'
  * @export
  * @return {*}
  */
-const Home: React.FC<PageProps<allMdxNodesQuery<'latest' | 'Highlights'> & MdxNodesQuery>> = ({ data }) => {
+const Home: React.FC<PageProps<allMdxNodesQuery<"latest" | "Highlights"> & MdxNodesQuery>> = ({
+  data,
+}) => {
   const { styles } = useStyles()
 
   const site = useSiteStore((state) => state.siteMetadata)
@@ -32,8 +37,8 @@ const Home: React.FC<PageProps<allMdxNodesQuery<'latest' | 'Highlights'> & MdxNo
     <Space className={styles.home} direction="vertical" size={[0, 40]}>
       <BriefHeader greeting={<>Hey, I&rsquo;m &nbsp;&nbsp;{site.author}</>}>
         <p className={styles.briefDescription}>
-          I hope you live a life you&rsquo;re proud of. If you find that you&rsquo;re not, I hope you have the courage
-          to start over.
+          I hope you live a life you&rsquo;re proud of. If you find that you&rsquo;re not, I hope
+          you have the courage to start over.
         </p>
         <p className={styles.briefDescription}>
           「 我希望你过着自己引以为傲的生活。如果你发现事实并非如此，我希望你有勇气重新开始 」
@@ -53,7 +58,7 @@ const Home: React.FC<PageProps<allMdxNodesQuery<'latest' | 'Highlights'> & MdxNo
               <div className={styles.tagLinks}>
                 {item.tags &&
                   item.tags
-                    .filter((cat) => cat !== 'Highlight')
+                    .filter((cat) => cat !== "Highlight")
                     .map((cat) => {
                       return (
                         <Link to={`/tags/${cat}`} key={`cat-${cat}`}>
@@ -74,7 +79,11 @@ const Home: React.FC<PageProps<allMdxNodesQuery<'latest' | 'Highlights'> & MdxNo
           <div className={styles.wrapper}>
             {simplifiedHighlights.map((item) => {
               return (
-                <Card className={styles.highlightCard} key={`Highlight-${item.slug}`} bordered={false}>
+                <Card
+                  className={styles.highlightCard}
+                  key={`Highlight-${item.slug}`}
+                  bordered={false}
+                >
                   <SVGIcon id={item.icon} width="5em" height="5em"></SVGIcon>
                   <div className="content">
                     <time className={styles.time}>{item.date}</time>
@@ -109,7 +118,7 @@ export const pageQuery = graphql`
     latest: allMdx(
       limit: 6
       sort: { frontmatter: { date: DESC } }
-      filter: { frontmatter: { template: { eq: "article" }, published: { eq: true } } }
+      filter: { frontmatter: { template: { ne: "page" }, published: { eq: true } } }
     ) {
       nodes {
         ...InformationFragment

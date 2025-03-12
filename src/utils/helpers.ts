@@ -1,29 +1,37 @@
-import type { AnchorLinkItemProps } from 'antd/es/anchor/Anchor'
+import type { AnchorLinkItemProps } from "antd/es/anchor/Anchor"
+
+interface GraphqlNode {
+  frontmatter: Frontmatter
+  [key: string]: any
+}
 
 type ResponseData<T> = T & SimplifiedQueryData
 
-type SimplifiedQueryDataFunction = <T>(
-  nodes: ReadonlyArray<T extends null ? GraphqlNode : T>,
-  callback?: (e: ResponseData<T>) => ResponseData<T>
-) => ResponseData<T>[]
-
+// type SimplifiedQueryDataFunction = <T>(
+//   nodes: ReadonlyArray<T extends null ? GraphqlNode : T>,
+//   callback?: (e: ResponseData<T>) => ResponseData<T>
+// ) => ResponseData<T>[]
 /**
  * @description 简化查询数据
- * @date 20/04/2024
+ * @date 16/01/2025
+ * @template T
  * @param {ReadonlyArray<T extends null ? GraphqlNode : T>} nodes
- * @param {(e: ResponseData<T>) => ResponseData<T>} callback
- * @return {*}  {SimplifiedQueryDataFunction}
+ * @param {(e: ResponseData<T>) => ResponseData<T>} [callback]
+ * @return {*}  {ResponseData<T>[]}
  */
-export const simplifiedQueryData: SimplifiedQueryDataFunction = (nodes, callback) => {
+export const simplifiedQueryData = <T>(
+  nodes: ReadonlyArray<T extends null ? GraphqlNode : T>,
+  callback?: (e: ResponseData<T>) => ResponseData<T>
+): ResponseData<T>[] => {
   if (!nodes) return []
   const result = nodes
     .map((node) => {
-      const { frontmatter } = node as any
+      const { frontmatter, ...rest } = node as GraphqlNode
 
       const newNode = {
-        ...node,
+        ...rest,
         ...frontmatter,
-      }
+      } as ResponseData<T>
 
       if (callback) {
         return callback(newNode)
@@ -31,7 +39,7 @@ export const simplifiedQueryData: SimplifiedQueryDataFunction = (nodes, callback
 
       return newNode
     })
-    .filter((e) => e !== null)
+    .filter((e): e is ResponseData<T> => e !== null)
   return result
 }
 

@@ -1,10 +1,18 @@
-import React from 'react'
-import { useStyles } from './style'
+import React from "react"
+
+import { useStyles } from "./style"
 
 const Copy: React.FC<IconProps> = (props) => {
   const { theme } = useStyles()
   return (
-    <svg width={18} height={18} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" fill="currentColor" {...props}>
+    <svg
+      width={18}
+      height={18}
+      viewBox="0 0 18 18"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      {...props}
+    >
       <g id="empty-clipboard--work-plain-clipboard-task-list-company-office">
         <path
           id="Rectangle 659"

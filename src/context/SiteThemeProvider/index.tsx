@@ -1,12 +1,14 @@
-import React, { memo, useCallback } from 'react'
-import { ThemeProvider, StyleProvider, extractStaticStyle } from 'antd-style'
-import type { CustomTokenParams } from 'antd-style'
-import { useThemeMode } from '@/hooks/useThemeMode'
-import { createCustomToken, getAntdTheme, getCustomStylish } from '@/customize-theme'
-import { GlobalScopeStyle } from '@/customize-theme/globalScopeStyle'
+import React, { memo, useCallback } from "react"
 
-// @ts-ignore
-global['__ANTD_CACHE__'] = extractStaticStyle.cache
+import { extractStaticStyle, StyleProvider, ThemeProvider } from "antd-style"
+
+import { createCustomToken, getAntdTheme, getCustomStylish } from "@/customize-theme"
+import { GlobalScopeStyle } from "@/customize-theme/globalScopeStyle"
+import { useThemeMode } from "@/hooks/useThemeMode"
+
+import type { CustomTokenParams } from "antd-style"
+
+global["__ANTD_CACHE__"] = extractStaticStyle.cache
 
 const SiteThemeProvider = memo<{ children: React.ReactNode }>(({ children }) => {
   const { themeMode } = useThemeMode()
@@ -20,13 +22,13 @@ const SiteThemeProvider = memo<{ children: React.ReactNode }>(({ children }) => 
   return (
     <>
       <ThemeProvider
-        prefixCls={'site'}
+        prefixCls={"site"}
         themeMode={themeMode}
         theme={getAntdTheme}
         customToken={getCustomToken}
         customStylish={getCustomStylish}
       >
-        <StyleProvider prefix={'site'} cache={extractStaticStyle.cache}>
+        <StyleProvider prefix={"site"} cache={extractStaticStyle.cache}>
           <GlobalScopeStyle />
           {children}
         </StyleProvider>

@@ -1,7 +1,9 @@
-import { Divider, Space, Typography } from 'antd'
-import config from '@/config'
-import { useSiteStore } from '@/store'
-import { useStyles } from './style'
+import { Divider, Space, Typography } from "antd"
+
+import config from "@/config"
+import { useSiteStore } from "@/store"
+
+import { useStyles } from "./style"
 
 export const Footer = () => {
   const { styles } = useStyles()
@@ -19,7 +21,13 @@ export const Footer = () => {
 
       <Space size="middle" className={styles.wrapper}>
         {menu.map((link) => (
-          <Typography.Link className={styles.href} key={link.url} href={link.url} title={link.label} target="_blank">
+          <Typography.Link
+            className={styles.href}
+            key={link.url}
+            href={link.url}
+            title={link.label}
+            target="_blank"
+          >
             <span>{link.label}</span>
             <link.icon />
           </Typography.Link>
@@ -28,7 +36,13 @@ export const Footer = () => {
         {friend.length > 0 && <Divider type="vertical" />}
 
         {friend.map((link) => (
-          <Typography.Link className={styles.href} key={link.url} href={link.url} title={link.label} target="_blank">
+          <Typography.Link
+            className={styles.href}
+            key={link.url}
+            href={link.url}
+            title={link.label}
+            target="_blank"
+          >
             <span>{link.label}</span>
             <link.icon />
           </Typography.Link>

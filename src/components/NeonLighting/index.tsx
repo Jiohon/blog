@@ -1,16 +1,18 @@
-import { useMemo, useState } from 'react'
-import { useThemeMode } from '@/hooks/useThemeMode'
-import SevenSegmentDisplay from '@/components/SevenSegmentDisplay'
-import Screw from './Screw'
-import { useStyles } from './style'
+import { useMemo, useState } from "react"
+
+import SevenSegmentDisplay from "@/components/SevenSegmentDisplay"
+import { useThemeMode } from "@/hooks/useThemeMode"
+
+import Screw from "./Screw"
+import { useStyles } from "./style"
 
 const neonColors = [
-  { background: '#0c0c0c', activeColor: '#ff5e00', inactiveColor: '#161616' },
-  { background: '#0c0c0c', activeColor: '#ffffff', inactiveColor: '#161616' },
-  { background: '#0c0c0c', activeColor: '#6cb71b', inactiveColor: '#161616' },
-  { background: '#0c0c0c', activeColor: '#7556ff', inactiveColor: '#161616' },
-  { background: '#0c0c0c', activeColor: '#568cff', inactiveColor: '#161616' },
-  { background: '#0c0c0c', activeColor: '#ff5656', inactiveColor: '#161616' },
+  { background: "#0c0c0c", activeColor: "#ff5e00", inactiveColor: "#161616" },
+  { background: "#0c0c0c", activeColor: "#ffffff", inactiveColor: "#161616" },
+  { background: "#0c0c0c", activeColor: "#6cb71b", inactiveColor: "#161616" },
+  { background: "#0c0c0c", activeColor: "#7556ff", inactiveColor: "#161616" },
+  { background: "#0c0c0c", activeColor: "#568cff", inactiveColor: "#161616" },
+  { background: "#0c0c0c", activeColor: "#ff5656", inactiveColor: "#161616" },
 ]
 
 const NeonLighting = () => {
@@ -24,15 +26,15 @@ const NeonLighting = () => {
     }
     if (isToggled) {
       return {
-        background: '#ccc75f',
-        activeColor: '#5a571c',
-        inactiveColor: '#c4bf48',
+        background: "#ccc75f",
+        activeColor: "#5a571c",
+        inactiveColor: "#c4bf48",
       }
     }
     return {
-      background: '#eff1f5',
-      activeColor: '#adb0b8',
-      inactiveColor: '#eff1f5',
+      background: "#eff1f5",
+      activeColor: "#adb0b8",
+      inactiveColor: "#eff1f5",
     }
   }, [isDarkMode, isToggled, neonColorIdx])
 
@@ -59,7 +61,7 @@ const NeonLighting = () => {
         segmentActiveColor={colorPattern.activeColor}
         segmentInactiveColor={colorPattern.inactiveColor}
         backgroundColor={colorPattern.background}
-        padding={'10px 14px'}
+        padding={"10px 14px"}
         glow
       />
       <div className={cx(styles.twinkling)}></div>

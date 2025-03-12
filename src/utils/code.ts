@@ -1,52 +1,52 @@
-import { PreHighlightProps } from '@/components/MDXRenderer/Pre'
+import { PreHighlightProps } from "@/components/MDXRenderer/Pre"
 
 export type Languages =
-  | 'javascript'
-  | 'typescript'
-  | 'jsx'
-  | 'tsx'
-  | 'md'
-  | 'mdx'
-  | 'html'
-  | 'kotlin'
-  | 'swift'
-  | 'rust'
-  | 'go'
-  | 'java'
-  | 'powershell'
-  | 'css'
-  | 'less'
-  | 'sass'
-  | 'json'
-  | 'nginx'
-  | 'typescript-def'
-  | 'objective-c'
-  | 'c'
-  | 'cpp'
-  | 'ruby'
-  | 'vue'
-  | 'angular'
-  | 'svelte'
-  | 'git'
-  | 'gitlab'
-  | 'npm'
-  | 'pnpm'
-  | 'yarn'
-  | 'webpack'
-  | 'vite'
-  | 'vitest'
-  | 'babel'
-  | 'prettier'
-  | 'stylelint'
-  | 'docker'
-  | 'next'
-  | 'netlify'
-  | 'gatsby'
-  | 'graphql'
-  | 'azure'
-  | 'coffee'
+  | "javascript"
+  | "typescript"
+  | "jsx"
+  | "tsx"
+  | "md"
+  | "mdx"
+  | "html"
+  | "kotlin"
+  | "swift"
+  | "rust"
+  | "go"
+  | "java"
+  | "powershell"
+  | "css"
+  | "less"
+  | "sass"
+  | "json"
+  | "nginx"
+  | "typescript-def"
+  | "objective-c"
+  | "c"
+  | "cpp"
+  | "ruby"
+  | "vue"
+  | "angular"
+  | "svelte"
+  | "git"
+  | "gitlab"
+  | "npm"
+  | "pnpm"
+  | "yarn"
+  | "webpack"
+  | "vite"
+  | "vitest"
+  | "babel"
+  | "prettier"
+  | "stylelint"
+  | "docker"
+  | "next"
+  | "netlify"
+  | "gatsby"
+  | "graphql"
+  | "azure"
+  | "coffee"
 
-export type GetLanguageInput = `language-${Languages}` | ''
+export type GetLanguageInput = `language-${Languages}` | ""
 
 /**
  * @description 语言映射
@@ -100,6 +100,8 @@ export interface CodeNode {
   highlight?: string
   title?: string
   lineNumbers?: boolean
+  fetch?: string
+  maxRows?: number | "infinite"
 
   // [key: string]: any
 }
@@ -149,8 +151,8 @@ export const ToPreParams = (preProps): PreHighlightProps => {
   const { language } = getLanguage(className)
 
   for (const key in props) {
-    if (props[key] === 'true') props[key] = true
-    if (props[key] === 'false') props[key] = false
+    if (props[key] === "true") props[key] = true
+    if (props[key] === "false") props[key] = false
   }
 
   return {
@@ -182,6 +184,8 @@ export const calculateLinesToHighlight = (meta: string) => {
   })
   return (index: number) => {
     const lineNumber = index + 1
-    return lineNumbers.some(([start, end]) => (end ? lineNumber >= start && lineNumber <= end : lineNumber === start))
+    return lineNumbers.some(([start, end]) =>
+      end ? lineNumber >= start && lineNumber <= end : lineNumber === start
+    )
   }
 }

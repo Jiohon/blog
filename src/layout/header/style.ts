@@ -1,4 +1,4 @@
-import { createStyles } from 'antd-style'
+import { createStyles } from "antd-style"
 
 export const useStyles = createStyles(({ css, stylish, responsive: r, cx, token, prefixCls }) => ({
   header: cx(
@@ -13,6 +13,8 @@ export const useStyles = createStyles(({ css, stylish, responsive: r, cx, token,
       backdrop-filter: saturate(50%) blur(4px);
       background-size: 3px 3px;
       background-image: radial-gradient(transparent 1px, ${token.colorBgLayout} 1px);
+      box-shadow: 0px 0.8px 2px rgba(0, 0, 0, 0.028);
+
       ${r({
         mobile: css`
           height: ${token.headerHeightMobile}px;

@@ -1,10 +1,12 @@
-import type { GatsbyNode } from 'gatsby'
-import { createFilePath } from 'gatsby-source-filesystem'
-import * as dotenv from 'dotenv'
-import readingTime from 'reading-time'
-import path, { dirname } from 'path'
-import { fileURLToPath } from 'url'
-import NodePolyfillPlugin from 'node-polyfill-webpack-plugin'
+import path, { dirname } from "path"
+import { fileURLToPath } from "url"
+
+import * as dotenv from "dotenv"
+import { createFilePath } from "gatsby-source-filesystem"
+import NodePolyfillPlugin from "node-polyfill-webpack-plugin"
+import readingTime from "reading-time"
+
+import type { GatsbyNode } from "gatsby"
 
 dotenv.config({ path: [`.env`, `.env.${process.env.NODE_ENV}`], override: true })
 
@@ -12,7 +14,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 
 const GATSBY_PUBLISHED = JSON.parse(process.env.GATSBY_PUBLISHED)
 
-export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] = ({ actions }) => {
+export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] = ({ actions }) => {
   actions.createTypes(`
     type Site {
       siteMetadata: SiteMetadata!
@@ -31,33 +33,35 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
   `)
 }
 
-export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ actions }) => {
+export const onCreateWebpackConfig: GatsbyNode["onCreateWebpackConfig"] = ({ actions }) => {
   actions.setWebpackConfig({
     ignoreWarnings: [/defaultProps will be removed/],
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, 'src'),
-        '@@': path.resolve(__dirname, 'src/assets'),
-        '@static': path.resolve(__dirname, 'static'),
+        "@": path.resolve(__dirname, "src"),
+        "@@": path.resolve(__dirname, "src/assets"),
+        "@static": path.resolve(__dirname, "static"),
       },
     },
-    plugins: [new NodePolyfillPlugin({ includeAliases: ['path', 'url', 'stream', 'buffer', 'events'] })],
+    plugins: [
+      new NodePolyfillPlugin({ includeAliases: ["path", "url", "stream", "buffer", "events"] }),
+    ],
   })
 }
 
-const articlePage = path.resolve('./src/templates/article.tsx')
-const aboutPage = path.resolve('./src/templates/about.tsx')
-const tagPage = path.resolve('./src/templates/tag.tsx')
+const postPage = path.resolve("./src/templates/post.tsx")
+const aboutPage = path.resolve("./src/templates/about.tsx")
+const tagPage = path.resolve("./src/templates/tag.tsx")
 
-export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, reporter }) => {
+export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions, reporter }) => {
   try {
     const { createPage, createRedirect } = actions
 
-    createRedirect({ fromPath: '/rss', toPath: '/rss.xml', statusCode: 200 })
+    createRedirect({ fromPath: "/rss", toPath: "/rss.xml", statusCode: 200 })
 
-    const result = await graphql<allMdxNodesQuery<'articles'>>(`
+    const result = await graphql<allMdxNodesQuery<"posts">>(`
       query PagesData {
-        articles: allMdx(sort: { frontmatter: { date: DESC } }) {
+        posts: allMdx(sort: { frontmatter: { date: DESC } }) {
           nodes {
             body
             frontmatter {
@@ -81,33 +85,33 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
     `)
 
     if (result.errors || !result.data) {
-      reporter.panicOnBuild('Error while running GraphQL query.', result.errors)
+      reporter.panicOnBuild("Error while running GraphQL query.", result.errors)
       return
     }
 
-    const nodes = result?.data.articles.nodes
-    const articles = nodes.filter((node) => node.frontmatter.template === 'article')
-    const pages = nodes.filter((node) => node.frontmatter.template === 'page')
+    const nodes = result?.data.posts.nodes
+    const posts = nodes.filter((node) => node.frontmatter.template !== "page")
+    const pages = nodes.filter((node) => node.frontmatter.template === "page")
     const tagSet = new Set()
 
     // =====================================================================================
-    // articles
+    // posts
     // =====================================================================================
-    articles.forEach((article, i) => {
-      const previous = i === articles.length - 1 ? null : articles[i + 1]
-      const next = i === 0 ? null : articles[i - 1]
+    posts.forEach((post, i) => {
+      const previous = i === posts.length - 1 ? null : posts[i + 1]
+      const next = i === 0 ? null : posts[i - 1]
 
-      if (article.frontmatter.tags) {
-        article.frontmatter.tags.forEach((tag) => {
+      if (post.frontmatter.tags) {
+        post.frontmatter.tags.forEach((tag) => {
           tagSet.add(tag)
         })
       }
 
       createPage({
-        path: article.frontmatter.slug,
-        component: `${articlePage}?__contentFilePath=${article.internal.contentFilePath}`,
+        path: post.frontmatter.slug,
+        component: `${postPage}?__contentFilePath=${post.internal.contentFilePath}`,
         context: {
-          slug: article.frontmatter.slug,
+          slug: post.frontmatter.slug,
           previous,
           next,
           published: GATSBY_PUBLISHED,
@@ -149,24 +153,24 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
   }
 }
 
-export const onCreateNode: GatsbyNode['onCreateNode'] = ({ node, actions, getNode }) => {
+export const onCreateNode: GatsbyNode["onCreateNode"] = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
 
   // =====================================================================================
   // Slugs
   // =====================================================================================
-  if (node.internal.type === 'Mdx') {
+  if (node.internal.type === "Mdx") {
     const slug = createFilePath({ node, getNode })
 
     createNodeField({
-      name: 'slug',
+      name: "slug",
       node,
       value: slug,
     })
 
     createNodeField({
       node,
-      name: 'timeToRead',
+      name: "timeToRead",
       value: readingTime(node.body as string),
     })
   }

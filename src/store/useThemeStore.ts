@@ -1,6 +1,7 @@
-import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
-import type { ThemeMode } from 'antd-style'
+import { create } from "zustand"
+import { persist } from "zustand/middleware"
+
+import type { ThemeMode } from "antd-style"
 
 type Store = {
   storeTheme: ThemeMode
@@ -10,11 +11,11 @@ type Store = {
 export const useThemeStore = create<Store>()(
   persist(
     (set) => ({
-      storeTheme: 'auto' as ThemeMode,
+      storeTheme: "auto" as ThemeMode,
       setStoreTheme: (mode: ThemeMode) => {
         set({ storeTheme: mode })
       },
     }),
-    { name: 'SITE_THEME_MODE' }
+    { name: "SITE_THEME_MODE" }
   )
 )

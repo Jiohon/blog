@@ -1,10 +1,12 @@
-import React from 'react'
-import type { GatsbyBrowser } from 'gatsby'
-import Layout from './src/layout'
+import React from "react"
 
-export const wrapPageElement: GatsbyBrowser['wrapPageElement'] = ({ element, props }) => {
+import Layout from "./src/layout"
+
+import type { GatsbyBrowser } from "gatsby"
+
+export const wrapPageElement: GatsbyBrowser["wrapPageElement"] = ({ element, props }) => {
   const error = console.error
-  console.error = (...args: any) => {
+  console.error = (...args) => {
     if (/defaultProps/.test(args[0])) return
     error(...args)
   }

@@ -1,11 +1,14 @@
-import { useState } from 'react'
-import { Button, App } from 'antd'
-import { useSpring, animated } from '@react-spring/web'
-import { useDebounceFn, useHover } from 'ahooks'
-import CopyIcon from '@/components/Icons/Copy'
-import CopiedIcon from '@/components/Icons/Copied'
-import { copyToClipboard } from '@/utils/func'
-import { useStyles } from './style'
+import { useState } from "react"
+
+import { animated, useSpring } from "@react-spring/web"
+import { useDebounceFn, useHover } from "ahooks"
+import { App, Button } from "antd"
+
+import CopiedIcon from "@/components/Icons/Copied"
+import CopyIcon from "@/components/Icons/Copy"
+import { copyToClipboard } from "@/utils/func"
+
+import { useStyles } from "./style"
 
 interface CopyProps {
   code: string
@@ -20,7 +23,7 @@ const Copy: React.FC<CopyProps> = ({ code, highlightRef }) => {
 
   const copyElementProps = useSpring({
     opacity: isHover ? 1 : 0,
-    display: isHover ? 'flex' : 'none',
+    display: isHover ? "flex" : "none",
   })
 
   const { run } = useDebounceFn(
@@ -36,14 +39,14 @@ const Copy: React.FC<CopyProps> = ({ code, highlightRef }) => {
     copyToClipboard(code)
     setCopied(true)
     message.open({
-      type: 'success',
-      content: 'Copied 🎉',
+      type: "success",
+      content: "Copied 🎉",
       duration: 2,
     })
     run()
   }
   return (
-    <animated.div style={{ ...copyElementProps, position: 'absolute', top: '0px', right: '0px' }}>
+    <animated.div style={{ ...copyElementProps, position: "absolute", top: "0px", right: "0px" }}>
       <Button className={styles.copy} size="small" type="dashed" onClick={copyClick}>
         {copied ? <CopiedIcon /> : <CopyIcon />}
       </Button>

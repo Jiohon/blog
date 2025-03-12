@@ -1,4 +1,4 @@
-import { useStyles } from './style'
+import { useStyles } from "./style"
 
 const Blockquote: React.FC<React.BlockquoteHTMLAttributes<HTMLQuoteElement>> = (props) => {
   const { styles } = useStyles()

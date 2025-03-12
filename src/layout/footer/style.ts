@@ -1,4 +1,4 @@
-import { createStyles } from 'antd-style'
+import { createStyles } from "antd-style"
 
 export const useStyles = createStyles(({ css, responsive: r, cx, token, prefixCls }) => ({
   footer: cx(
@@ -10,14 +10,14 @@ export const useStyles = createStyles(({ css, responsive: r, cx, token, prefixCl
       justify-content: center;
       min-height: ${token.footerHeight}px;
       padding-block: 2.5rem;
-      margin-block-start: 2rem;
+      padding-block-end: 5rem;
       color: ${token.colorTextTertiary};
       gap: 1.2rem;
 
       ${r({
         mobile: css`
-          height: ${token.footerHeightMobile}px;
-          padding-block: 0.8rem;
+          min-height: ${token.footerHeightMobile}px;
+          padding-block: 3rem;
         `,
       })}
     `

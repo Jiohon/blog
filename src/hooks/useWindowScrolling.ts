@@ -1,9 +1,11 @@
-import { useRef, useState } from 'react'
-import { raf } from '@react-spring/rafz'
-import { useIsomorphicLayoutEffect } from './useIsomorphicEffect'
+import { useRef, useState } from "react"
 
-type SCROLL_UP = 'up'
-type SCROLL_DOWN = 'down'
+import { raf } from "@react-spring/rafz"
+
+import { useIsomorphicLayoutEffect } from "./useIsomorphicEffect"
+
+type SCROLL_UP = "up"
+type SCROLL_DOWN = "down"
 export type SCROLL_DIR = SCROLL_DOWN | SCROLL_UP
 
 type UseWindowScrolling = (args: {
@@ -30,7 +32,12 @@ type UseWindowScrolling = (args: {
  * }
  * @return {*}  {([direction: SCROLL_DIR | undefined, scrollTop: number])}
  */
-export const useWindowScrolling: UseWindowScrolling = ({ active = true, threshold = 0, yOffset = 0, onScroll }) => {
+export const useWindowScrolling: UseWindowScrolling = ({
+  active = true,
+  threshold = 0,
+  yOffset = 0,
+  onScroll,
+}) => {
   const [scrollTop, setScrollTop] = useState(0)
   const [direction, setDirection] = useState<SCROLL_DIR | undefined>(undefined)
 
@@ -41,9 +48,11 @@ export const useWindowScrolling: UseWindowScrolling = ({ active = true, threshol
     const updateScrollDir = () => {
       const scrollY = window.scrollY
 
-      const _direction = scrollY > lastScrollY.current ? 'down' : 'up'
+      const _direction = scrollY > lastScrollY.current ? "down" : "up"
 
-      const thresholdValue = Array.isArray(threshold) ? threshold[_direction === 'down' ? 0 : 1] : threshold
+      const thresholdValue = Array.isArray(threshold)
+        ? threshold[_direction === "down" ? 0 : 1]
+        : threshold
 
       if (!active) {
         setDirection(undefined)
@@ -79,9 +88,9 @@ export const useWindowScrolling: UseWindowScrolling = ({ active = true, threshol
 
     updateScrollDir()
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener("scroll", handleScroll)
 
-    return () => window.removeEventListener('scroll', handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
   }, [active, threshold])
 
   return [direction, scrollTop]
