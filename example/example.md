@@ -36,7 +36,7 @@ published: true
 ---
 ```
 
-##### template**
+##### template
 
 - 渲染模版
 
@@ -52,11 +52,11 @@ createPage({
 })
 ```
 
-##### **slug**
+##### slug
 
 - 文章路径
 
-##### **icon**
+##### icon
 
 - 文章图标
 
@@ -73,24 +73,24 @@ export type Languages =
  ···
 ```
 
-##### **categories**
+##### categories
 
 - 文章分类
 
 文章属于哪些分类，可以根据分类进行文章的筛选。
 当 `categories`包含`Highlight` 时，会筛选渲染到热门内容中
 
-##### **tags**
+##### tags
 
 - 文章标签
 
 文章属于哪些标签，可以根据标签进行文章的筛选。
 
-##### **published**
+##### published
 
 - 文章是否发布
 
-### 代码高亮、标记行
+### 代码高亮行
 
 - 代码高亮使用 `prism-react-renderer`+`@mdx-js/react`解析`markdown` 文件中的代码块。
 

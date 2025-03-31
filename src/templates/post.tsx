@@ -8,7 +8,7 @@ import Calendar from "@/components/Icons/Calendar"
 import MDXRenderer from "@/components/MDXRenderer"
 import SEO from "@/components/SEO"
 import PostSidebar from "@/components/Sidebar/PostSidebar"
-import { transformHeading } from "@/utils/helpers"
+import { flattenSingleItems } from "@/utils/helpers"
 
 import { useStyles } from "./styles/post.style"
 
@@ -27,7 +27,7 @@ const PostTemplate: React.FC<
   const timeToRead = currentPost.fields.timeToRead
   const frontmatter = currentPost.frontmatter
 
-  const headings = transformHeading(currentPost.tableOfContents.items)
+  const headings = flattenSingleItems(currentPost.tableOfContents.items)
 
   const posts = allPost.nodes
     .map((e) => ({ ...e.frontmatter }))

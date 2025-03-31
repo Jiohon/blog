@@ -19,7 +19,7 @@ const ArchiveSidebar: React.FC<ArchiveSidebarProps> = ({ tags }) => {
 
   return (
     <Sticky>
-      <Card bordered={false} className={styles.card}>
+      <Card className={styles.card}>
         <MenuBar>
           <MenuBar.Title>标签</MenuBar.Title>
           {Tags.map((t) => (

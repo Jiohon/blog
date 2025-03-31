@@ -38,8 +38,9 @@ export const useStyles = createStyles(
     return {
       card: css`
         ${stylish.card}
-        background-color: transparent !important;
-        box-shadow: none !important;
+        background-color: transparent;
+        box-shadow: none;
+        border: none;
       `,
 
       title: cx(

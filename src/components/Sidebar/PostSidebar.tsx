@@ -1,10 +1,8 @@
-import { useEffect } from "react"
-
 import { Anchor, Card } from "antd"
 import { Link } from "gatsby"
 
-import type { HeadingItem } from "@/utils/helpers"
 import { findMaxLevel } from "@/utils/helpers"
+import type { HeadingItem } from "@/utils/helpers"
 
 import MenuBar from "../MenuBar"
 import Sticky from "../Sticky"
@@ -38,10 +36,6 @@ const PostSidebar: React.FC<PostSidebarProps> = ({ icon, headings, posts }) => {
     }
   }
 
-  useEffect(() => {
-    console.log(headings, findMaxLevel(headings))
-  }, [headings])
-
   return (
     <Sticky>
       <SVGIcon id={icon} width="8em" height="8em" style={{ marginBlock: "0 1rem" }}></SVGIcon>
@@ -49,7 +43,7 @@ const PostSidebar: React.FC<PostSidebarProps> = ({ icon, headings, posts }) => {
           <h2>About me</h2>
         </Card> */}
 
-      <Card bordered={false} className={styles.card}>
+      <Card className={styles.card}>
         <MenuBar>
           <MenuBar.Title>目录</MenuBar.Title>
           <Anchor
@@ -63,7 +57,7 @@ const PostSidebar: React.FC<PostSidebarProps> = ({ icon, headings, posts }) => {
         </MenuBar>
       </Card>
 
-      <Card bordered={false} className={styles.card}>
+      <Card className={styles.card}>
         <MenuBar>
           <MenuBar.Title>近期发布</MenuBar.Title>
           {latest.map((l) => (

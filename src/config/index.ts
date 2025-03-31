@@ -7,7 +7,7 @@ import GithubFooterSvg from "@/components/Icons/GithubFooter"
 import SiteConfig from "./type"
 
 const siteConfig: SiteConfig = {
-  comment: true,
+  comment: false,
   themes: {
     brandColor: "#6c4cff",
     light: {

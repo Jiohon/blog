@@ -43,41 +43,17 @@ export const simplifiedQueryData = <T>(
   return result
 }
 
-interface MenuItem {
+interface TableOfContentsItem {
   url: string
   title: string
-  items?: MenuItem[] // 可选的子项
+  items?: TableOfContentsItem[] // 可选的子项
 }
 
 export interface HeadingItem extends AnchorLinkItemProps {
   level: number
   children?: HeadingItem[]
 }
-/**
- * @description 转换heading格式
- * @date 19/10/2024
- * @param {MenuItem[]} items
- * @param {number} [level=1]
- * @return {*}  {HeadingItem[]}
- */
-export function transformHeading(tree: MenuItem[], level = 1): HeadingItem[] {
-  return tree.map((item) => {
-    const transformedItem: HeadingItem = {
-      key: item.title,
-      href: `#${item.title}`,
-      title: item.title,
-      className: `level-${level}`,
-      level: level,
-    }
 
-    // 递归处理子项
-    if (item.items) {
-      transformedItem.children = transformHeading(item.items, level + 1)
-    }
-
-    return transformedItem
-  })
-}
 /**
  * @description 查询当前树的最大层级
  * @date 19/10/2024
@@ -99,4 +75,53 @@ export function findMaxLevel(tree: HeadingItem[], currentLevel = 1): number {
   })
 
   return maxLevel
+}
+
+/**
+ * @description 生成字符串的简单哈希值
+ * @date 24/03/2024
+ * @param {string} str
+ * @return {string}
+ */
+export const simpleHash = (str: string): string => {
+  let hash = 0
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i)
+    hash = (hash << 5) - hash + char
+    hash = hash & hash // Convert to 32bit integer
+  }
+  // 转换为正数并取8位十六进制
+  return Math.abs(hash).toString(16).slice(0, 5)
+}
+
+/**
+ * @description 扁平化处理只包含单个items的结构并转换为AnchorLink格式
+ * @date 24/03/2024
+ * @param {TableOfContentsItem[]} items
+ * @param {number} [level=1]
+ * @return {*}  {HeadingItem[]}
+ */
+export function flattenSingleItems(items: TableOfContentsItem[], level = 1): HeadingItem[] {
+  return items.reduce<HeadingItem[]>((acc, item) => {
+    // 如果当前项只有一个items属性，直接处理其子项
+    if (Object.keys(item).length === 1 && item.items) {
+      return [...acc, ...flattenSingleItems(item.items, level)]
+    }
+
+    // 转换为HeadingItem格式
+    const headingItem: HeadingItem = {
+      key: item.title,
+      href: `#${item.title}`,
+      title: item.title,
+      className: `level-${level}`,
+      level: level,
+    }
+
+    // 处理子项
+    if (item.items) {
+      headingItem.children = flattenSingleItems(item.items, level + 1)
+    }
+
+    return [...acc, headingItem]
+  }, [])
 }

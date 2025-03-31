@@ -8,36 +8,37 @@ const { Title, Link } = Typography
 
 type HeadingProps = {
   id: string
-  children: React.ReactNode
+  children: string
 }
 
 /* eslint-disable */
 const heading =
   (level) =>
-  ({ children }: HeadingProps) => {
+  ({ children, ...props }: HeadingProps) => {
     const { styles, cx } = useStyles()
     const linkRef = useRef<HTMLElement>(null)
     const ID = children
+    // const ID = typeof children === "string" ? children : children?.props?.children
 
     const handleClick = async (e: React.MouseEvent<HTMLElement>, href) => {
       // e.preventDefault()
       const { origin, pathname } = window.location
 
-      await linkRef.current?.scrollIntoView({ behavior: 'smooth' })
-      history.replaceState(null, '', `${origin}${pathname}#${href}`)
+      await linkRef.current?.scrollIntoView({ behavior: "smooth" })
+      history.replaceState(null, "", `${origin}${pathname}#${href}`)
     }
 
     return (
       <Title
         level={level}
-        id={`#${children}`}
+        id={`#${ID}`}
         className={cx(styles.heading, styles.levelStyle, `h${level}`)}
       >
         <Link
           ref={linkRef}
-          id={`${children}`}
+          id={`${ID}`}
           className={styles.link}
-          onClick={(e) => handleClick(e, children)}
+          onClick={(e) => handleClick(e, ID)}
         >
           #
         </Link>
