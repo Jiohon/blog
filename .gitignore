@@ -85,3 +85,7 @@ content/
 
 *local.sh
 .secrets
+
+# cursor
+.cursorrules
+.cursor/
