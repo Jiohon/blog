@@ -8,52 +8,50 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
+      - name: Debug Configuration
+        run: |
+          echo "正在验证配置..."
+          if [[ -z "${{ secrets.GITHUB_TOKEN }}" ]]; then echo "GITHUB_TOKEN 未配置"; else echo "GITHUB_TOKEN 已配置"; fi
+          if [[ -z "${{ secrets.PRIVATE_KEY }}" ]]; then echo "PRIVATE_KEY 未配置"; else echo "PRIVATE_KEY 已配置"; fi
+          if [[ -z "${{ secrets.HOST }}" ]]; then echo "HOST 未配置"; else echo "HOST 已配置"; fi
+          if [[ -z "${{ secrets.USER }}" ]]; then echo "USER 未配置"; else echo "USER 已配置"; fi
+          if [[ -z "${{ secrets.PORT }}" ]]; then echo "PORT 未配置"; else echo "PORT 已配置"; fi
+          if [[ -z "${{ secrets.TARGET }}" ]]; then echo "TARGET 未配置"; else echo "TARGET 已配置"; fi
+
       - name: Checkout Code
         uses: actions/checkout@v3
         with:
           submodules: recursive
-          ssh-key: ${{ secrets.PRIVATE_KEY }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
+          echo "${{ secrets.PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/deploy
+          chmod 600 ~/.ssh/deploy
 
-          # 明确设置 GitHub 的 IP 地址
-          echo "140.82.113.4 github.com" | sudo tee -a /etc/hosts
-          
-          # 检查密钥文件是否存在及其权限
-          ls -la ~/.ssh/id_ed25519
-          
-          # 检查密钥的指纹（安全地显示密钥信息）
-          ssh-keygen -l -f ~/.ssh/id_ed25519
-          
-          # 检查 SSH 配置
+          # 配置 SSH
           echo "Host github.com
             HostName github.com
             User git
-            IdentityFile ~/.ssh/id_ed25519
+            IdentityFile ~/.ssh/deploy
             StrictHostKeyChecking no
             UserKnownHostsFile=/dev/null
-            LogLevel DEBUG3" > ~/.ssh/config
+            LogLevel ERROR" > ~/.ssh/config
 
-          # 添加 GitHub 的公钥
-          curl -L https://api.github.com/meta | jq -r '.ssh_keys[]' | sed -e 's/^/github.com /' > ~/.ssh/known_hosts
-          
-          
-          # 测试 SSH 连接（使用详细模式）
-          ssh -Tv git@github.com || true
+          # 测试 SSH 连接
+          ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+          ssh -T git@github.com || true
 
       - name: Update Submodules
         env:
-          GIT_SSH_COMMAND: "ssh -v -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no"  # 添加这个环境变量
+          GIT_SSH_COMMAND: "ssh -i ~/.ssh/deploy -o StrictHostKeyChecking=no"
         run: |
-          rm -rf .git/modules/*
-          git submodule deinit -f .
-          git submodule sync --recursive
+          git config --global url."git@github.com:".insteadOf "https://github.com/"
           git submodule update --init --recursive --force
 
       - name: Set up Node.js
@@ -88,4 +86,4 @@ jobs:
           REMOTE_USER: ${{ secrets.USER }}
           REMOTE_PORT: ${{ secrets.PORT }}
           TARGET: ${{ secrets.TARGET }}
-          SOURCE: 'public/'
+          SOURCE: "public/"

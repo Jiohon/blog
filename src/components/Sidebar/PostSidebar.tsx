@@ -1,6 +1,7 @@
 import { Anchor, Card } from "antd"
 import { Link } from "gatsby"
 
+import type { Languages } from "@/utils/code"
 import { findMaxLevel } from "@/utils/helpers"
 import type { HeadingItem } from "@/utils/helpers"
 
@@ -12,7 +13,7 @@ import { useStyles } from "./style"
 
 interface PostSidebarProps {
   date?: string
-  icon?: any
+  icon: Languages
   headings: HeadingItem[]
   posts: Frontmatter[]
 }

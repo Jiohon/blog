@@ -2,7 +2,6 @@ import type { AnchorLinkItemProps } from "antd/es/anchor/Anchor"
 
 interface GraphqlNode {
   frontmatter: Frontmatter
-  [key: string]: any
 }
 
 type ResponseData<T> = T & SimplifiedQueryData

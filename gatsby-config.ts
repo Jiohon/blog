@@ -129,28 +129,6 @@ const config: GatsbyConfigType = {
     },
 
     // ===================================================================================
-    // Images and static
-    // ===================================================================================
-
-    // @see: https://www.gatsbyjs.com/plugins/gatsby-plugin-sharp/
-    {
-      resolve: `gatsby-plugin-sharp`,
-      options: {
-        defaults: {
-          formats: [`auto`, `webp`, "png"],
-          placeholder: `none`,
-          backgroundColor: `transparent`,
-        },
-      },
-    },
-
-    // @see: https://www.gatsbyjs.com/plugins/gatsby-transformer-sharp/
-    "gatsby-transformer-sharp",
-
-    // @see: https://www.gatsbyjs.com/plugins/gatsby-plugin-image/
-    "gatsby-plugin-image",
-
-    // ===================================================================================
     // Markdown
     // ===================================================================================
     "gatsby-transformer-remark",
@@ -163,16 +141,7 @@ const config: GatsbyConfigType = {
           remarkPlugins: [remarkGfm, remarkMath],
           rehypePlugins: [rehypeMetaAsAttributes, rehypeKatex],
         },
-        gatsbyRemarkPlugins: [
-          // @see: https://www.gatsbyjs.com/plugins/gatsby-remark-images/
-          {
-            resolve: "gatsby-remark-images",
-            options: {
-              maxWidth: 800,
-              backgroundColor: "transparent",
-            },
-          },
-        ],
+        gatsbyRemarkPlugins: [],
       },
     },
   ],

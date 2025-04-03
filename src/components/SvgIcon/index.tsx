@@ -1,10 +1,10 @@
-import { Languages } from "@/utils/code"
+import type { Languages } from "@/utils/code"
 
 type SVGIconProps = {
   id: Languages
   width: string
   height: string
-  style?: any
+  style?: React.CSSProperties
 }
 
 // https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/abap.svg

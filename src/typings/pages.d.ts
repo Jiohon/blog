@@ -1,3 +1,5 @@
+/// <reference types="@/utils/code" />
+
 type TableOfContentsItem = {
   url: string
   title: string
@@ -8,7 +10,7 @@ type Frontmatter = {
   description: string
   date: string
   lastUpdated: string
-  icon: any
+  icon: Languages
   slug: string
   template: string
   tags: string[]

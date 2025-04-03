@@ -33,7 +33,6 @@ const ThemeSwitch: FC = memo(() => {
 
     const { clientX: x, clientY: y } = domEvent
 
-    // @ts-ignore
     const transition = document.startViewTransition(() => {
       setThemeMode(key)
     })
