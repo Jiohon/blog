@@ -34,6 +34,8 @@ const config: GatsbyConfigType = {
   pathPrefix: "/",
   siteMetadata,
   plugins: [
+    // 本地版本更新插件
+    "gatsby-plugin-version-update",
     // @see: https://www.gatsbyjs.com/plugins/gatsby-source-filesystem/
     {
       resolve: "gatsby-source-filesystem",

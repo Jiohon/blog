@@ -9,13 +9,13 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      DEPLOYTOKEN: ${{ secrets.DEPLOYTOKEN }}
 
     steps:
       - name: Debug Configuration
         run: |
           echo "正在验证配置..."
-          if [[ -z "${{ secrets.GITHUB_TOKEN }}" ]]; then echo "GITHUB_TOKEN 未配置"; else echo "GITHUB_TOKEN 已配置"; fi
+          if [[ -z "${{ secrets.DEPLOYTOKEN }}" ]]; then echo "DEPLOYTOKEN 未配置"; else echo "DEPLOYTOKEN 已配置"; fi
           if [[ -z "${{ secrets.PRIVATE_KEY }}" ]]; then echo "PRIVATE_KEY 未配置"; else echo "PRIVATE_KEY 已配置"; fi
           if [[ -z "${{ secrets.HOST }}" ]]; then echo "HOST 未配置"; else echo "HOST 已配置"; fi
           if [[ -z "${{ secrets.USER }}" ]]; then echo "USER 未配置"; else echo "USER 已配置"; fi
@@ -25,34 +25,40 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
         with:
-          submodules: recursive
-          token: ${{ secrets.GITHUB_TOKEN }}
+          submodules: false # 先克隆主仓库
+          token: ${{ secrets.DEPLOYTOKEN }} # 使用 DEPLOYTOKEN 进行认证
 
-      - name: Setup SSH
+      - name: Setup SSH and Clone Submodules
         run: |
+          # 配置 SSH
           mkdir -p ~/.ssh
           echo "${{ secrets.PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/deploy
           chmod 600 ~/.ssh/deploy
 
-          # 配置 SSH
-          echo "Host github.com
+          # SSH 配置
+          cat > ~/.ssh/config << EOF
+          Host github.com
             HostName github.com
             User git
             IdentityFile ~/.ssh/deploy
             StrictHostKeyChecking no
             UserKnownHostsFile=/dev/null
-            LogLevel ERROR" > ~/.ssh/config
+            LogLevel ERROR
+          EOF
 
           # 测试 SSH 连接
           ssh-keyscan -H github.com >> ~/.ssh/known_hosts
           ssh -T git@github.com || true
 
-      - name: Update Submodules
-        env:
-          GIT_SSH_COMMAND: "ssh -i ~/.ssh/deploy -o StrictHostKeyChecking=no"
-        run: |
+          # 配置 Git 使用 SSH
           git config --global url."git@github.com:".insteadOf "https://github.com/"
-          git submodule update --init --recursive --force
+
+          # 初始化和更新子模块
+          echo "正在初始化子模块..."
+          git submodule init
+
+          echo "正在更新子模块..."
+          git submodule update --recursive --force
 
       - name: Set up Node.js
         uses: actions/setup-node@v4

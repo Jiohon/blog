@@ -1,0 +1,8 @@
+{
+  "name": "gatsby-plugin-version-update",
+  "version": "1.0.0",
+  "description": "自动生成版本信息文件的 Gatsby 插件",
+  "main": "gatsby-node.ts",
+  "author": "Johon",
+  "license": "MIT"
+} 
