@@ -1,0 +1,21 @@
+{
+  "name": "gatsby-rehype-meta-attributes",
+  "version": "1.0.0",
+  "description": "Gatsby插件，将代码块中的meta信息转换为HTML属性",
+  "main": "index.ts",
+  "keywords": [
+    "gatsby",
+    "gatsby-plugin",
+    "rehype",
+    "markdown",
+    "code-block"
+  ],
+  "author": "Johon",
+  "license": "MIT",
+  "dependencies": {
+    "unist-util-visit": "^5.0.0"
+  },
+  "peerDependencies": {
+    "gatsby": "^5.0.0"
+  }
+} 

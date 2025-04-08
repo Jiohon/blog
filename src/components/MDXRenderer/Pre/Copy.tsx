@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 
 import { animated, useSpring } from "@react-spring/web"
 import { useDebounceFn, useHover } from "ahooks"
@@ -6,16 +6,15 @@ import { App, Button } from "antd"
 
 import CopiedIcon from "@/components/Icons/Copied"
 import CopyIcon from "@/components/Icons/Copy"
+import PreContext from "@/components/MDXRenderer/Pre/context"
 import { copyToClipboard } from "@/utils/func"
 
 import { useStyles } from "./style"
 
-interface CopyProps {
-  code: string
-  highlightRef: React.RefObject<HTMLPreElement>
-}
+const Copy = () => {
+  const context = useContext(PreContext)
+  const { codeString, highlightRef } = context || {}
 
-const Copy: React.FC<CopyProps> = ({ code, highlightRef }) => {
   const { styles } = useStyles()
   const { message } = App.useApp()
   const [copied, setCopied] = useState<boolean>(false)
@@ -36,7 +35,7 @@ const Copy: React.FC<CopyProps> = ({ code, highlightRef }) => {
   )
 
   const copyClick = () => {
-    copyToClipboard(code)
+    copyToClipboard(codeString)
     setCopied(true)
     message.open({
       type: "success",

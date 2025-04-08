@@ -1,0 +1,156 @@
+---
+title: Gatsby Rehype Meta Attributes 插件演示
+description: "这个页面用于演示 gatsby-rehype-meta-attributes 插件的功能。该插件可以将代码块中的元数据信息转换为 HTML 属性."
+date: 2025-04-07
+lastUpdated: 2025-04-07
+slug: gatsby-rehype-meta-attributes-demo
+icon: mdx
+template: "post"
+categories:
+tags:
+  - gatsby
+  - plugin
+  - rehype
+  - markdown
+published: true
+---
+
+### 核心功能与实例
+
+该插件支持两种主要的元数据格式，下面展示每种格式的写法与效果：
+
+#### 1. 键值对
+
+键值对格式允许你为代码块添加明确的属性和值，如标题、语言等信息。
+
+````markdown
+```javascript title="键值对" lineNumber={true} highlight={2,4-6}
+// 这是一个JavaScript示例
+function greeting(name) {
+  return `Hello, ${name}!`
+}
+
+console.log(greeting("World"))
+```
+````
+
+```javascript title="键值对" lineNumber={true} highlight={2,4-6}
+// 这是一个JavaScript示例
+function greeting(name) {
+  return `Hello, ${name}!`
+}
+
+console.log(greeting("World"))
+```
+
+常用的键值对属性包括：
+
+- `title="文件名"` - 添加代码块标题
+- `lineNumber` - 显示行号
+- `filename="路径/文件名"` - 指定文件路径和名称
+- `language="javascript"` - 指定语言（通常直接在反引号后指定）
+
+#### 2. 属性简写
+
+属性简写是一种使用花括号指定行号范围的简洁语法，特别适用于代码高亮。
+
+````markdown
+```jsx title="属性简写" lineNumber {2,4-6}
+import React from "react"
+// 这行将被高亮（第2行）
+const App = () => {
+  // 第4-6行也会被高亮
+  const message = "Hello, World!"
+  return <div>{message}</div>
+}
+export default App
+```
+````
+
+```jsx title="属性简写" lineNumber {2,4-6}
+import React from "react"
+// 这行将被高亮（第2行）
+const App = () => {
+  // 第4-6行也会被高亮
+  const message = "Hello, World!"
+  return <div>{message}</div>
+}
+export default App
+```
+
+高亮语法规则：
+
+- 单行高亮：`{2}`
+- 多行高亮：`{4-6}`
+- 组合高亮：`{2,4-6,8}`
+
+#### 组合使用示例
+
+你可以同时使用键值对和属性简写，创建功能更丰富的代码块：
+
+````markdown
+```typescript title="component.tsx" lineNumber {3,5-7}
+import React from "react"
+
+// 第3行会被高亮
+const MyComponent: React.FC = () => {
+  // 第5-7行也会被高亮
+  const data = fetchData()
+  return <div>{data}</div>
+}
+
+export default MyComponent
+```
+````
+
+```typescript title="component.tsx" lineNumber {3,5-7}
+import React from "react"
+
+// 第3行会被高亮
+const MyComponent: React.FC = () => {
+  // 第5-7行也会被高亮
+  const data = fetchData()
+  return <div>{data}</div>
+}
+
+export default MyComponent
+```
+
+#### 转换原理
+
+当你在 Markdown 中添加这些元数据时，gatsby-rehype-meta-attributes 插件会将它们转换为 HTML 的属性。例如：
+
+````markdown
+```css title="styles.css" {2-4}
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+```
+````
+
+```css title="styles.css" {2-4} className="test"
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+```
+
+将被转换为以下 HTML：
+
+```html
+<pre>
+  <code class="language-css" title="styles.css" highlight="2-4">
+    body {
+      font-family: "Arial", sans-serif;
+      margin: 0;
+      padding: 0;
+      display: none;
+    }
+  </code>
+</pre>
+```
+
+这些 HTML 属性可以被 CSS 或 JavaScript 捕获，应用特定的样式或行为，如高亮显示特定行等。

@@ -1,54 +1,66 @@
-import { useRef } from "react"
+import { useMemo, useRef } from "react"
 
 import PrismSyntaxHighlight from "@/components/PrismSyntaxHighlight"
 import SandpackSyntaxHighlight from "@/components/SandpackSyntaxHighlight"
-import { CodeNode, GetLanguageData } from "@/utils/code"
+import { getPrismjsLanguage } from "@/utils/prismjsLanguages"
 
+import PreContext from "./context"
 import { useStyles } from "./style"
 import Title from "./Title"
 
+import type { PreContextProps } from "./context"
+import type { PreNodeProps } from "./util"
 import type { SandboxEnvironment } from "@codesandbox/sandpack-react"
 
-export interface PreHighlightProps extends GetLanguageData, CodeNode {
+export interface PreHighlightProps extends PreNodeProps {
   codeString: string
   template?: string
   environment?: SandboxEnvironment
 }
 
 const PreHighlight: React.FC<PreHighlightProps> = (props) => {
-  const { codeString, language = "javascript", title = "", template, environment } = props
-  const { styles } = useStyles("pre")
+  const { maxRows = 20, template, ...rest } = props
 
+  const { styles } = useStyles("pre")
   const highlightRef = useRef<HTMLPreElement>(null)
 
-  const sandpackFiles = {
-    "index.js": codeString,
-  }
+  const preContextValue = useMemo<PreContextProps>(() => {
+    const language = getPrismjsLanguage(rest?.language)
 
-  const setup = {
-    entry: "index.tsx",
-    environment,
-  }
+    return {
+      lineNumber: true,
+      ...rest,
+      language,
+      highlightRef,
+    }
+  }, [rest, highlightRef])
+
+  const maxHeight = useMemo(() => {
+    if (maxRows === "infinite") {
+      return "none"
+    }
+
+    const isNumber = /^\d+$/.test(`${maxRows || ""}`)
+
+    return isNumber ? `${maxRows * 1.6}rem` : "none"
+  }, [maxRows])
 
   if (template) {
-    return (
-      <SandpackSyntaxHighlight codeString={codeString} files={sandpackFiles} customSetup={setup} />
-    )
+    return <SandpackSyntaxHighlight />
   }
 
   return (
-    <>
-      <pre ref={highlightRef} className={styles.Pre}>
-        <Title
-          title={title}
-          codeString={codeString}
-          language={language}
-          highlightRef={highlightRef}
-        />
+    <PreContext.Provider value={preContextValue}>
+      <pre
+        ref={highlightRef}
+        className={styles.Pre}
+        style={{ maxHeight: `calc(${maxHeight} + 2.4rem)` }}
+      >
+        <Title />
 
-        <PrismSyntaxHighlight {...props} />
+        <PrismSyntaxHighlight />
       </pre>
-    </>
+    </PreContext.Provider>
   )
 }
 

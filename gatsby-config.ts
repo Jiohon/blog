@@ -3,7 +3,7 @@ import remarkGfm from "remark-gfm"
 import remarkMath from "remark-math"
 
 import packageJson from "./package.json"
-import rehypeMetaAsAttributes from "./plugins/rehype-meta-as-attributes"
+import rehypeMetaAttributes from "./plugins/gatsby-rehype-meta-attributes"
 import { SiteMetadataType } from "./src/hooks/useSiteMetadata"
 
 import type { GatsbyConfig } from "gatsby"
@@ -34,9 +34,8 @@ const config: GatsbyConfigType = {
   pathPrefix: "/",
   siteMetadata,
   plugins: [
-    // 本地版本更新插件
+    "gatsby-rehype-meta-attributes",
     "gatsby-plugin-version-update",
-    // @see: https://www.gatsbyjs.com/plugins/gatsby-source-filesystem/
     {
       resolve: "gatsby-source-filesystem",
       options: {
@@ -59,10 +58,6 @@ const config: GatsbyConfigType = {
       },
     },
 
-    // ===================================================================================
-    // Meta
-    // ===================================================================================
-    // @see: https://www.gatsbyjs.com/plugins/gatsby-plugin-react-svg/
     {
       resolve: "gatsby-plugin-react-svg",
       options: {
@@ -72,7 +67,6 @@ const config: GatsbyConfigType = {
       },
     },
 
-    // @see: https://www.gatsbyjs.com/plugins/gatsby-plugin-feed/
     {
       resolve: `gatsby-plugin-feed`,
       options: {
@@ -130,18 +124,14 @@ const config: GatsbyConfigType = {
       },
     },
 
-    // ===================================================================================
-    // Markdown
-    // ===================================================================================
     "gatsby-transformer-remark",
-    // @see: https://www.gatsbyjs.com/plugins/gatsby-plugin-mdx/
     {
       resolve: `gatsby-plugin-mdx`,
       options: {
         extensions: [`.mdx`, `.md`],
         mdxOptions: {
           remarkPlugins: [remarkGfm, remarkMath],
-          rehypePlugins: [rehypeMetaAsAttributes, rehypeKatex],
+          rehypePlugins: [rehypeMetaAttributes, rehypeKatex],
         },
         gatsbyRemarkPlugins: [],
       },

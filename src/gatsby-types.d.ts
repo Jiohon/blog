@@ -925,7 +925,6 @@ type MarkdownRemarkFilterListInput = {
 };
 
 type MarkdownRemarkFrontmatter = {
-  readonly categories: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly date: Maybe<Scalars['Date']>;
   readonly description: Maybe<Scalars['String']>;
   readonly icon: Maybe<Scalars['String']>;
@@ -954,7 +953,6 @@ type MarkdownRemarkFrontmatter_lastUpdatedArgs = {
 };
 
 type MarkdownRemarkFrontmatterFieldSelector = {
-  readonly categories: InputMaybe<FieldSelectorEnum>;
   readonly date: InputMaybe<FieldSelectorEnum>;
   readonly description: InputMaybe<FieldSelectorEnum>;
   readonly icon: InputMaybe<FieldSelectorEnum>;
@@ -967,7 +965,6 @@ type MarkdownRemarkFrontmatterFieldSelector = {
 };
 
 type MarkdownRemarkFrontmatterFilterInput = {
-  readonly categories: InputMaybe<StringQueryOperatorInput>;
   readonly date: InputMaybe<DateQueryOperatorInput>;
   readonly description: InputMaybe<StringQueryOperatorInput>;
   readonly icon: InputMaybe<StringQueryOperatorInput>;
@@ -980,7 +977,6 @@ type MarkdownRemarkFrontmatterFilterInput = {
 };
 
 type MarkdownRemarkFrontmatterSortInput = {
-  readonly categories: InputMaybe<SortOrderEnum>;
   readonly date: InputMaybe<SortOrderEnum>;
   readonly description: InputMaybe<SortOrderEnum>;
   readonly icon: InputMaybe<SortOrderEnum>;

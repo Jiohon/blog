@@ -1,7 +1,7 @@
-import type { Languages } from "@/utils/code"
+import type { Language } from "@/utils/prismjsLanguages"
 
 type SVGIconProps = {
-  id: Languages
+  id: Language
   width: string
   height: string
   style?: React.CSSProperties

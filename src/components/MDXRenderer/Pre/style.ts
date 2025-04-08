@@ -12,7 +12,7 @@ export const useStyles = createStyles(
           gap: 0.15rem;
           border-radius: ${token.borderRadius * 1.3}px;
           margin-block: 3rem 2rem;
-          /* padding-block: 0.6rem 0.7rem; */
+          padding-block-end: 0.65rem;
           border: 1px solid ${token.colorBorderSecondary};
           overflow: overlay;
           font-family: ${token.fontFamilyCode};
@@ -23,16 +23,18 @@ export const useStyles = createStyles(
       TitleBox: cx(
         `${prefixCls}-${componentPrefixCls}-titleBox`,
         css`
-          position: relative;
-          left: 0;
+          position: sticky;
+          top: 0;
           display: flex;
           justify-content: space-between;
           font-family: ${token.fontFamilyCode};
           color: ${token.colorTextQuaternary};
           font-size: 0.95rem;
-          padding-inline: 1.4rem;
+          padding-inline: 1.3rem;
           padding-block-start: 0.6rem;
           gap: 0.8rem;
+          backdrop-filter: blur(6px);
+          z-index: 10;
         `
       ),
 

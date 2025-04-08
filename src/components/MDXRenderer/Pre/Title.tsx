@@ -1,22 +1,20 @@
+import { useContext } from "react"
+
 import { CodeSandboxOutlined } from "@ant-design/icons"
 import stackblitzSdk from "@stackblitz/sdk"
 import { Button, Tooltip } from "antd"
 import { getParameters } from "codesandbox/lib/api/define"
 
 import StackblitzSvg from "@/components/Icons/Stackblitz"
-import { Languages } from "@/utils/code"
 
+import PreContext from "./context"
 import Copy from "./Copy"
 import { useStyles } from "./style"
 
-interface TitleProps {
-  title: string
-  codeString: string
-  language: Languages
-  highlightRef: React.RefObject<HTMLPreElement>
-}
+const Title = () => {
+  const context = useContext(PreContext)
+  const { title, codeString, language } = context || {}
 
-const Title: React.FC<TitleProps> = ({ title, codeString, language, highlightRef }) => {
   const { styles } = useStyles("syntax-preHighlight")
 
   const handleToStackblitz = () => {
@@ -97,7 +95,7 @@ const Title: React.FC<TitleProps> = ({ title, codeString, language, highlightRef
         <span> {language}</span>
       </div>
 
-      <Copy code={codeString} highlightRef={highlightRef} />
+      <Copy />
     </div>
   )
 }

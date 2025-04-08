@@ -1,9 +1,9 @@
 import { Anchor, Card } from "antd"
 import { Link } from "gatsby"
 
-import type { Languages } from "@/utils/code"
 import { findMaxLevel } from "@/utils/helpers"
 import type { HeadingItem } from "@/utils/helpers"
+import type { Language } from "@/utils/prismjsLanguages"
 
 import MenuBar from "../MenuBar"
 import Sticky from "../Sticky"
@@ -13,7 +13,7 @@ import { useStyles } from "./style"
 
 interface PostSidebarProps {
   date?: string
-  icon: Languages
+  icon: Language
   headings: HeadingItem[]
   posts: Frontmatter[]
 }

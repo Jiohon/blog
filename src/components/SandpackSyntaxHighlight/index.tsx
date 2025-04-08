@@ -1,13 +1,14 @@
-import React, { lazy, Suspense, useMemo } from "react"
+import React, { lazy, Suspense, useContext, useMemo } from "react"
 
 import { Skeleton } from "antd"
 
+import PreContext from "@/components/MDXRenderer/Pre/context"
 import { useThemeMode } from "@/hooks/useThemeMode"
 
 import { getReactFiles } from "./files"
 import { useStyles } from "./style"
 
-import type { SandpackProps } from "@codesandbox/sandpack-react"
+// import type { SandpackProps } from "@codesandbox/sandpack-react"
 
 const OriginSandpack = lazy(() => import("./Sandpack"))
 
@@ -23,14 +24,14 @@ const SandpackFallback = () => {
   )
 }
 
-interface SandpackSyntaxHighlightProps extends SandpackProps {
-  codeString: string
-}
+// interface SandpackSyntaxHighlightProps extends SandpackProps {
+//   codeString: string
+// }
 
-const SandpackSyntaxHighlight: React.FC<React.PropsWithChildren<SandpackSyntaxHighlightProps>> = (
-  props
-) => {
-  const { options, codeString } = props
+// const SandpackSyntaxHighlight: React.FC< React.PropsWithChildren<SandpackSyntaxHighlightProps> > = () => {
+const SandpackSyntaxHighlight = () => {
+  const context = useContext(PreContext)
+  const { codeString, lineNumber } = context || {}
 
   const { styles, theme: token } = useStyles()
   const { appearance } = useThemeMode()
@@ -38,14 +39,22 @@ const SandpackSyntaxHighlight: React.FC<React.PropsWithChildren<SandpackSyntaxHi
   const insideOptions = {
     activeFile: "index.tsx",
     editorWidthPercentage: 60,
-    showLineNumbers: true,
+    showLineNumbers: lineNumber,
     showConsoleButton: true,
     showConsole: false,
     showRefreshButton: true,
     editorHeight: "400px",
     autorun: true,
-    ...options,
   }
+
+  // const sandpackFiles = {
+  //   "index.js": codeString,
+  // }
+
+  // const setup = {
+  //   entry: "index.tsx",
+  //   environment,
+  // }
 
   const theme = {
     colors: {

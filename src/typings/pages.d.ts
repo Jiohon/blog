@@ -1,4 +1,4 @@
-/// <reference types="@/utils/code" />
+/// <reference types="@/utils/prismjsLanguages" />
 
 type TableOfContentsItem = {
   url: string
@@ -10,7 +10,7 @@ type Frontmatter = {
   description: string
   date: string
   lastUpdated: string
-  icon: Languages
+  icon: Language
   slug: string
   template: string
   tags: string[]

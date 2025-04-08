@@ -1,6 +1,6 @@
 import { Alert, Tag } from "antd"
 
-import { toCodeParams, ToPreParams } from "@/utils/code"
+import { toCodeParams, ToPreParams } from "@/components/MDXRenderer/Pre/util"
 
 import A from "./A"
 import Blockquote from "./Blockquote"

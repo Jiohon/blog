@@ -124,3 +124,26 @@ export function flattenSingleItems(items: TableOfContentsItem[], level = 1): Hea
     return [...acc, headingItem]
   }, [])
 }
+
+/**
+ * @description 获取要在代码块中突出显示的行
+ * @param meta
+ * @returns 一个函数，返回一个布尔值，具体取决于索引是否应该突出显示 (零索引)
+ * @example
+ * calculateLinesToHighlight('3')
+ * calculateLinesToHighlight('3-6')
+ * calculateLinesToHighlight('3-6,8')
+ */
+export const calculateLinesToHighlight = (meta?: string) => {
+  if (!meta) {
+    return () => false
+  }
+
+  const lineNumbers = meta.split(`,`).map((v) => v.split(`-`).map(Number))
+  return (index: number) => {
+    const lineNumber = index + 1
+    return lineNumbers.some(([start, end]) =>
+      end ? lineNumber >= start && lineNumber <= end : lineNumber === start
+    )
+  }
+}

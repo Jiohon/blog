@@ -2,16 +2,6 @@ import { createStyles } from "antd-style"
 
 export const useStyles = createStyles<string>(
   ({ css, cx, token, prefixCls }, componentPrefixCls) => ({
-    PrismScorll: cx(
-      `${prefixCls}-${componentPrefixCls}-code-scorll`,
-      css`
-        box-sizing: content-box;
-        overflow: overlay;
-        font-family: inherit;
-        padding-block-end: 0.65rem;
-      `
-    ),
-
     PrismCode: cx(
       `${prefixCls}-${componentPrefixCls}-code`,
       css`
@@ -83,9 +73,12 @@ export const useStyles = createStyles<string>(
             ${token.colorPrimaryBorderHover} 0% 10%,
             ${token.colorPrimaryBgHover} 10% 100%
           );
+          opacity: 1 !important;
         }
+
         &.line {
           background-color: ${token.colorPrimaryBgHover};
+          opacity: 1 !important;
         }
       `
     ),
