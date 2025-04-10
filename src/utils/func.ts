@@ -82,3 +82,11 @@ export function copyToClipboard(text: string) {
   }
   copyToClipboard(text)
 }
+
+/**
+ * @description 获取字符串行数
+ * @date 09/04/2025
+ * @param {string} str
+ * @return {*}  {number}
+ */
+export const getCountLine = (str: string) => str.split("\n").length

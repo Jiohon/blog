@@ -28,7 +28,7 @@ const PreHighlight: React.FC<PreHighlightProps> = (props) => {
     const language = getPrismjsLanguage(rest?.language)
 
     return {
-      lineNumber: true,
+      lineNumber: false,
       ...rest,
       language,
       highlightRef,
@@ -54,7 +54,7 @@ const PreHighlight: React.FC<PreHighlightProps> = (props) => {
       <pre
         ref={highlightRef}
         className={styles.Pre}
-        style={{ maxHeight: `calc(${maxHeight} + 2.4rem)` }}
+        style={{ maxHeight: `calc(${maxHeight} + 3.1rem)` }}
       >
         <Title />
 

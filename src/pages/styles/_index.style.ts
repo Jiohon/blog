@@ -154,6 +154,8 @@ export const useStyles = createStyles(({ css, stylish, cx, responsive: r, token,
     `${prefixCls}-card-tagLinks`,
     css`
       width: 100%;
+      display: flex;
+      gap: 0.35rem;
 
       a {
         font-size: 0.75rem;

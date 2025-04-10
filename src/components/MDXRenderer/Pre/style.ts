@@ -7,12 +7,11 @@ export const useStyles = createStyles(
         `${prefixCls}-${componentPrefixCls}`,
         css`
           ${stylish.card}
+          box-sizing: content-box;
           position: relative;
-          display: grid;
-          gap: 0.15rem;
+          gap: 0.3rem;
           border-radius: ${token.borderRadius * 1.3}px;
           margin-block: 3rem 2rem;
-          padding-block-end: 0.65rem;
           border: 1px solid ${token.colorBorderSecondary};
           overflow: overlay;
           font-family: ${token.fontFamilyCode};
@@ -25,6 +24,7 @@ export const useStyles = createStyles(
         css`
           position: sticky;
           top: 0;
+          left: 0;
           display: flex;
           justify-content: space-between;
           font-family: ${token.fontFamilyCode};
@@ -35,6 +35,7 @@ export const useStyles = createStyles(
           gap: 0.8rem;
           backdrop-filter: blur(6px);
           z-index: 10;
+          width: 100%;
         `
       ),
 
@@ -43,6 +44,12 @@ export const useStyles = createStyles(
         css`
           color: inherit;
           font-family: inherit;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+          /* flex: 1; */
+          width: calc(100% - 11.5rem);
         `
       ),
 
@@ -50,10 +57,12 @@ export const useStyles = createStyles(
         `${prefixCls}-${componentPrefixCls}-titleBox-language`,
         css`
           display: flex;
+          justify-content: flex-end;
           align-items: center;
           font-family: inherit;
           font-size: 0.9rem;
           color: inherit;
+          width: 11.5rem;
         `
       ),
 

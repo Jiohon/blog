@@ -1,12 +1,14 @@
 import { createStyles } from "antd-style"
 
-export const useStyles = createStyles<string>(
-  ({ css, cx, token, prefixCls }, componentPrefixCls) => ({
+export const useStyles = createStyles<{
+  componentPrefixCls: string
+  countLine: number
+}>(({ css, cx, token, prefixCls }, { componentPrefixCls, countLine }) => {
+  return {
     PrismCode: cx(
       `${prefixCls}-${componentPrefixCls}-code`,
       css`
-        display: inline-flex;
-        flex-wrap: nowrap;
+        display: inline-block;
         font-family: inherit;
         font-size: 0.95rem;
         font-weight: normal;
@@ -16,71 +18,63 @@ export const useStyles = createStyles<string>(
         overflow-wrap: normal;
         tab-size: 4;
         hyphens: none;
-        width: auto;
+        line-height: 1.6rem;
         min-width: 100%;
-        line-height: 22px;
-        margin: 0;
-        padding: 0;
-      `
-    ),
 
-    lineNumbers: cx(
-      `${prefixCls}-${componentPrefixCls}-code-lineNumbers`,
-      css`
-        display: flex;
-        flex-direction: column;
-        position: sticky;
-        left: 0;
-        z-index: 1;
-        font-size: 0.85rem;
-        line-height: 22px;
+        margin-block-start: 0.3rem;
+        padding-block-end: 0.65rem;
 
-        .number {
-          display: inline-block;
-          user-select: none;
-          padding-inline: 1rem;
-          text-align: right;
-          background-color: ${token.colorBgElevated};
-          color: ${token.colorTextQuaternary};
-        }
-      `
-    ),
-
-    lines: cx(
-      `${prefixCls}-${componentPrefixCls}-code-lines`,
-      css`
-        font-family: inherit;
-        flex: 1;
-
-        .line {
-          position: relative;
-          padding-inline-start: 0.8rem;
-          padding-inline-end: 1.2rem;
-
-          span {
-            font-family: inherit;
+        &:hover {
+          .${prefixCls}-${componentPrefixCls}-code-line {
+            opacity: 1;
           }
         }
       `
     ),
 
-    LineHighlight: cx(
-      `${prefixCls}-${componentPrefixCls}-code-CodeHighlight`,
+    line: cx(
+      `${prefixCls}-${componentPrefixCls}-code-line`,
       css`
-        &.number {
-          background: linear-gradient(
-            90deg,
-            ${token.colorPrimaryBorderHover} 0% 10%,
-            ${token.colorPrimaryBgHover} 10% 100%
-          );
-          opacity: 1 !important;
+        display: flex;
+        position: relative;
+        padding-inline-end: 1.3rem;
+        font-family: inherit;
+        transition: opacity 0.25s ease-in-out;
+
+        &.opacity {
+          opacity: 0.65;
         }
 
-        &.line {
-          background-color: ${token.colorPrimaryBgHover};
-          opacity: 1 !important;
+        &.lineNumber {
+          &:before {
+            content: attr(data-line);
+            box-sizing: content-box;
+            position: sticky;
+            left: 0;
+            display: inline-block;
+            min-width: ${countLine * 0.55}rem;
+            text-align: right;
+            font-size: 0.85rem;
+            color: ${token.colorTextQuaternary};
+            padding-inline-start: 1.3rem;
+            padding-inline-end: 1rem;
+            background-color: ${token.colorBgElevated};
+          }
+        }
+
+        &.LineHighlight {
+          opacity: 1;
+        }
+
+        &.LineHighlight,
+        &.LineHighlight:before {
+          background: linear-gradient(
+            90deg,
+            ${token.colorPrimaryBorderHover} 0% 0.29rem,
+            ${token.colorPrimaryBgHover} 0.29rem 100%
+          );
         }
       `
     ),
-  })
-)
+  }
+})
