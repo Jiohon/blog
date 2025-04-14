@@ -8,10 +8,10 @@ export const useStyles = createStyles(({ css, cx, token, responsive: r, prefixCl
         &.h1 {
           ${r({
             tablet: css`
-              font-size: 37.5px;
+              font-size: 37px;
             `,
             mobile: css`
-              font-size: 37px;
+              font-size: 36px;
             `,
           })}
         }
@@ -19,10 +19,10 @@ export const useStyles = createStyles(({ css, cx, token, responsive: r, prefixCl
           margin-block: 7.5rem 3.5rem;
           ${r({
             tablet: css`
-              font-size: 29.5px;
+              font-size: 29px;
             `,
             mobile: css`
-              font-size: 29px;
+              font-size: 28px;
             `,
           })}
         }
@@ -30,10 +30,10 @@ export const useStyles = createStyles(({ css, cx, token, responsive: r, prefixCl
           margin-block: 5.5rem 2.5rem;
           ${r({
             tablet: css`
-              font-size: 23.5px;
+              font-size: 23px;
             `,
             mobile: css`
-              font-size: 23px;
+              font-size: 22px;
             `,
           })}
         }
@@ -42,10 +42,10 @@ export const useStyles = createStyles(({ css, cx, token, responsive: r, prefixCl
           scroll-margin-top: 90px;
           ${r({
             tablet: css`
-              font-size: 19.5px;
+              font-size: 19px;
             `,
             mobile: css`
-              font-size: 19px;
+              font-size: 18px;
             `,
           })}
         }
@@ -53,10 +53,10 @@ export const useStyles = createStyles(({ css, cx, token, responsive: r, prefixCl
           margin-block-end: 1rem;
           ${r({
             tablet: css`
-              font-size: 15.5px;
+              font-size: 15px;
             `,
             mobile: css`
-              font-size: 15px;
+              font-size: 14px;
             `,
           })}
         }

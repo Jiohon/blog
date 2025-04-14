@@ -8,7 +8,8 @@ import Calendar from "@/components/Icons/Calendar"
 import MDXRenderer from "@/components/MDXRenderer"
 import SEO from "@/components/SEO"
 import PostSidebar from "@/components/Sidebar/PostSidebar"
-import { flattenSingleItems } from "@/utils/helpers"
+import { HeadingProvider } from "@/context/HeadingProvider"
+import { filtersItems } from "@/utils/helpers"
 
 import { useStyles } from "./styles/post.style"
 
@@ -27,7 +28,7 @@ const PostTemplate: React.FC<
   const timeToRead = currentPost.fields.timeToRead
   const frontmatter = currentPost.frontmatter
 
-  const headings = flattenSingleItems(currentPost.tableOfContents.items)
+  const headings = filtersItems(currentPost.tableOfContents.items)
 
   const posts = allPost.nodes
     .map((e) => ({ ...e.frontmatter }))
@@ -35,47 +36,49 @@ const PostTemplate: React.FC<
   const tags = frontmatter?.tags.map((t) => ({ name: t, path: `/tags/${t}` }))
 
   return (
-    <div className={styles.post}>
-      <div className="content">
-        <Typography.Title level={2} className={styles.title}>
-          {frontmatter?.title}
-        </Typography.Title>
+    <HeadingProvider value={headings}>
+      <div className={styles.post}>
+        <div className="content">
+          <Typography.Title level={2} className={styles.title}>
+            {frontmatter?.title}
+          </Typography.Title>
 
-        <div className={styles.information}>
-          <Space className="times" align="center">
-            <Tooltip
-              placement="bottom"
-              title={`最后修改于 ${dayjs(frontmatter?.lastUpdated).format("YYYY-MM-DD")}`}
-            >
-              <Space>
-                <Calendar />
-                {frontmatter?.lastUpdated}
-              </Space>
-            </Tooltip>
+          <div className={styles.information}>
+            <Space className="times" align="center">
+              <Tooltip
+                placement="bottom"
+                title={`最后修改于 ${dayjs(frontmatter?.lastUpdated).format("YYYY-MM-DD")}`}
+              >
+                <Space>
+                  <Calendar />
+                  {frontmatter?.lastUpdated}
+                </Space>
+              </Tooltip>
 
-            <ClockCircleOutlined style={{ marginLeft: "1rem" }} />
-            {timeToRead.text}
-          </Space>
+              <ClockCircleOutlined style={{ marginLeft: "1rem" }} />
+              {timeToRead.text}
+            </Space>
 
-          {tags.map((i) => (
-            <Tag key={i.path} bordered={false} onClick={() => navigate(i.path)}>
-              #{i.name}
-            </Tag>
-          ))}
+            {tags.map((i) => (
+              <Tag key={i.path} bordered={false} onClick={() => navigate(i.path)}>
+                #<span>{i.name}</span>
+              </Tag>
+            ))}
+          </div>
+
+          <MDXRenderer>{children}</MDXRenderer>
+
+          <Comment />
         </div>
 
-        <MDXRenderer>{children}</MDXRenderer>
-
-        <Comment />
+        <PostSidebar
+          date={frontmatter?.date}
+          icon={frontmatter?.icon}
+          headings={headings}
+          posts={posts}
+        />
       </div>
-
-      <PostSidebar
-        date={frontmatter?.date}
-        icon={frontmatter?.icon}
-        headings={headings}
-        posts={posts}
-      />
-    </div>
+    </HeadingProvider>
   )
 }
 

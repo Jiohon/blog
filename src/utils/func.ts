@@ -90,3 +90,68 @@ export function copyToClipboard(text: string) {
  * @return {*}  {number}
  */
 export const getCountLine = (str: string) => str.split("\n").length
+
+/**
+ * @description 从数组对象中查找匹配指定键值对的项
+ * @date 10/05/2025
+ * @param {Array<Record<string, unknown>>} array 要搜索的数组
+ * @param {Record<string, unknown>} criteria 查找条件，格式为 {key: "value"}
+ * @return {*} 返回匹配的项，如果没有找到则返回undefined
+ * @example
+ * // 基本用法
+ * const users = [
+ *   { id: 1, name: "张三" },
+ *   { id: 2, name: "李四" }
+ * ]
+ * const user = findItemsInJson(users, { id: 1 }) // 返回 { id: 1, name: "张三" }
+ *
+ * // 嵌套数组查找
+ * const menu = [
+ *   {
+ *     title: "首页",
+ *     key: "home",
+ *     children: [
+ *       { title: "概览", key: "overview" }
+ *     ]
+ *   }
+ * ]
+ * const item = findItemsInJson(menu, { key: "overview" }) // 返回 { title: "概览", key: "overview" }
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function findItem<T extends Record<string, any>, K extends keyof T>(
+  array: T[],
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  criteria: Record<K & string, any>
+): T | undefined {
+  if (!array || !Array.isArray(array) || array.length === 0) {
+    return undefined
+  }
+
+  if (!criteria || typeof criteria !== "object") {
+    return undefined
+  }
+
+  const criteriaKey = Object.keys(criteria)[0] as K & string
+  const criteriaValue = criteria[criteriaKey]
+
+  // 递归搜索函数
+  const search = (items: T[]): T | undefined => {
+    for (const item of items) {
+      // 检查当前项是否匹配条件
+      if (item[criteriaKey] === criteriaValue) {
+        return item
+      }
+
+      // 如果当前项有children属性且是数组，递归搜索
+      if (item.children && Array.isArray(item.children) && item.children.length > 0) {
+        const found = search(item.children as T[])
+        if (found) {
+          return found
+        }
+      }
+    }
+    return undefined
+  }
+
+  return search(array)
+}

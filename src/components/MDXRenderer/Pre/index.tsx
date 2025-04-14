@@ -19,7 +19,7 @@ export interface PreHighlightProps extends PreNodeProps {
 }
 
 const PreHighlight: React.FC<PreHighlightProps> = (props) => {
-  const { maxRows = 20, template, ...rest } = props
+  const { maxRows = 25, template, ...rest } = props
 
   const { styles } = useStyles("pre")
   const highlightRef = useRef<HTMLPreElement>(null)
@@ -54,7 +54,7 @@ const PreHighlight: React.FC<PreHighlightProps> = (props) => {
       <pre
         ref={highlightRef}
         className={styles.Pre}
-        style={{ maxHeight: `calc(${maxHeight} + 3.1rem)` }}
+        style={{ maxHeight: `calc(${maxHeight} + 2.5rem)` }}
       >
         <Title />
 

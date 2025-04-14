@@ -1,7 +1,7 @@
 import { useStyles } from "./style"
 
 interface CodeHighlightProps {
-  children: string | React.ReactNode
+  children: React.ReactNode
   codeString?: string
 }
 

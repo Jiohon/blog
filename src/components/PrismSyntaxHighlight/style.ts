@@ -20,9 +20,10 @@ export const useStyles = createStyles<{
         hyphens: none;
         line-height: 1.6rem;
         min-width: 100%;
+        padding-block-end: 0.6rem;
 
-        margin-block-start: 0.3rem;
-        padding-block-end: 0.65rem;
+        /* padding-block-start: 0.3rem;
+        padding-block-end: 0.7rem; */
 
         &:hover {
           .${prefixCls}-${componentPrefixCls}-code-line {
@@ -37,6 +38,8 @@ export const useStyles = createStyles<{
       css`
         display: flex;
         position: relative;
+        height: 1.6rem;
+        line-height: 1.6rem;
         padding-inline-end: 1.3rem;
         font-family: inherit;
         transition: opacity 0.25s ease-in-out;

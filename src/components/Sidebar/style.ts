@@ -15,7 +15,7 @@ export const useStyles = createStyles(
           > .${prefixCls}-anchor-link-title {
             overflow: visible;
             position: relative;
-            transition: all 0.45s;
+            transition: color 0.45s;
 
             &::before {
               content: "";
@@ -27,7 +27,6 @@ export const useStyles = createStyles(
               height: 4px;
               border-radius: 2rem;
               background-color: ${isDarkMode ? "#373737" : "#e5e5e5"};
-              transition: all 0.45s;
               margin-inline: -2rem 0;
             }
           }

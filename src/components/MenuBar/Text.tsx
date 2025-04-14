@@ -2,7 +2,7 @@ import { CSSProperties, FunctionComponent, ReactNode } from "react"
 
 import { useStyles } from "./style"
 
-interface TextProps {
+interface TextProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string
   style?: CSSProperties
   children: ReactNode

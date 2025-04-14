@@ -98,19 +98,27 @@ export const simpleHash = (str: string): string => {
  * @date 24/03/2024
  * @param {TableOfContentsItem[]} items
  * @param {number} [level=1]
+ * @param {string} [parentUrl='']
  * @return {*}  {HeadingItem[]}
  */
-export function flattenSingleItems(items: TableOfContentsItem[], level = 1): HeadingItem[] {
+export function filtersItems(
+  items: TableOfContentsItem[],
+  level = 1,
+  parentUrl = ""
+): HeadingItem[] {
   return items.reduce<HeadingItem[]>((acc, item) => {
     // 如果当前项只有一个items属性，直接处理其子项
     if (Object.keys(item).length === 1 && item.items) {
-      return [...acc, ...flattenSingleItems(item.items, level)]
+      return [...acc, ...filtersItems(item.items, level, parentUrl)]
     }
+
+    // 生成带有父级前缀的href
+    const urlPath = parentUrl ? `${parentUrl}-${item.url}` : item.url
 
     // 转换为HeadingItem格式
     const headingItem: HeadingItem = {
-      key: item.title,
-      href: `#${item.title}`,
+      key: urlPath,
+      href: `${item.url}`,
       title: item.title,
       className: `level-${level}`,
       level: level,
@@ -118,7 +126,7 @@ export function flattenSingleItems(items: TableOfContentsItem[], level = 1): Hea
 
     // 处理子项
     if (item.items) {
-      headingItem.children = flattenSingleItems(item.items, level + 1)
+      headingItem.children = filtersItems(item.items, level + 1, urlPath)
     }
 
     return [...acc, headingItem]

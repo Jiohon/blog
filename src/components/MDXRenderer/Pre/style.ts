@@ -7,14 +7,15 @@ export const useStyles = createStyles(
         `${prefixCls}-${componentPrefixCls}`,
         css`
           ${stylish.card}
-          box-sizing: content-box;
           position: relative;
           gap: 0.3rem;
           border-radius: ${token.borderRadius * 1.3}px;
-          margin-block: 3rem 2rem;
-          border: 1px solid ${token.colorBorderSecondary};
+          margin-block: 2rem;
+          border: 1px solid ${token.colorBorderFourth};
           overflow: overlay;
           font-family: ${token.fontFamilyCode};
+          box-shadow: 0 1px 9px 2px rgba(0, 0, 0, 0.008), 0 1px 6px 2px rgba(0, 0, 0, 0.006),
+            0 2px 4px 2px rgba(0, 0, 0, 0.006);
         `
       ),
 
@@ -31,11 +32,12 @@ export const useStyles = createStyles(
           color: ${token.colorTextQuaternary};
           font-size: 0.95rem;
           padding-inline: 1.3rem;
-          padding-block-start: 0.6rem;
+          padding-block-start: 0.5rem;
           gap: 0.8rem;
           backdrop-filter: blur(6px);
           z-index: 10;
           width: 100%;
+          height: 2.5rem;
         `
       ),
 

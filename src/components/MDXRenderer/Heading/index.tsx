@@ -1,60 +1,75 @@
-import { useRef } from "react"
+import React, { HTMLAttributes, useMemo, useRef } from "react"
 
 import { Typography } from "antd"
+
+import { useHeading } from "@/context/HeadingProvider"
+import { findItem } from "@/utils/func"
 
 import { useStyles } from "./style"
 
 const { Title, Link } = Typography
 
-type HeadingProps = {
-  id: string
-  children: string
+type HeadingProps = HTMLAttributes<HTMLHeadingElement> & {
+  id?: string
+  level: 1 | 2 | 3 | 4 | 5 | undefined
+  children?: React.ReactNode
 }
 
 /* eslint-disable */
-const heading =
-  (level) =>
-  ({ children, ...props }: HeadingProps) => {
-    const { styles, cx } = useStyles()
-    const linkRef = useRef<HTMLElement>(null)
-    const ID = children
-    // const ID = typeof children === "string" ? children : children?.props?.children
+const Heading: React.FC<HeadingProps> = ({ children, level, ...props }) => {
+  const { styles, cx } = useStyles()
+  const headings = useHeading()
+  const linkRef = useRef<HTMLElement>(null)
 
-    const handleClick = async (e: React.MouseEvent<HTMLElement>, href) => {
-      // e.preventDefault()
-      const { origin, pathname } = window.location
+  const ID = useMemo(() => {
+    const currentHeading = findItem(headings, { title: children })
+    return currentHeading?.href
+  }, [children, headings])
 
-      await linkRef.current?.scrollIntoView({ behavior: "smooth" })
-      history.replaceState(null, "", `${origin}${pathname}#${href}`)
-    }
-
-    return (
-      <Title
-        level={level}
-        id={`#${ID}`}
-        className={cx(styles.heading, styles.levelStyle, `h${level}`)}
-      >
-        <Link
-          ref={linkRef}
-          id={`${ID}`}
-          className={styles.link}
-          onClick={(e) => handleClick(e, ID)}
-        >
-          #
-        </Link>
-
-        {children}
-      </Title>
-    )
+  const handleClick = () => {
+    linkRef.current?.scrollIntoView({ behavior: "smooth" })
   }
 
+  return (
+    <Title
+      level={level}
+      id={ID}
+      className={cx(styles.heading, styles.levelStyle, `h${level}`)}
+      {...props}
+    >
+      <Link
+        ref={linkRef}
+        id={`${ID}`.replace("#", "")}
+        className={styles.link}
+        onClick={handleClick}
+      >
+        #
+      </Link>
+
+      {children}
+    </Title>
+  )
+}
+
 const headings = {
-  h1: heading(1),
-  h2: heading(2),
-  h3: heading(3),
-  h4: heading(4),
-  h5: heading(5),
-  h6: heading(6),
+  h1: (props) => {
+    return <Heading level={1} {...props}></Heading>
+  },
+  h2: (props) => {
+    return <Heading level={2} {...props}></Heading>
+  },
+  h3: (props) => {
+    return <Heading level={3} {...props}></Heading>
+  },
+  h4: (props) => {
+    return <Heading level={4} {...props}></Heading>
+  },
+  h5: (props) => {
+    return <Heading level={5} {...props}></Heading>
+  },
+  h6: (props) => {
+    return <Heading level={6} {...props}></Heading>
+  },
 }
 
 export default headings

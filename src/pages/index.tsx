@@ -50,7 +50,7 @@ const Home: React.FC<PageProps<allMdxNodesQuery<"latest" | "Highlights"> & MdxNo
       <div className={styles.wrapper}>
         {simplifiedLatest.map((item) => {
           return (
-            <Card className={styles.latestCard} key={item.slug} bordered>
+            <Card className={styles.latestCard} key={item.slug}>
               <time className={styles.time}>{item.date}</time>
               <Link className={styles.titleLink} to={item.slug}>
                 {item.title}
@@ -79,11 +79,7 @@ const Home: React.FC<PageProps<allMdxNodesQuery<"latest" | "Highlights"> & MdxNo
           <div className={styles.wrapper}>
             {simplifiedHighlights.map((item) => {
               return (
-                <Card
-                  className={styles.highlightCard}
-                  key={`Highlight-${item.slug}`}
-                  bordered={false}
-                >
+                <Card className={styles.highlightCard} key={`Highlight-${item.slug}`}>
                   <SVGIcon id={item.icon} width="5em" height="5em"></SVGIcon>
                   <div className="content">
                     <time className={styles.time}>{item.date}</time>

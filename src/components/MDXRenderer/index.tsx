@@ -9,7 +9,7 @@ export type MDXRendererProps = {
 }
 
 const MDXRenderer: React.FC<React.PropsWithChildren<MDXRendererProps>> = ({ children }) => {
-  return <MDXProvider components={components as any}>{children}</MDXProvider>
+  return <MDXProvider components={components}>{children}</MDXProvider>
 }
 
 export default MDXRenderer

@@ -37,9 +37,6 @@ export const useStyles = createStyles(({ css, cx, responsive: r, token, prefixCl
 
       &:hover {
         transform: translate3d(0.85rem, 0px, 0px);
-        .infos {
-          color: ${token.colorPrimary};
-        }
       }
 
       .infos {

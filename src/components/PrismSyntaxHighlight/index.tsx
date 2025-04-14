@@ -17,7 +17,7 @@ const camelToKebab = (obj: Record<string, any>): Record<string, any> => {
   const result: Record<string, any> = {}
   Object.keys(obj).forEach((key) => {
     const kebabKey = key.replace(/([A-Z])/g, "-$1").toLowerCase()
-    result[kebabKey] = obj[key]
+    result[kebabKey] = JSON.stringify(obj[key])
   })
   return result
 }

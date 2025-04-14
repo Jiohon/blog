@@ -53,6 +53,10 @@ export interface SiteToken {
    * @title 第四级阴影样式
    */
   boxShadowFourth: string
+  /**
+   * @title 第四级边框色
+   */
+  colorBorderFourth: string
 }
 
 export const createCustomToken: GetCustomToken<SiteToken> = ({ isDarkMode, token }) => {
@@ -82,5 +86,7 @@ export const createCustomToken: GetCustomToken<SiteToken> = ({ isDarkMode, token
     boxShadowFourth: isDarkMode
       ? ""
       : "0px 0.8px 2px rgba(0, 0, 0, 0.028),0px 2.7px 6.7px rgba(0, 0, 0, 0.03),0px 3px 15px rgba(0, 0, 0, 0.052)",
+
+    colorBorderFourth: isDarkMode ? "#282828" : "#f5f5f5",
   }
 }

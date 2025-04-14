@@ -1,15 +1,12 @@
-import { CSSProperties, FunctionComponent, ReactNode } from "react"
+import { FunctionComponent } from "react"
 
 import { Link as GatsbyLink } from "gatsby"
 
 import { useStyles } from "./style"
 
-interface TagProps {
-  className?: string
-  style?: CSSProperties
-  to: string
-  children: ReactNode
-}
+import type { GatsbyLinkProps } from "gatsby"
+
+type TagProps = Omit<GatsbyLinkProps<string>, "ref">
 
 const Tag: FunctionComponent<TagProps> = ({ to, children, className, ...otherProps }) => {
   const { styles, cx, prefixCls } = useStyles()
@@ -17,9 +14,17 @@ const Tag: FunctionComponent<TagProps> = ({ to, children, className, ...otherPro
   return (
     <>
       <GatsbyLink
+        state={to}
         className={cx(`${prefixCls}-tag`, styles.tag, className)}
-        activeClassName={cx(`${prefixCls}-tag-checked`)}
         to={to}
+        getProps={({ isCurrent }) => ({
+          className: cx(
+            `${prefixCls}-tag`,
+            styles.tag,
+            className,
+            isCurrent ? `${prefixCls}-tag-checked` : ""
+          ),
+        })}
         {...otherProps}
       >
         {children}

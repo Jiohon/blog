@@ -1,9 +1,11 @@
+import React, { AnchorHTMLAttributes } from "react"
+
 import LinkSvg from "@/components/Icons/ALink"
 
 import { useStyles } from "./style"
 
-interface AProps {
-  children: string | React.ReactNode
+export interface AProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+  children?: React.ReactNode
 }
 
 const A: React.FC<AProps> = (props) => {

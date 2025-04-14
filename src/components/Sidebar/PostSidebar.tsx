@@ -1,6 +1,7 @@
 import { Anchor, Card } from "antd"
 import { Link } from "gatsby"
 
+import { findItem } from "@/utils/func"
 import { findMaxLevel } from "@/utils/helpers"
 import type { HeadingItem } from "@/utils/helpers"
 import type { Language } from "@/utils/prismjsLanguages"
@@ -28,19 +29,18 @@ const PostSidebar: React.FC<PostSidebarProps> = ({ icon, headings, posts }) => {
   const latest = posts.slice(0, 6)
 
   const handleChange = (currentActiveLink: string) => {
-    if (currentActiveLink) {
-      // @ts-expect-error 替换锚点
-      history.replaceState(null, null, currentActiveLink)
+    const currentHeading = findItem(headings, { href: currentActiveLink })
+    if (currentHeading) {
+      history.replaceState(null, "", currentHeading?.href)
     } else {
-      // @ts-expect-error 清空锚点
-      history.replaceState(null, null, window.location.pathname + window.location.search)
+      history.replaceState(null, "", window.location.pathname + window.location.search)
     }
   }
 
   return (
     <Sticky>
       <SVGIcon id={icon} width="8em" height="8em" style={{ marginBlock: "0 1rem" }}></SVGIcon>
-      {/* <Card bordered={false} className={styles.card}>
+      {/* <Card className={styles.card}>
           <h2>About me</h2>
         </Card> */}
 

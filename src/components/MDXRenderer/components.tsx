@@ -14,7 +14,7 @@ const components = {
   code: (props) => {
     const codeProps = toCodeParams(props)
 
-    return <CodeHighlight {...codeProps} />
+    return <CodeHighlight {...codeProps}>{props.children}</CodeHighlight>
   },
   pre: (props) => {
     const preProps = ToPreParams(props)
