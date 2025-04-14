@@ -58,7 +58,11 @@ jobs:
           git submodule init
 
           echo "正在更新子模块..."
-          git submodule update --recursive --force
+          git submodule update --recursive --remote --force
+
+          # 确保子模块获取最新内容
+          echo "确保子模块已更新到最新提交..."
+          git submodule foreach 'git checkout $(git config -f $toplevel/.gitmodules submodule.$name.branch || echo "master") && git pull'
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
