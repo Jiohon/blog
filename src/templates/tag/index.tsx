@@ -8,7 +8,7 @@ import SEO from "@/components/SEO"
 import ArchiveSidebar from "@/components/Sidebar/ArchiveSidebar"
 import { simplifiedQueryData } from "@/utils/helpers"
 
-import { useStyles } from "./styles/tag.style"
+import { useStyles } from "./_style"
 
 import type { HeadFC, PageProps } from "gatsby"
 
@@ -60,17 +60,17 @@ export const Head: HeadFC<allMdxNodesQuery<"tags"> & MdxNodesQuery, TagData> = (
 }
 
 export const pageQuery = graphql`
-  query TagPage($tag: String, $published: Boolean) {
+  query TagPage($tag: String, $published: [Boolean]) {
     posts: allMdx(
       sort: { frontmatter: { date: DESC } }
-      filter: { frontmatter: { tags: { in: [$tag] }, published: { eq: $published } } }
+      filter: { frontmatter: { tags: { in: [$tag] }, published: { in: $published } } }
     ) {
       totalCount
       nodes {
         ...InformationFragment
       }
     }
-    tags: allMdx(filter: { frontmatter: { published: { eq: $published } } }) {
+    tags: allMdx(filter: { frontmatter: { published: { in: $published } } }) {
       group(field: { frontmatter: { tags: SELECT } }) {
         name: fieldValue
         totalCount

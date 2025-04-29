@@ -1,4 +1,4 @@
-import { useStyles } from "./style"
+import { useStyles } from "./_style"
 
 // function Model() {
 //   const texture = useLoader(

@@ -1,9 +1,9 @@
 declare namespace NodeJS {
   interface ProcessEnv {
     /**
-     * 筛选文章 published 标志
+     * 是否筛选未发布文章
      */
-    GATSBY_PUBLISHED: "true" | "false"
+    GATSBY_NOT_PUBLISHED: "true" | "false"
 
     /**
      * 评论组件 - GitHub 仓库

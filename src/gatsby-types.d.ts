@@ -2490,23 +2490,32 @@ type StringQueryOperatorInput = {
   readonly regex: InputMaybe<Scalars['String']>;
 };
 
-type ArchivePageQueryVariables = Exact<{ [key: string]: never; }>;
+type ArchivePageQueryVariables = Exact<{
+  published: InputMaybe<ReadonlyArray<InputMaybe<Scalars['Boolean']>> | InputMaybe<Scalars['Boolean']>>;
+}>;
 
 
 type ArchivePageQuery = { readonly archive: { readonly nodes: ReadonlyArray<{ readonly frontmatter: { readonly title: string | null, readonly description: string | null, readonly date: string | null, readonly lastUpdated: string | null, readonly icon: string | null, readonly slug: string | null, readonly template: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly published: boolean | null } | null, readonly fields: { readonly path: string | null, readonly slug: string | null, readonly timeToRead: { readonly minutes: number | null, readonly time: number | null, readonly words: number | null, readonly text: string | null } | null } | null }> }, readonly tags: { readonly group: ReadonlyArray<{ readonly totalCount: number, readonly name: string | null }> } };
 
+type HomePageQueryVariables = Exact<{
+  published: InputMaybe<ReadonlyArray<InputMaybe<Scalars['Boolean']>> | InputMaybe<Scalars['Boolean']>>;
+}>;
+
+
+type HomePageQuery = { readonly latest: { readonly nodes: ReadonlyArray<{ readonly frontmatter: { readonly title: string | null, readonly description: string | null, readonly date: string | null, readonly lastUpdated: string | null, readonly icon: string | null, readonly slug: string | null, readonly template: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly published: boolean | null } | null, readonly fields: { readonly path: string | null, readonly slug: string | null, readonly timeToRead: { readonly minutes: number | null, readonly time: number | null, readonly words: number | null, readonly text: string | null } | null } | null }> }, readonly Highlights: { readonly nodes: ReadonlyArray<{ readonly frontmatter: { readonly title: string | null, readonly description: string | null, readonly date: string | null, readonly lastUpdated: string | null, readonly icon: string | null, readonly slug: string | null, readonly template: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly published: boolean | null } | null, readonly fields: { readonly path: string | null, readonly slug: string | null, readonly timeToRead: { readonly minutes: number | null, readonly time: number | null, readonly words: number | null, readonly text: string | null } | null } | null }> } };
+
 type InformationFragmentFragment = { readonly frontmatter: { readonly title: string | null, readonly description: string | null, readonly date: string | null, readonly lastUpdated: string | null, readonly icon: string | null, readonly slug: string | null, readonly template: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly published: boolean | null } | null, readonly fields: { readonly path: string | null, readonly slug: string | null, readonly timeToRead: { readonly minutes: number | null, readonly time: number | null, readonly words: number | null, readonly text: string | null } | null } | null };
 
 type MeBySlugQueryVariables = Exact<{
-  slug: Scalars['String'];
+  slug: InputMaybe<Scalars['String']>;
 }>;
 
 
 type MeBySlugQuery = { readonly me: { readonly frontmatter: { readonly title: string | null, readonly description: string | null, readonly date: string | null, readonly lastUpdated: string | null, readonly icon: string | null, readonly slug: string | null, readonly template: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly published: boolean | null } | null, readonly fields: { readonly path: string | null, readonly slug: string | null, readonly timeToRead: { readonly minutes: number | null, readonly time: number | null, readonly words: number | null, readonly text: string | null } | null } | null } | null };
 
 type PostPageQueryVariables = Exact<{
-  slug: Scalars['String'];
-  published: InputMaybe<Scalars['Boolean']>;
+  slug: InputMaybe<Scalars['String']>;
+  published: InputMaybe<ReadonlyArray<InputMaybe<Scalars['Boolean']>> | InputMaybe<Scalars['Boolean']>>;
 }>;
 
 
@@ -2519,7 +2528,7 @@ type siteMetadataQuery = { readonly site: { readonly siteMetadata: { readonly ti
 
 type TagPageQueryVariables = Exact<{
   tag: InputMaybe<Scalars['String']>;
-  published: InputMaybe<Scalars['Boolean']>;
+  published: InputMaybe<ReadonlyArray<InputMaybe<Scalars['Boolean']>> | InputMaybe<Scalars['Boolean']>>;
 }>;
 
 

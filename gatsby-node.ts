@@ -6,6 +6,7 @@ import { createFilePath } from "gatsby-source-filesystem"
 import NodePolyfillPlugin from "node-polyfill-webpack-plugin"
 import readingTime from "reading-time"
 
+import { getNotPublished } from "./src/utils/env"
 import { getPostTags, parseFilePath } from "./src/utils/helpers"
 
 import type { GatsbyNode } from "gatsby"
@@ -13,8 +14,6 @@ import type { GatsbyNode } from "gatsby"
 dotenv.config({ path: [`.env`, `.env.${process.env.NODE_ENV}`], override: true })
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-
-const GATSBY_PUBLISHED = JSON.parse(process.env.GATSBY_PUBLISHED)
 
 export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] = ({ actions }) => {
   actions.createTypes(`
@@ -51,13 +50,15 @@ export const onCreateWebpackConfig: GatsbyNode["onCreateWebpackConfig"] = ({ act
   })
 }
 
-const postPage = path.resolve("./src/templates/post.tsx")
-const aboutPage = path.resolve("./src/templates/about.tsx")
-const tagPage = path.resolve("./src/templates/tag.tsx")
+const postPage = path.resolve("./src/templates/post/index.tsx")
+const aboutPage = path.resolve("./src/templates/about/index.tsx")
+const tagPage = path.resolve("./src/templates/tag/index.tsx")
 
 export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions, reporter }) => {
   try {
     const { createPage, createRedirect } = actions
+
+    const published = getNotPublished() ? [true, false] : [true]
 
     createRedirect({ fromPath: "/rss", toPath: "/rss.xml", statusCode: 200 })
 
@@ -112,7 +113,7 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
           slug: post.frontmatter.slug,
           previous,
           next,
-          published: GATSBY_PUBLISHED,
+          published,
         },
       })
     })
@@ -141,7 +142,7 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
         component: tagPage,
         context: {
           tag,
-          published: GATSBY_PUBLISHED,
+          published,
         },
       })
     })
@@ -158,19 +159,9 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = ({ node, actions, getNod
   // =====================================================================================
   if (node.internal.type === "Mdx") {
     const slug = createFilePath({ node, getNode })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const path = parseFilePath(node as any)
 
-    // id: string
-    // parent?: string | null
-    // children?: string[]
-    // internal: {
-    //   type: string
-    //   mediaType?: string
-    //   content?: string
-    //   contentDigest: string
-    //   description?: string
-    //   contentFilePath?: string
-    // }
     createNodeField({
       name: "path",
       value: path,

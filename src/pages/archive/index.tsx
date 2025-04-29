@@ -8,7 +8,7 @@ import SEO from "@/components/SEO"
 import ArchiveSidebar from "@/components/Sidebar/ArchiveSidebar"
 import { simplifiedQueryData } from "@/utils/helpers"
 
-import { useStyles } from "./style"
+import { useStyles } from "./_style"
 
 import type { HeadFC, PageProps } from "gatsby"
 
@@ -59,16 +59,16 @@ export const Head: HeadFC = (props) => {
 }
 
 export const blogQuery = graphql`
-  query ArchivePage {
+  query ArchivePage($published: [Boolean]) {
     archive: allMdx(
       sort: { frontmatter: { date: DESC } }
-      filter: { frontmatter: { template: { ne: "page" }, published: { ne: false } } }
+      filter: { frontmatter: { template: { ne: "page" }, published: { in: $published } } }
     ) {
       nodes {
         ...InformationFragment
       }
     }
-    tags: allMdx(filter: { frontmatter: { published: { eq: true } } }) {
+    tags: allMdx(filter: { frontmatter: { published: { in: $published } } }) {
       group(field: { frontmatter: { tags: SELECT } }) {
         name: fieldValue
         totalCount

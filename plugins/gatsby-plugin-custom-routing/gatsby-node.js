@@ -6,6 +6,24 @@ const path = require("path")
 const glob = require("glob")
 
 /**
+ * @description 获取是否不发布文章
+ * @returns {boolean}
+ */
+const getNotPublished = () => {
+  try {
+    if (process.env.NODE_ENV === "production") {
+      return false
+    }
+
+    const GATSBY_NOT_PUBLISHED = JSON.parse(process.env.GATSBY_NOT_PUBLISHED)
+
+    return GATSBY_NOT_PUBLISHED
+  } catch (error) {
+    false
+  }
+}
+
+/**
  * 自定义路由插件，用于：
  * 1. 自动处理pages目录中的index文件夹中的文件映射到根路径
  * 2. 忽略特定文件或文件夹
@@ -20,7 +38,10 @@ exports.createPages = async ({ actions, reporter }, pluginOptions) => {
     ignore = [], // 忽略的文件或文件夹模式（使用glob模式）
     customMappings = {}, // 自定义路径映射 { "源路径": "目标路径" }
     nestedIndexToRoot = true, // 是否将嵌套的index文件夹映射到根路径
+    context = {}, // 上下文
   } = pluginOptions
+
+  const insideContext = { ...context, published: getNotPublished() ? [true, false] : [true] }
 
   // 项目根目录
   const rootDir = path.resolve(".")
@@ -39,7 +60,7 @@ exports.createPages = async ({ actions, reporter }, pluginOptions) => {
       createPage({
         path: destination,
         component: componentPath,
-        context: {},
+        context: insideContext,
       })
       reporter.info(`gatsby-plugin-custom-routing: 创建映射 ${source} -> ${destination}`)
     } else {
@@ -67,7 +88,7 @@ exports.createPages = async ({ actions, reporter }, pluginOptions) => {
         createPage({
           path: `/${folderName}`,
           component: componentPath,
-          context: {},
+          context: insideContext,
         })
         reporter.info(`gatsby-plugin-custom-routing: 创建映射 ${filePath} -> /${folderName}`)
 
@@ -76,7 +97,7 @@ exports.createPages = async ({ actions, reporter }, pluginOptions) => {
           createPage({
             path: "/",
             component: componentPath,
-            context: {},
+            context: insideContext,
           })
           reporter.info(`gatsby-plugin-custom-routing: 创建根路径映射 ${filePath} -> /`)
         }

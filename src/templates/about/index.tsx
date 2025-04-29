@@ -6,7 +6,7 @@ import PrismSyntaxHighlight from "@/components/MDXRenderer"
 import SEO from "@/components/SEO"
 import MeSidebar from "@/components/Sidebar/MeSidebar"
 
-import { useStyles } from "./styles/about.style"
+import { useStyles } from "./_style"
 
 import type { HeadFC, PageProps } from "gatsby"
 
@@ -49,7 +49,7 @@ export const Head: HeadFC<MdxQuery> = ({ location, data }) => {
 }
 
 export const pageQuery = graphql`
-  query MeBySlug($slug: String!) {
+  query MeBySlug($slug: String) {
     me: mdx(frontmatter: { slug: { eq: $slug } }) {
       ...InformationFragment
     }

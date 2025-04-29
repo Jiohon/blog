@@ -8,7 +8,7 @@ import SVGIcon from "@/components/SvgIcon"
 import { useSiteStore } from "@/store"
 import { simplifiedQueryData } from "@/utils/helpers"
 
-import { useStyles } from "./style"
+import { useStyles } from "./_style"
 
 import type { HeadFC, PageProps } from "gatsby"
 /**
@@ -104,11 +104,11 @@ export const Head: HeadFC = (props) => {
 }
 
 export const pageQuery = graphql`
-  query {
+  query HomePage($published: [Boolean]) {
     latest: allMdx(
       limit: 6
       sort: { frontmatter: { date: DESC } }
-      filter: { frontmatter: { template: { ne: "page" }, published: { eq: true } } }
+      filter: { frontmatter: { template: { ne: "page" }, published: { in: $published } } }
     ) {
       nodes {
         ...InformationFragment
@@ -117,7 +117,7 @@ export const pageQuery = graphql`
     Highlights: allMdx(
       limit: 6
       sort: { frontmatter: { date: DESC } }
-      filter: { frontmatter: { tags: { eq: "Highlight" }, published: { eq: true } } }
+      filter: { frontmatter: { tags: { eq: "Highlight" }, published: { in: $published } } }
     ) {
       nodes {
         ...InformationFragment

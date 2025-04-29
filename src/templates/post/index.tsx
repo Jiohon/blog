@@ -11,7 +11,7 @@ import PostSidebar from "@/components/Sidebar/PostSidebar"
 import { HeadingProvider } from "@/context/HeadingProvider"
 import { filtersItems, simplifiedQueryData } from "@/utils/helpers"
 
-import { useStyles } from "./styles/post.style"
+import { useStyles } from "./_style"
 
 /**
  * @description 文章页面
@@ -98,10 +98,10 @@ export const Head: HeadFC<allMdxNodesQuery<"allPost"> & MdxNodesQuery<"currentPo
 }
 
 export const recentQuery = graphql`
-  query PostPage($slug: String!, $published: Boolean) {
+  query PostPage($slug: String, $published: [Boolean]) {
     allPost: allMdx(
       sort: { frontmatter: { date: DESC } }
-      filter: { frontmatter: { template: { ne: "page" }, published: { eq: $published } } }
+      filter: { frontmatter: { template: { ne: "page" }, published: { in: $published } } }
     ) {
       nodes {
         ...InformationFragment
