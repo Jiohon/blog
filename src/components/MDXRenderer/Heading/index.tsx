@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, useMemo, useRef } from "react"
+import React, { HTMLAttributes, useRef } from "react"
 
 import { Typography } from "antd"
 
@@ -21,10 +21,7 @@ const Heading: React.FC<HeadingProps> = ({ children, level, ...props }) => {
   const headings = useHeading()
   const linkRef = useRef<HTMLElement>(null)
 
-  const ID = useMemo(() => {
-    const currentHeading = findItem(headings, { title: children })
-    return currentHeading?.href
-  }, [children, headings])
+  const ID = findItem(headings, { title: children })?.href
 
   const handleClick = () => {
     linkRef.current?.scrollIntoView({ behavior: "smooth" })

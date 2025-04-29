@@ -6,6 +6,8 @@ import { createFilePath } from "gatsby-source-filesystem"
 import NodePolyfillPlugin from "node-polyfill-webpack-plugin"
 import readingTime from "reading-time"
 
+import { getPostTags, parseFilePath } from "./src/utils/helpers"
+
 import type { GatsbyNode } from "gatsby"
 
 dotenv.config({ path: [`.env`, `.env.${process.env.NODE_ENV}`], override: true })
@@ -92,7 +94,7 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
     const nodes = result?.data.posts.nodes
     const posts = nodes.filter((node) => node.frontmatter.template !== "page")
     const pages = nodes.filter((node) => node.frontmatter.template === "page")
-    const tagSet = new Set()
+    const tags = getPostTags(nodes)
 
     // =====================================================================================
     // posts
@@ -101,14 +103,10 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
       const previous = i === posts.length - 1 ? null : posts[i + 1]
       const next = i === 0 ? null : posts[i - 1]
 
-      if (post.frontmatter.tags) {
-        post.frontmatter.tags.forEach((tag) => {
-          tagSet.add(tag)
-        })
-      }
+      const path = parseFilePath(post)
 
       createPage({
-        path: post.frontmatter.slug,
+        path,
         component: `${postPage}?__contentFilePath=${post.internal.contentFilePath}`,
         context: {
           slug: post.frontmatter.slug,
@@ -137,8 +135,7 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
     // Tags
     // =====================================================================================
 
-    const tagList = Array.from(tagSet)
-    tagList.forEach((tag) => {
+    tags.forEach((tag) => {
       createPage({
         path: `/tags/${tag}/`,
         component: tagPage,
@@ -161,6 +158,24 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = ({ node, actions, getNod
   // =====================================================================================
   if (node.internal.type === "Mdx") {
     const slug = createFilePath({ node, getNode })
+    const path = parseFilePath(node as any)
+
+    // id: string
+    // parent?: string | null
+    // children?: string[]
+    // internal: {
+    //   type: string
+    //   mediaType?: string
+    //   content?: string
+    //   contentDigest: string
+    //   description?: string
+    //   contentFilePath?: string
+    // }
+    createNodeField({
+      name: "path",
+      value: path,
+      node,
+    })
 
     createNodeField({
       name: "slug",

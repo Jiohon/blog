@@ -1,44 +1,33 @@
 import type { AnchorLinkItemProps } from "antd/es/anchor/Anchor"
 
-interface GraphqlNode {
-  frontmatter: Frontmatter
-}
-
-type ResponseData<T> = T & SimplifiedQueryData
-
-// type SimplifiedQueryDataFunction = <T>(
-//   nodes: ReadonlyArray<T extends null ? GraphqlNode : T>,
-//   callback?: (e: ResponseData<T>) => ResponseData<T>
-// ) => ResponseData<T>[]
 /**
  * @description 简化查询数据
- * @date 16/01/2025
- * @template T
- * @param {ReadonlyArray<T extends null ? GraphqlNode : T>} nodes
- * @param {(e: ResponseData<T>) => ResponseData<T>} [callback]
- * @return {*}  {ResponseData<T>[]}
+ * @param {ReadonlyArray<GraphqlNode>} nodes
+ * @param {(e: GraphqlNode) => PathFrontmatter} [callback]
+ * @return {*}  {PathFrontmatter[]}
  */
-export const simplifiedQueryData = <T>(
-  nodes: ReadonlyArray<T extends null ? GraphqlNode : T>,
-  callback?: (e: ResponseData<T>) => ResponseData<T>
-): ResponseData<T>[] => {
+export const simplifiedQueryData = (
+  nodes: ReadonlyArray<GraphqlNode>,
+  callback?: (e: GraphqlNode) => PathFrontmatter
+): PathFrontmatter[] => {
   if (!nodes) return []
   const result = nodes
     .map((node) => {
-      const { frontmatter, ...rest } = node as GraphqlNode
-
-      const newNode = {
-        ...rest,
-        ...frontmatter,
-      } as ResponseData<T>
+      const { frontmatter, fields } = node as GraphqlNode
 
       if (callback) {
-        return callback(newNode)
+        return callback(node)
+      }
+
+      const newNode = {
+        ...frontmatter,
+        path: fields.path,
       }
 
       return newNode
     })
-    .filter((e): e is ResponseData<T> => e !== null)
+    .filter((e) => e !== null)
+
   return result
 }
 
@@ -154,4 +143,72 @@ export const calculateLinesToHighlight = (meta?: string) => {
       end ? lineNumber >= start && lineNumber <= end : lineNumber === start
     )
   }
+}
+
+type YearListData = Record<string, PathFrontmatter[]>
+
+/**
+ * @description 将文章按年份分组
+ * @param {PathFrontmatter[]} posts - 文章列表
+ * @return {YearListData} 按年份分组的文章集合
+ */
+export const groupPostsByYear = (posts: PathFrontmatter[]): YearListData => {
+  const collection: YearListData = {}
+
+  posts.forEach((item) => {
+    const year = item.date?.split(", ")[1]
+
+    collection[year] = [...(collection[year] || []), item]
+  })
+
+  return collection
+}
+
+/**
+ * @description 解析文件路径，提取中间部分
+ * @param {GraphqlNode} node
+ * @return {*}  {string}
+ */
+export const parseFilePath = (node: GraphqlNode): string => {
+  const pathList = ["blog/content", "blog"]
+  const filePath = node.internal.contentFilePath
+  const slug = node.frontmatter.slug
+
+  const _path = pathList.find((path) => filePath.includes(path))
+
+  if (!_path) {
+    return slug
+  }
+
+  let middlePath = ""
+
+  // 提取 posts/ 和文件名之间的路径部分
+  const postsIndex = filePath.indexOf(_path) + _path.length
+  const fullPath = filePath.substring(postsIndex)
+  const lastSlashIndex = fullPath.lastIndexOf("/")
+
+  if (lastSlashIndex !== -1) {
+    // 如果存在中间路径
+    middlePath = fullPath.substring(0, lastSlashIndex)
+  }
+  return `${middlePath}/${slug}`
+}
+
+/**
+ * @description 获取文章的标签
+ * @param {GraphqlNode[]} nodes
+ * @return {string[]}
+ */
+export const getPostTags = (nodes: GraphqlNode[]): string[] => {
+  const tagSet = new Set<string>()
+
+  nodes.forEach((node) => {
+    if (node.frontmatter.tags) {
+      node.frontmatter.tags.forEach((tag) => {
+        tagSet.add(tag)
+      })
+    }
+  })
+
+  return Array.from(tagSet)
 }

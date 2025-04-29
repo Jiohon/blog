@@ -9,7 +9,7 @@ import MDXRenderer from "@/components/MDXRenderer"
 import SEO from "@/components/SEO"
 import PostSidebar from "@/components/Sidebar/PostSidebar"
 import { HeadingProvider } from "@/context/HeadingProvider"
-import { filtersItems } from "@/utils/helpers"
+import { filtersItems, simplifiedQueryData } from "@/utils/helpers"
 
 import { useStyles } from "./styles/post.style"
 
@@ -30,9 +30,7 @@ const PostTemplate: React.FC<
 
   const headings = filtersItems(currentPost.tableOfContents.items)
 
-  const posts = allPost.nodes
-    .map((e) => ({ ...e.frontmatter }))
-    .filter((a) => a.slug !== frontmatter.slug)
+  const posts = simplifiedQueryData(allPost.nodes).filter((i) => i.slug !== frontmatter.slug)
   const tags = frontmatter?.tags.map((t) => ({ name: t, path: `/tags/${t}` }))
 
   return (
@@ -139,6 +137,8 @@ export const InformationFragmentQuery = graphql`
         words
         text
       }
+      path
+      slug
     }
   }
 `

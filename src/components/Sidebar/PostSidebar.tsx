@@ -16,7 +16,7 @@ interface PostSidebarProps {
   date?: string
   icon: Language
   headings: HeadingItem[]
-  posts: Frontmatter[]
+  posts: PathFrontmatter[]
 }
 
 /**
@@ -62,7 +62,7 @@ const PostSidebar: React.FC<PostSidebarProps> = ({ icon, headings, posts }) => {
         <MenuBar>
           <MenuBar.Title>近期发布</MenuBar.Title>
           {latest.map((l) => (
-            <Link className={styles.latest} to={`/${l.slug}`} key={l.slug}>
+            <Link className={styles.latest} to={l.path} key={l.slug}>
               <SVGIcon id={l.icon} width="1.8em" height="1.8em"></SVGIcon>
               <div className="title">{l.title.split("-")[1] || l.title}</div>
             </Link>

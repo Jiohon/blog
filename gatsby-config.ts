@@ -37,6 +37,14 @@ const config: GatsbyConfigType = {
     "gatsby-rehype-meta-attributes",
     "gatsby-plugin-version-update",
     {
+      resolve: "gatsby-plugin-custom-routing",
+      options: {
+        nestedIndexToRoot: true,
+        ignore: ["**/*.css", "**/*.ts", "!**/index.ts", "**/*.scss", "**/README.md"],
+        customMappings: {},
+      },
+    },
+    {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "pages",

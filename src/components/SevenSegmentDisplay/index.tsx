@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+import React from "react"
 
 import Digit from "./Digit"
 import SevenSegmentDisplayProvider from "./Provider"
@@ -36,8 +36,8 @@ const RetroHitCounter: React.FC<RetroHitCounterProps> = (props) => {
 
   const { styles } = useStyles()
 
-  const paddedValue = useMemo(() => value.toString().padStart(minLength, "0"), [value, minLength])
-  const individualDigits = useMemo(() => paddedValue.split(""), [paddedValue])
+  const paddedValue = value.toString().padStart(minLength, "0")
+  const individualDigits = paddedValue.split("")
 
   return (
     <SevenSegmentDisplayProvider

@@ -1,6 +1,3 @@
-import { memo, useMemo } from "react"
-import type { FC } from "react"
-
 import { Button, Dropdown } from "antd"
 
 import IconAuto from "@/components/Icons/Auto"
@@ -17,11 +14,11 @@ const items = [
   { key: "dark", label: " 暗色模式", icon: <IconDark /> },
 ]
 
-const ThemeSwitch: FC = memo(() => {
+const ThemeSwitch: React.FC = () => {
   const { styles } = useStyles()
   const { themeMode, setThemeMode } = useThemeMode()
 
-  const Icon = useMemo(() => items.find((item) => item?.key === themeMode)?.icon, [themeMode])
+  const Icon = items.find((item) => item?.key === themeMode)?.icon
 
   const onClick = ({ key, domEvent }) => {
     if (isSSR) return
@@ -65,6 +62,6 @@ const ThemeSwitch: FC = memo(() => {
       </Dropdown>
     </>
   )
-})
+}
 
 export default ThemeSwitch

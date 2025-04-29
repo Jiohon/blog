@@ -5,11 +5,13 @@ export const useStyles = createStyles(({ css, cx, stylish, responsive: r, token,
     `${prefixCls}-404-container`,
     css`
       ${stylish.container}
-      height: calc(100vh - ${token.headerHeight}px - ${token.footerHeight}px);
+      height: calc(100vh - ${token.headerHeight}px);
       display: flex;
       flex-wrap: wrap;
       align-content: center;
       justify-content: center;
+      position: relative;
+      overflow: hidden;
 
       ${r({
         mobile: css`
@@ -36,4 +38,22 @@ export const useStyles = createStyles(({ css, cx, stylish, responsive: r, token,
       }
     `
   ),
+  buttonContainer: css`
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    pointer-events: auto;
+  `,
+  tipText: css`
+    margin-bottom: 16px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: ${token.colorTextSecondary};
+  `,
 }))

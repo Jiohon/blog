@@ -11,11 +11,9 @@ export const useStyles = createStyles(
           gap: 0.3rem;
           border-radius: ${token.borderRadius * 1.3}px;
           margin-block: 2rem;
-          border: 1px solid ${token.colorBorderFourth};
+          border: 1px solid ${token.colorBorderSecondary};
           overflow: overlay;
           font-family: ${token.fontFamilyCode};
-          box-shadow: 0 1px 9px 2px rgba(0, 0, 0, 0.008), 0 1px 6px 2px rgba(0, 0, 0, 0.006),
-            0 2px 4px 2px rgba(0, 0, 0, 0.006);
         `
       ),
 

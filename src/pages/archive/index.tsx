@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+import React from "react"
 
 import { graphql } from "gatsby"
 
@@ -8,7 +8,7 @@ import SEO from "@/components/SEO"
 import ArchiveSidebar from "@/components/Sidebar/ArchiveSidebar"
 import { simplifiedQueryData } from "@/utils/helpers"
 
-import { useStyles } from "./styles/_archive.style"
+import { useStyles } from "./style"
 
 import type { HeadFC, PageProps } from "gatsby"
 
@@ -24,18 +24,17 @@ const Archive: React.FC<ArchiveProps> = (props) => {
   const { data } = props
   const title = "文章归档"
 
-  const nodes = data.archive.nodes
   const tags = data.tags.group
 
   const { styles } = useStyles()
 
-  const posts = useMemo(() => simplifiedQueryData(nodes), [nodes])
+  const frontmatterList = simplifiedQueryData(data.archive.nodes)
 
   return (
     <div className={styles.archive}>
       <div>
         <BriefHeader title={title} />
-        <PostList data={posts} />
+        <PostList list={frontmatterList} />
       </div>
 
       <ArchiveSidebar tags={tags} />

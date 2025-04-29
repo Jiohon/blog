@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+import React from "react"
 
 import { graphql } from "gatsby"
 
@@ -33,13 +33,13 @@ const TagTemplate: React.FC<TagTemplateProps> = (props) => {
   const message = totalCount === 1 ? " Post tagged:" : " Posts tagged:"
   const { tag } = pageContext
 
-  const simplifiedPosts = useMemo(() => simplifiedQueryData(nodes), [nodes])
+  const frontmatterList = simplifiedQueryData(nodes)
 
   return (
     <div className={styles.tag}>
       <div>
         <BriefHeader highlight={totalCount} description={message} title={tag} />
-        <PostList data={simplifiedPosts} />
+        <PostList list={frontmatterList} />
       </div>
       <ArchiveSidebar tags={tags} />
     </div>

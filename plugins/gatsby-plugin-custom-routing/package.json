@@ -1,0 +1,14 @@
+{
+  "name": "gatsby-plugin-custom-routing",
+  "version": "1.0.0",
+  "description": "自定义Gatsby路由插件，用于处理页面路径和忽略特定文件/文件夹",
+  "main": "gatsby-node.js",
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "glob": "^7.2.0"
+  },
+  "peerDependencies": {
+    "gatsby": "^5.0.0"
+  }
+} 

@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useContext, useMemo } from "react"
+import React, { lazy, Suspense, useContext } from "react"
 
 import { Skeleton } from "antd"
 
@@ -68,9 +68,7 @@ const SandpackSyntaxHighlight = () => {
     },
   }
 
-  const insideFiles = useMemo(() => {
-    return getReactFiles(appearance === "dark", codeString)
-  }, [appearance, codeString])
+  const insideFiles = getReactFiles(appearance === "dark", codeString)
 
   return (
     <Suspense fallback={<SandpackFallback />}>

@@ -1,5 +1,3 @@
-import { useMemo } from "react"
-
 import { Card, Space } from "antd"
 import { graphql, Link } from "gatsby"
 
@@ -10,10 +8,9 @@ import SVGIcon from "@/components/SvgIcon"
 import { useSiteStore } from "@/store"
 import { simplifiedQueryData } from "@/utils/helpers"
 
-import { useStyles } from "./styles/_index.style"
+import { useStyles } from "./style"
 
 import type { HeadFC, PageProps } from "gatsby"
-
 /**
  * @description 首页
  * @date 23/10/2022
@@ -27,11 +24,8 @@ const Home: React.FC<PageProps<allMdxNodesQuery<"latest" | "Highlights"> & MdxNo
 
   const site = useSiteStore((state) => state.siteMetadata)
 
-  const latest = data.latest.nodes
-  const Highlights = data.Highlights.nodes
-
-  const simplifiedLatest = useMemo(() => simplifiedQueryData(latest), [latest])
-  const simplifiedHighlights = useMemo(() => simplifiedQueryData(Highlights), [Highlights])
+  const latestList = simplifiedQueryData(data.latest.nodes)
+  const highlightsList = simplifiedQueryData(data.Highlights.nodes)
 
   return (
     <Space className={styles.home} direction="vertical" size={[0, 40]}>
@@ -48,11 +42,11 @@ const Home: React.FC<PageProps<allMdxNodesQuery<"latest" | "Highlights"> & MdxNo
 
       <Heading title="最近内容" slug="/archive" />
       <div className={styles.wrapper}>
-        {simplifiedLatest.map((item) => {
+        {latestList.map((item) => {
           return (
             <Card className={styles.latestCard} key={item.slug}>
               <time className={styles.time}>{item.date}</time>
-              <Link className={styles.titleLink} to={item.slug}>
+              <Link className={styles.titleLink} to={item.path}>
                 {item.title}
               </Link>
               <div className={styles.tagLinks}>
@@ -73,11 +67,11 @@ const Home: React.FC<PageProps<allMdxNodesQuery<"latest" | "Highlights"> & MdxNo
       </div>
 
       {/* 查找目录下带有 Highlight 的markdown文件 */}
-      {simplifiedHighlights.length > 0 && (
+      {highlightsList.length > 0 && (
         <>
           <Heading title="热门内容" />
           <div className={styles.wrapper}>
-            {simplifiedHighlights.map((item) => {
+            {highlightsList.map((item) => {
               return (
                 <Card className={styles.highlightCard} key={`Highlight-${item.slug}`}>
                   <SVGIcon id={item.icon} width="5em" height="5em"></SVGIcon>

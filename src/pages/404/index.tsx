@@ -3,7 +3,7 @@ import { HeadFC, navigate } from "gatsby"
 
 import SEO from "@/components/SEO"
 
-import { useStyles } from "./styles/_404.style"
+import { useStyles } from "./style"
 
 const FourOhFour = () => {
   const { styles } = useStyles()

@@ -17,6 +17,10 @@ type Frontmatter = {
   published: boolean
 }
 
+type PathFrontmatter = Frontmatter & {
+  path: string
+}
+
 type TimeToRead = {
   minutes: number
   time: number
@@ -27,6 +31,7 @@ type TimeToRead = {
 type fields = {
   slug: string
   timeToRead: TimeToRead
+  path: string
 }
 
 type tableOfContents = {
@@ -53,19 +58,13 @@ interface TagData {
   tag: string
 }
 
-interface SimplifiedQueryData extends Frontmatter {
-  id: string
-}
-
-type YearListData = Record<string, Frontmatter[]>
-
 type MdxQuery = GraphqlNode
 
 type AllMdxQuery = {
   nodes: GraphqlNode[]
   totalCount: number
   fields: {
-    slug
+    slug: string
   }
 }
 
