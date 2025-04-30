@@ -9,9 +9,9 @@ import { isSSR } from "@/utils/func"
 import { useStyles } from "./style"
 
 const items = [
-  { key: "auto", label: " 跟随系统", icon: <IconAuto /> },
-  { key: "light", label: " 亮色模式", icon: <IconLight /> },
-  { key: "dark", label: " 暗色模式", icon: <IconDark /> },
+  { key: "auto", label: " 自动", icon: <IconAuto /> },
+  { key: "light", label: " 亮色", icon: <IconLight /> },
+  { key: "dark", label: " 暗色", icon: <IconDark /> },
 ]
 
 const ThemeSwitch: React.FC = () => {
@@ -52,6 +52,7 @@ const ThemeSwitch: React.FC = () => {
   return (
     <>
       <Dropdown
+        autoAdjustOverflow
         menu={{ items, selectable: true, selectedKeys: [themeMode], subMenuCloseDelay: 0, onClick }}
         trigger={["click"]}
         placement="bottom"

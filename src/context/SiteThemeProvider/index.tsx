@@ -11,7 +11,7 @@ import type { CustomTokenParams } from "antd-style"
 global["__ANTD_CACHE__"] = extractStaticStyle.cache
 
 const SiteThemeProvider = memo<{ children: React.ReactNode }>(({ children }) => {
-  const { themeMode } = useThemeMode()
+  const { themeMode, appearance } = useThemeMode()
 
   const getCustomToken = useCallback((params: CustomTokenParams) => {
     const base = createCustomToken(params)
@@ -24,6 +24,7 @@ const SiteThemeProvider = memo<{ children: React.ReactNode }>(({ children }) => 
       <ThemeProvider
         prefixCls={"site"}
         themeMode={themeMode}
+        appearance={appearance}
         theme={getAntdTheme}
         customToken={getCustomToken}
         customStylish={getCustomStylish}

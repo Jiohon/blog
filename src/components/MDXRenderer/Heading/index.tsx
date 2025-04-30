@@ -2,9 +2,9 @@ import React, { HTMLAttributes, useRef } from "react"
 
 import { Typography } from "antd"
 
-import { useHeading } from "@/context/HeadingProvider"
 import { findItem } from "@/utils/func"
 
+import { useHeading } from "./context"
 import { useStyles } from "./style"
 
 const { Title, Link } = Typography

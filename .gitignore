@@ -89,3 +89,6 @@ content/
 # cursor
 .cursorrules
 .cursor/
+
+# vscode
+.vscode/
