@@ -11,6 +11,11 @@ const glob = require("glob")
  */
 const getNotPublished = () => {
   try {
+    console.log(
+      "process.env.NODE_ENV ==========>",
+      process.env.NODE_ENV,
+      process.env.NODE_ENV === "production"
+    )
     if (process.env.NODE_ENV === "production") {
       return false
     }
@@ -83,6 +88,7 @@ exports.createPages = async ({ actions, reporter }, pluginOptions) => {
       if (dirMatch && dirMatch[1]) {
         const folderName = dirMatch[1]
         const componentPath = path.resolve(rootDir, filePath)
+        console.log("insideContext = > ", insideContext)
 
         // 创建自定义路由
         createPage({

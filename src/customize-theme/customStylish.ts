@@ -12,7 +12,7 @@ export interface SiteStylish {
   tagLink: string
 }
 
-export const getCustomStylish: GetCustomStylish<SiteStylish> = ({ css, token }) => {
+export const createCustomStylish: GetCustomStylish<SiteStylish> = ({ css, token }) => {
   return {
     container: css`
       display: flex;

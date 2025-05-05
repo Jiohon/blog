@@ -59,7 +59,7 @@ export const Head: HeadFC = (props) => {
 }
 
 export const blogQuery = graphql`
-  query ArchivePage($published: [Boolean]) {
+  query ArchivePage($published: [Boolean] = [true]) {
     archive: allMdx(
       sort: { frontmatter: { date: DESC } }
       filter: { frontmatter: { template: { ne: "page" }, published: { in: $published } } }

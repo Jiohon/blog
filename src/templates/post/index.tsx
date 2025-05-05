@@ -98,7 +98,7 @@ export const Head: HeadFC<allMdxNodesQuery<"allPost"> & MdxNodesQuery<"currentPo
 }
 
 export const recentQuery = graphql`
-  query PostPage($slug: String, $published: [Boolean]) {
+  query PostPage($slug: String, $published: [Boolean] = [true]) {
     allPost: allMdx(
       sort: { frontmatter: { date: DESC } }
       filter: { frontmatter: { template: { ne: "page" }, published: { in: $published } } }

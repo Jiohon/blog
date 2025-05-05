@@ -60,7 +60,7 @@ export const Head: HeadFC<allMdxNodesQuery<"tags"> & MdxNodesQuery, TagData> = (
 }
 
 export const pageQuery = graphql`
-  query TagPage($tag: String, $published: [Boolean]) {
+  query TagPage($tag: String, $published: [Boolean] = [true]) {
     posts: allMdx(
       sort: { frontmatter: { date: DESC } }
       filter: { frontmatter: { tags: { in: [$tag] }, published: { in: $published } } }

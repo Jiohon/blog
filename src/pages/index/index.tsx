@@ -104,7 +104,7 @@ export const Head: HeadFC = (props) => {
 }
 
 export const pageQuery = graphql`
-  query HomePage($published: [Boolean]) {
+  query HomePage($published: [Boolean] = [true]) {
     latest: allMdx(
       limit: 6
       sort: { frontmatter: { date: DESC } }
