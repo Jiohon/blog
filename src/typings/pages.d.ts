@@ -93,6 +93,7 @@ interface HeadNodeProps<DT = unknown, PT = unknown, CT = unknown, ST = unknown> 
 interface GroupItem {
   name: string
   totalCount: number
+  path: string
 }
 
 type Group = Record<"group", GroupItem[]>

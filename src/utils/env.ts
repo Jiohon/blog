@@ -5,13 +5,14 @@
 export const getNotPublished = () => {
   try {
     if (process.env.NODE_ENV === "production") {
-      return false
+      return [true]
     }
 
     const GATSBY_NOT_PUBLISHED = JSON.parse(process.env.GATSBY_NOT_PUBLISHED)
 
-    return GATSBY_NOT_PUBLISHED
+    return GATSBY_NOT_PUBLISHED ? [true, false] : [true]
   } catch (error) {
-    false
+    console.error("error ===> ", error)
+    return [true]
   }
 }

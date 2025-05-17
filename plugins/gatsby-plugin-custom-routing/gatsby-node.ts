@@ -1,31 +1,17 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable no-undef */
-const fs = require("fs")
-const path = require("path")
+import fs from "fs"
+import path from "path"
 
-const glob = require("glob")
+import { sync } from "glob"
 
-/**
- * @description 获取是否不发布文章
- * @returns {boolean}
- */
-const getNotPublished = () => {
-  try {
-    console.log(
-      "process.env.NODE_ENV ==========>",
-      process.env.NODE_ENV,
-      process.env.NODE_ENV === "production"
-    )
-    if (process.env.NODE_ENV === "production") {
-      return false
-    }
+import type { GatsbyNode } from "gatsby"
 
-    const GATSBY_NOT_PUBLISHED = JSON.parse(process.env.GATSBY_NOT_PUBLISHED)
-
-    return GATSBY_NOT_PUBLISHED
-  } catch (error) {
-    false
-  }
+interface CustomPluginOptions {
+  pagesDir: string
+  _templatesDir: string
+  ignore: string[]
+  customMappings: Record<string, string>
+  nestedIndexToRoot: boolean
+  context: Record<string, unknown>
 }
 
 /**
@@ -33,8 +19,14 @@ const getNotPublished = () => {
  * 1. 自动处理pages目录中的index文件夹中的文件映射到根路径
  * 2. 忽略特定文件或文件夹
  */
-exports.createPages = async ({ actions, reporter }, pluginOptions) => {
+export const createPages: GatsbyNode["createPages"] = async (
+  { actions, reporter },
+  pluginOptions
+) => {
   const { createPage } = actions
+
+  // 将pluginOptions转换为强类型
+  const options = pluginOptions as Partial<CustomPluginOptions>
 
   const {
     pagesDir = "src/pages",
@@ -44,9 +36,7 @@ exports.createPages = async ({ actions, reporter }, pluginOptions) => {
     customMappings = {}, // 自定义路径映射 { "源路径": "目标路径" }
     nestedIndexToRoot = true, // 是否将嵌套的index文件夹映射到根路径
     context = {}, // 上下文
-  } = pluginOptions
-
-  const insideContext = { ...context, published: getNotPublished() ? [true, false] : [true] }
+  } = options
 
   // 项目根目录
   const rootDir = path.resolve(".")
@@ -65,7 +55,7 @@ exports.createPages = async ({ actions, reporter }, pluginOptions) => {
       createPage({
         path: destination,
         component: componentPath,
-        context: insideContext,
+        context,
       })
       reporter.info(`gatsby-plugin-custom-routing: 创建映射 ${source} -> ${destination}`)
     } else {
@@ -75,7 +65,7 @@ exports.createPages = async ({ actions, reporter }, pluginOptions) => {
 
   // 处理嵌套的index文件夹
   if (nestedIndexToRoot) {
-    const indexFolders = glob.sync(`${pagesDir}/*/index.{jsx,js,tsx,ts}`, {
+    const indexFolders = sync(`${pagesDir}/*/index.{jsx,js,tsx,ts}`, {
       cwd: rootDir,
       ignore: ignore.map((pattern) =>
         pattern.startsWith("/") ? pattern.slice(1) : `${pagesDir}/${pattern}`
@@ -88,13 +78,12 @@ exports.createPages = async ({ actions, reporter }, pluginOptions) => {
       if (dirMatch && dirMatch[1]) {
         const folderName = dirMatch[1]
         const componentPath = path.resolve(rootDir, filePath)
-        console.log("insideContext = > ", insideContext)
 
         // 创建自定义路由
         createPage({
           path: `/${folderName}`,
           component: componentPath,
-          context: insideContext,
+          context,
         })
         reporter.info(`gatsby-plugin-custom-routing: 创建映射 ${filePath} -> /${folderName}`)
 
@@ -103,7 +92,7 @@ exports.createPages = async ({ actions, reporter }, pluginOptions) => {
           createPage({
             path: "/",
             component: componentPath,
-            context: insideContext,
+            context,
           })
           reporter.info(`gatsby-plugin-custom-routing: 创建根路径映射 ${filePath} -> /`)
         }
@@ -115,7 +104,7 @@ exports.createPages = async ({ actions, reporter }, pluginOptions) => {
 /**
  * 在Gatsby构建时验证插件配置
  */
-exports.pluginOptionsSchema = ({ Joi }) => {
+export const pluginOptionsSchema: GatsbyNode["pluginOptionsSchema"] = ({ Joi }) => {
   return Joi.object({
     pagesDir: Joi.string().description("页面目录的路径"),
     templatesDir: Joi.string().description("模板目录的路径"),
@@ -124,5 +113,6 @@ exports.pluginOptionsSchema = ({ Joi }) => {
       .pattern(Joi.string(), Joi.string())
       .description("自定义路径映射 { '源路径': '目标路径' }"),
     nestedIndexToRoot: Joi.boolean().description("是否将嵌套的index文件夹映射到根路径"),
+    context: Joi.object().description("页面上下文"),
   })
 }

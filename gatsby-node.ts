@@ -50,6 +50,13 @@ export const onCreateWebpackConfig: GatsbyNode["onCreateWebpackConfig"] = ({ act
   })
 }
 
+export const onCreatePage: GatsbyNode["onCreatePage"] = ({ page }) => {
+  if (!Object.prototype.hasOwnProperty.call(page?.context, "published")) {
+    // @ts-expect-error: Gatsby页面上下文类型不完整
+    page.context.published = getNotPublished()
+  }
+}
+
 const postPage = path.resolve("./src/templates/post/index.tsx")
 const aboutPage = path.resolve("./src/templates/about/index.tsx")
 const tagPage = path.resolve("./src/templates/tag/index.tsx")
@@ -58,7 +65,7 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
   try {
     const { createPage, createRedirect } = actions
 
-    const published = getNotPublished() ? [true, false] : [true]
+    const published = getNotPublished()
 
     createRedirect({ fromPath: "/rss", toPath: "/rss.xml", statusCode: 200 })
 
@@ -147,7 +154,7 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
       })
     })
   } catch (error) {
-    console.error(error)
+    reporter.warn(`createPages: ${error}`)
   }
 }
 

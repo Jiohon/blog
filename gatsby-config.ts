@@ -1,3 +1,4 @@
+import * as dotenv from "dotenv"
 import rehypeKatex from "rehype-katex"
 import remarkGfm from "remark-gfm"
 import remarkMath from "remark-math"
@@ -5,10 +6,11 @@ import remarkMath from "remark-math"
 import packageJson from "./package.json"
 import rehypeMetaAttributes from "./plugins/gatsby-rehype-meta-attributes"
 import { SiteMetadataType } from "./src/hooks/useSiteMetadata"
+import { getNotPublished } from "./src/utils/env"
 
 import type { GatsbyConfig } from "gatsby"
 
-// const __dirname = dirname(fileURLToPath(import.meta.url))
+dotenv.config({ path: [`.env`, `.env.${process.env.NODE_ENV}`], override: true })
 
 type GatsbyConfigType = GatsbyConfig & {
   siteMetadata: SiteMetadataType["site"]["siteMetadata"]
@@ -42,6 +44,9 @@ const config: GatsbyConfigType = {
         nestedIndexToRoot: true,
         ignore: ["**/*.css", "**/*.ts", "!**/index.ts", "**/*.scss", "**/README.md"],
         customMappings: {},
+        context: {
+          published: getNotPublished(),
+        },
       },
     },
     {

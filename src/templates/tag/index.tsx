@@ -25,6 +25,7 @@ type TagTemplateProps = PageProps<
  */
 const TagTemplate: React.FC<TagTemplateProps> = (props) => {
   const { data, pageContext } = props
+  console.log(props)
   const { styles } = useStyles()
 
   const totalCount = data.posts.totalCount
