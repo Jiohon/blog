@@ -23,7 +23,7 @@ export const useStyles = createStyles(({ css, cx, token, stylish, responsive: r,
     css`
       &.${prefixCls}-typography {
         padding-block-start: 7rem;
-        padding-block-end: 2rem;
+        padding-block-end: 4rem;
         margin: 0;
         font-weight: bold;
         font-family: ${token.fontFamilyCode};
@@ -31,7 +31,7 @@ export const useStyles = createStyles(({ css, cx, token, stylish, responsive: r,
         ${r({
           tablet: css`
             padding-block-start: 5rem;
-            padding-block-end: 2rem;
+            padding-block-end: 3rem;
             font-size: 29px;
           `,
           mobile: css`

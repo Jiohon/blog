@@ -2534,5 +2534,10 @@ type TagPageQueryVariables = Exact<{
 
 type TagPageQuery = { readonly posts: { readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly frontmatter: { readonly title: string | null, readonly description: string | null, readonly date: string | null, readonly lastUpdated: string | null, readonly icon: string | null, readonly slug: string | null, readonly template: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly published: boolean | null } | null, readonly fields: { readonly path: string | null, readonly slug: string | null, readonly timeToRead: { readonly minutes: number | null, readonly time: number | null, readonly words: number | null, readonly text: string | null } | null } | null }> }, readonly tags: { readonly group: ReadonlyArray<{ readonly totalCount: number, readonly name: string | null }> } };
 
+type PagesDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type PagesDataQuery = { readonly posts: { readonly nodes: ReadonlyArray<{ readonly body: string | null, readonly tableOfContents: Record<string, unknown> | null, readonly frontmatter: { readonly title: string | null, readonly description: string | null, readonly date: string | null, readonly lastUpdated: string | null, readonly icon: string | null, readonly slug: string | null, readonly template: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly published: boolean | null } | null, readonly internal: { readonly contentFilePath: string | null } }> } };
+
 
 }

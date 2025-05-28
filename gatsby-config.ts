@@ -34,6 +34,7 @@ const config: GatsbyConfigType = {
   },
   graphqlTypegen: true,
   pathPrefix: "/",
+  trailingSlash: "never",
   siteMetadata,
   plugins: [
     "gatsby-rehype-meta-attributes",

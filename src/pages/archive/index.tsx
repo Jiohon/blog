@@ -23,7 +23,6 @@ type ArchiveProps = PageProps<allMdxNodesQuery<"archive"> & Record<"tags", Group
 const Archive: React.FC<ArchiveProps> = (props) => {
   const { data } = props
   const title = "文章归档"
-  console.log(props)
 
   const tags = data.tags.group
 

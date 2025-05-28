@@ -19,9 +19,7 @@ import type { HeadFC, PageProps } from "gatsby"
  */
 const Home: React.FC<PageProps<allMdxNodesQuery<"latest" | "Highlights"> & MdxNodesQuery>> = ({
   data,
-  ...rest
 }) => {
-  console.log(rest);
   const { styles } = useStyles()
 
   const site = useSiteStore((state) => state.siteMetadata)
@@ -95,6 +93,15 @@ const Home: React.FC<PageProps<allMdxNodesQuery<"latest" | "Highlights"> & MdxNo
 
 export default Home
 
+export const Head: HeadFC = (props) => {
+  const { location } = props
+
+  return (
+    <>
+      <SEO pathName={location.pathname}></SEO>
+    </>
+  )
+}
 
 export const pageQuery = graphql`
   query HomePage($published: [Boolean] = [true]) {

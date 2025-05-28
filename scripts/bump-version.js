@@ -25,4 +25,5 @@ const newVersion = bumpPatchVersion(pkg.version)
 pkg.version = newVersion
 
 fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + "\n")
+// eslint-disable-next-line no-console
 console.log(`✔ Version bumped to ${newVersion}`)

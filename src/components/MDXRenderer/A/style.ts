@@ -8,6 +8,7 @@ export const useStyles = createStyles(({ css, cx, prefixCls }) => {
         font-weight: 500;
         text-decoration: underline;
         font-family: SF Mono Medium;
+        margin-inline: 0.1em;
 
         .${prefixCls}-code {
           color: inherit;

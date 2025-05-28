@@ -45,7 +45,7 @@ const PostTemplate: React.FC<
             <Space className="times" align="center">
               <Tooltip
                 placement="bottom"
-                title={`最后修改于 ${dayjs(frontmatter?.lastUpdated).format("YYYY-MM-DD")}`}
+                title={`发布于 ${dayjs(frontmatter?.date).format("YYYY-MM-DD")}`}
               >
                 <Space>
                   <Calendar />
