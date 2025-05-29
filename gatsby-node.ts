@@ -50,10 +50,15 @@ export const onCreateWebpackConfig: GatsbyNode["onCreateWebpackConfig"] = ({ act
   })
 }
 
-export const onCreatePage: GatsbyNode["onCreatePage"] = ({ page }) => {
+export const onCreatePage: GatsbyNode["onCreatePage"] = ({ page, actions }) => {
+  const { createPage, deletePage } = actions
+
+  // 确保所有页面都有 published 上下文变量
   if (!Object.prototype.hasOwnProperty.call(page?.context, "published")) {
+    deletePage(page)
     // @ts-expect-error: Gatsby页面上下文类型不完整
     page.context.published = getNotPublished()
+    createPage(page)
   }
 }
 

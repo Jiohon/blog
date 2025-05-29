@@ -162,7 +162,7 @@ export function findItem<T extends Record<string, any>, K extends keyof T>(
  * @param targetItem 目标元素
  */
 export const scrollToCenter = (container: HTMLElement, targetItem: HTMLElement) => {
-  if (!container || !targetItem) {
+  if (isSSR || !container || !targetItem) {
     return
   }
 
