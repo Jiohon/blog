@@ -60,6 +60,7 @@ export const useStyles = createStyles(
           min-height: 20rem;
           max-height: calc(100vh - 45rem - ${token.headerHeight}px);
           overflow-y: auto;
+          scroll-behavior: smooth;
         `
       ),
 
