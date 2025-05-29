@@ -109,7 +109,7 @@ export function filtersItems(
       key: urlPath,
       href: `${item.url}`,
       title: item.title,
-      className: `level-${level}`,
+      className: `level-${level} ${item.url.replace("#", "anchor-")}`,
       level: level,
     }
 

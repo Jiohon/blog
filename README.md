@@ -26,28 +26,27 @@
 ### Prerequisites
 
 1. Git
-2. Node: any 18.x version starting with v18.0.0 or greater
-3. Gatsby: See [Gatsby website for installation instructions](https://www.gatsbyjs.com/docs/tutorial/getting-started/part-0/#gatsby-cli)
-4. Yarn: See [Yarn website for installation instructions](https://yarnpkg.com/lang/en/docs/install/)
-5. A clone of the [blog](https://github.com/jiohon/blog) on your local
+2. Node.js: version 18.x or higher
+3. Gatsby CLI: See [Gatsby website for installation instructions](https://www.gatsbyjs.com/docs/tutorial/getting-started/part-0/#gatsby-cli)
+4. Pnpm: See [Pnpm website for installation instructions](https://pnpm.io/installation)
+5. A local clone of the [blog repository](https://github.com/Jiohon/blog.git)
 
 ### Installation
 
-1. `cd blog` to go into the project root
-2. `yarn` to install the website's npm dependencies
+1. Navigate to the project directory: `cd blog`
+2. Install dependencies: `pnpm install`
 
 ### Running locally
 
-1. `yarn dev` to start the development server
-1. `open http://localhost:8008` to open the site in your favorite browser
+1. Start the development server: `pnpm dev`
+2. Open your browser and visit `http://localhost:8008`
 
 ## Acknowledgments
 
-This project is based on the source code from [taniarascia](https://github.com/taniarascia/taniarascia.com), with modifications made by [Johon](https://github.com/Jiohon) in 2022.
+This project builds upon the original source code by [taniarascia](https://github.com/taniarascia/taniarascia.com), with modifications and enhancements by [Johon](https://github.com/Jiohon) since 2022.
 
-Please refer to the original project for detailed license information.
-Original repository: [taniarascia.com](https://github.com/taniarascia/taniarascia.com)
+For detailed license information, please refer to the original repository: [taniarascia.com](https://github.com/taniarascia/taniarascia.com)
 
 ## License
 
-This project is open source and available under the [MIT License](LICENSE).
+This project is open source and released under the [MIT License](LICENSE).

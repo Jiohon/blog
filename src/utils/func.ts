@@ -155,3 +155,29 @@ export function findItem<T extends Record<string, any>, K extends keyof T>(
 
   return search(array)
 }
+
+/**
+ * @description 滚动到目标元素居中
+ * @param container 滚动容器
+ * @param targetItem 目标元素
+ */
+export const scrollToCenter = (container: HTMLElement, targetItem: HTMLElement) => {
+  if (!container || !targetItem) {
+    return
+  }
+
+  const containerRect = container.getBoundingClientRect()
+  const targetItemRect = targetItem.getBoundingClientRect()
+
+  const scrollTop =
+    container.scrollTop +
+    targetItemRect.top -
+    containerRect.top -
+    containerRect.height / 2 +
+    targetItemRect.height / 2
+
+  container.scrollTo({
+    top: scrollTop,
+    behavior: "smooth",
+  })
+}

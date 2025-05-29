@@ -54,6 +54,15 @@ export const useStyles = createStyles(
         `
       ),
 
+      anchorScroll: cx(
+        `.${prefixCls}-sidebar-anchor-scroll`,
+        css`
+          min-height: 20rem;
+          max-height: calc(100vh - 45rem - ${token.headerHeight}px);
+          overflow-y: auto;
+        `
+      ),
+
       anchor: cx(
         `.${prefixCls}-sidebar-anchor`,
         css`
