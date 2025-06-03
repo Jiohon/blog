@@ -5,7 +5,7 @@
   "author": "Johon",
   "private": true,
   "homepage": "https://blog.hushes.cn",
-  "version": "1.1.10",
+  "version": "1.1.11",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -63,7 +63,7 @@
     "codesandbox": "^2.2.3",
     "color": "^4.2.3",
     "dayjs": "^1.11.13",
-    "gatsby": "^5.14.1",
+    "gatsby": "^5.14.3",
     "gatsby-plugin-feed": "^5.14.0",
     "gatsby-plugin-mdx": "^5.14.1",
     "gatsby-plugin-react-svg": "^3.3.0",
