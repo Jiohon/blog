@@ -42,7 +42,7 @@ export const useStyles = createStyles(({ css, stylish, responsive: r, cx, token,
             column-gap: 2.5rem;
           `,
           mobile: css`
-            column-gap: 2rem;
+            column-gap: 1.8rem;
           `,
         })}
       }
@@ -59,15 +59,16 @@ export const useStyles = createStyles(({ css, stylish, responsive: r, cx, token,
       height: 100%;
       cursor: pointer;
       font-size: 1rem;
-      font-weight: 600;
+      font-weight: bold;
       color: inherit;
       padding: 0;
       border: none;
       border-radius: 0;
+      letter-spacing: 0.02rem;
       transition: all ${token.motionDurationSlow};
 
       &:hover {
-        color: ${token.colorText};
+        color: ${token.colorPrimary};
 
         &.logo {
           transform: scale(1.16);

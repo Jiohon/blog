@@ -26,8 +26,13 @@ export const useStyles = createStyles(({ css, prefixCls, cx, responsive: r }) =>
     content: cx(
       `${prefixCls}-layout-content`,
       css`
-        flex: 1;
         min-height: calc(100vh - 64px);
+
+        ${r({
+          mobile: css`
+            min-height: calc(100vh - 50px);
+          `,
+        })}
       `
     ),
   }

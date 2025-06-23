@@ -22,7 +22,7 @@ type ArchiveProps = PageProps<allMdxNodesQuery<"archive"> & Record<"tags", Group
  */
 const Archive: React.FC<ArchiveProps> = (props) => {
   const { data } = props
-  const title = "文章归档"
+  const title = "Archives"
 
   const tags = data.tags.group
 
@@ -33,7 +33,7 @@ const Archive: React.FC<ArchiveProps> = (props) => {
   return (
     <div className={styles.archive}>
       <div>
-        <BriefHeader title={title} />
+        <BriefHeader title={title} description="过往的记录。" />
         <PostList list={frontmatterList} />
       </div>
 
@@ -50,7 +50,7 @@ export const Head: HeadFC = (props) => {
   return (
     <>
       <SEO
-        title="文章归档"
+        title="Archives"
         description="Notes & tutorials & Archives"
         pathName={location.pathname}
       />

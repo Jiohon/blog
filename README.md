@@ -43,7 +43,7 @@
 
 ## Acknowledgments
 
-This project builds upon the original source code by [taniarascia](https://github.com/taniarascia/taniarascia.com), with modifications and enhancements by [Johon](https://github.com/Jiohon) since 2022.
+This project builds upon the original source code by [taniarascia](https://github.com/taniarascia/taniarascia.com), with modifications and enhancements by [Jonhn](https://github.com/Jiohon) since 2022.
 
 For detailed license information, please refer to the original repository: [taniarascia.com](https://github.com/taniarascia/taniarascia.com)
 

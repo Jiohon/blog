@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from "react"
+import React, { memo } from "react"
 
 import { extractStaticStyle, StyleProvider, ThemeProvider } from "antd-style"
 
@@ -9,7 +9,7 @@ import { useThemeMode } from "@/hooks/useThemeMode"
 global["__ANTD_CACHE__"] = extractStaticStyle.cache
 
 const SiteThemeProvider = memo<{ children: React.ReactNode }>(({ children }) => {
-  const { themeMode, appearance } = useThemeMode()
+  const { themeMode } = useThemeMode()
 
   return (
     <>

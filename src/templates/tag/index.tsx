@@ -27,10 +27,8 @@ const TagTemplate: React.FC<TagTemplateProps> = (props) => {
   const { data, pageContext } = props
   const { styles } = useStyles()
 
-  const totalCount = data.posts.totalCount
   const nodes = data.posts.nodes
   const tags = data.tags.group
-  const message = totalCount === 1 ? " Post tagged:" : " Posts tagged:"
   const { tag } = pageContext
 
   const frontmatterList = simplifiedQueryData(nodes)
@@ -38,7 +36,7 @@ const TagTemplate: React.FC<TagTemplateProps> = (props) => {
   return (
     <div className={styles.tag}>
       <div>
-        <BriefHeader highlight={totalCount} description={message} title={tag} />
+        <BriefHeader title={tag} />
         <PostList list={frontmatterList} />
       </div>
       <ArchiveSidebar tags={tags} />

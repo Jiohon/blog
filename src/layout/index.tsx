@@ -1,7 +1,6 @@
 import { useEventListener } from "ahooks"
 import { App, message } from "antd"
 
-import Splitter from "@/components/Icons/Splitter"
 import SiteStoreProvider from "@/context/SiteStoreProvider"
 import SiteThemeProvider from "@/context/SiteThemeProvider"
 
@@ -33,7 +32,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <div className={styles.layout}>
             <Header />
             <main className={styles.content}>{children}</main>
-            <Splitter />
 
             <Footer />
           </div>

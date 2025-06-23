@@ -23,6 +23,7 @@ const siteConfig: SiteConfig = {
     menu: [
       { url: "/about", label: "About", show: true },
       { url: "/archive", label: "Archive", show: true },
+      { url: "/projects", label: "Projects", show: true },
     ],
     social: [{ url: "https://github.com/jiohon", label: "GitHub", icon: GithubSvg, show: true }],
   },

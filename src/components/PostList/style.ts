@@ -29,14 +29,15 @@ export const useStyles = createStyles(({ css, cx, responsive: r, token, prefixCl
     css`
       display: flex;
       align-items: center;
-      padding-block: 0.3rem;
-      margin-block: 1.6rem;
+      padding-block: 0.5rem;
+      margin-block: 1.3rem;
       background-color: transparent;
       transition: all ${token.motionDurationSlow};
       color: inherit;
 
       &:hover {
         transform: translate3d(0.85rem, 0px, 0px);
+        background-color: ${token.colorFillTertiary};
       }
 
       .infos {
@@ -46,14 +47,14 @@ export const useStyles = createStyles(({ css, cx, responsive: r, token, prefixCl
       }
 
       h5 {
-        flex: 1;
-        margin: 0;
-        font-size: 0.95rem;
-        font-weight: 600;
-        line-height: 1.5;
-        color: inherit;
-        transition: all 0.3s;
-        margin-bottom: 2px;
+          display: inline-flex;
+          align-items: center;
+          font-size: 1rem;
+          color: ${token.colorText};
+          font-weight: 600;
+          margin: 0;
+          padding: 0;
+        }
 
         ${r({
           tablet: css`
@@ -66,7 +67,7 @@ export const useStyles = createStyles(({ css, cx, responsive: r, token, prefixCl
         display: block;
         margin-inline-start: auto;
         color: ${token.colorTextDescription};
-        font-size: 0.8rem;
+        font-size: 0.85rem;
         font-weight: 500;
       }
     `

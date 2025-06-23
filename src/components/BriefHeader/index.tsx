@@ -9,30 +9,18 @@ import { useStyles } from "./style"
 interface BriefHeaderProps {
   title?: React.ReactNode
   greeting?: React.ReactNode
-  highlight?: number
   description?: React.ReactNode
   children?: React.ReactNode
 }
 
-const BriefHeader: React.FC<BriefHeaderProps> = ({
-  title,
-  greeting,
-  highlight,
-  description,
-  children,
-}) => {
+const BriefHeader: React.FC<BriefHeaderProps> = ({ title, greeting, description, children }) => {
   const { styles } = useStyles()
 
   return (
     <div className={styles.briefHeader}>
-      {description && (
-        <div className={styles.description}>
-          {highlight && <span>{highlight}</span>}
-          {description}
-        </div>
-      )}
       {greeting && <div className={styles.greeting}>{greeting}</div>}
       {title && <div className={styles.title}>{title}</div>}
+      {description && <div className={styles.description}>{description}</div>}
       {children && children}
     </div>
   )

@@ -132,7 +132,7 @@ const config: GatsbyConfigType = {
             },
 
             output: "/rss.xml",
-            title: "Johon | RSS Feed",
+            title: "Jonhn | RSS Feed",
           },
         ],
       },

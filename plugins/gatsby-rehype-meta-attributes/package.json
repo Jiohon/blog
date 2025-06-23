@@ -10,7 +10,7 @@
     "markdown",
     "code-block"
   ],
-  "author": "Johon",
+  "author": "Jonhn",
   "license": "MIT",
   "dependencies": {
     "unist-util-visit": "^5.0.0"

@@ -19,18 +19,36 @@ export const GlobalScopeStyle = createGlobalStyle`
   }
 
   @font-face {
-    font-family: 'Prisma';
-    src: url('/fonts/Prisma/Prisma.woff2') format('woff2'),
-    url('/fonts/Prisma/Prisma.woff') format('woff');
+    font-family: 'Coalhandluketrial';
+    src: url('/fonts/Coalhandluketrial/Coalhandluketrial.woff2') format('woff2'),
+    url('/fonts/Coalhandluketrial/Coalhandluketrial.woff') format('woff');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
   }
 
   @font-face {
-    font-family: 'Coalhandluketrial';
-    src: url('/fonts/Coalhandluketrial/Coalhandluketrial.woff2') format('woff2'),
-    url('/fonts/Coalhandluketrial/Coalhandluketrial.woff') format('woff');
+    font-family: 'Grechen Fuemen';
+    src: url('/fonts/GrechenFuemen/GrechenFuemen-Regular.woff2') format('woff2'),
+    url('/fonts/GrechenFuemen/GrechenFuemen-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Moon Dance';
+    src: url('/fonts/MoonDance/MoonDance-Regular.woff2') format('woff2'),
+    url('/fonts/MoonDance/MoonDance-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Rubik Glitch';
+    src: url('/fonts/RubikGlitch/RubikGlitch-Regular.woff2') format('woff2'),
+    url('/fonts/RubikGlitch/RubikGlitch-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
     font-display: swap;

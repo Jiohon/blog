@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "description": "自动生成版本信息文件的 Gatsby 插件",
   "main": "gatsby-node.ts",
-  "author": "Johon",
+  "author": "Jonhn",
   "license": "MIT"
 } 

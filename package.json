@@ -1,11 +1,11 @@
 {
   "name": "blog",
-  "title": "Johon Blog",
-  "description": "Johon's personal website.",
-  "author": "Johon",
+  "title": "Jonhn Blog",
+  "description": "Jonhn's personal website.",
+  "author": "Jonhn",
   "private": true,
   "homepage": "https://blog.hushes.cn",
-  "version": "1.1.11",
+  "version": "1.1.12",
   "license": "MIT",
   "repository": {
     "type": "git",

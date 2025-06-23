@@ -1,6 +1,6 @@
 import { createStyles } from "antd-style"
 
-export const useStyles = createStyles(({ css, cx, responsive: r, token, prefixCls }) => ({
+export const useStyles = createStyles(({ css, cx, responsive: r, prefixCls, token }) => ({
   briefHeader: cx(
     `${prefixCls}-briefHeader`,
     css`
@@ -16,29 +16,14 @@ export const useStyles = createStyles(({ css, cx, responsive: r, token, prefixCl
     `
   ),
 
-  description: cx(
-    `${prefixCls}-briefHeader-description`,
-    css`
-      color: ${token.colorTextDescription};
-      font-weight: 500;
-      font-size: 1.2rem;
-      margin-block-end: 1rem;
-
-      span {
-        color: ${token.colorPrimaryHover};
-        font-family: Prisma;
-        font-size: 1.6rem;
-      }
-    `
-  ),
-
   title: cx(
     `${prefixCls}-briefHeader-title`,
     css`
-      font-weight: 700;
       font-size: 2.6rem;
       letter-spacing: 0.1rem;
       margin: 0 !important;
+      font-family: Rubik Glitch;
+      letter-spacing: 0.3rem;
 
       ${r({
         tablet: css`
@@ -72,10 +57,19 @@ export const useStyles = createStyles(({ css, cx, responsive: r, token, prefixCl
     `
   ),
 
-  highlightText: cx(
-    `${prefixCls}-briefHeader-highlightText`,
+  description: cx(
+    `${prefixCls}-briefHeader-description`,
     css`
-      color: ${token.colorPrimaryBorderHover};
+      color: ${token.colorTextDescription};
+      font-weight: 500;
+      font-size: 1.2rem;
+      margin-block-end: 1rem;
+
+      span {
+        color: ${token.colorPrimaryHover};
+        font-family: Prisma;
+        font-size: 1.6rem;
+      }
     `
   ),
 }))

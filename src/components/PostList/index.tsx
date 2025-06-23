@@ -2,7 +2,6 @@ import React from "react"
 
 import { Link } from "gatsby"
 
-import ArrowRight from "@/components/Icons/ArrowRight"
 import SVGIcon from "@/components/SvgIcon"
 import { groupPostsByYear } from "@/utils/helpers"
 
@@ -34,8 +33,6 @@ const PostList: React.FC<PostListProps> = ({ list }) => {
                 <h5>{node.title}</h5>
                 <time>{node.date}</time>
               </div>
-
-              <ArrowRight />
             </Link>
           ))}
         </div>
