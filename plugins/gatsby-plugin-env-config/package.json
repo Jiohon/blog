@@ -1,0 +1,11 @@
+{
+  "name": "gatsby-plugin-env-config",
+  "version": "1.0.0",
+  "description": "统一的环境变量配置管理 Gatsby 插件",
+  "main": "gatsby-node.ts",
+  "author": "Jonhn",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.0.0"
+  }
+} 
