@@ -121,7 +121,7 @@ export const getCountLine = (str: string) => str.split("\n").length
 export function findItem<T extends Record<string, any>, K extends keyof T>(
   array: T[],
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  criteria: Record<K & string, any>
+  criteria: Partial<Record<K, any>>
 ): T | undefined {
   if (!array || !Array.isArray(array) || array.length === 0) {
     return undefined

@@ -5,7 +5,7 @@
   "author": "Jonhn",
   "private": true,
   "homepage": "https://blog.hushes.cn",
-  "version": "1.1.13",
+  "version": "1.1.14",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -23,32 +23,33 @@
     "url": "https://github.com/Jiohon/blog/issues"
   },
   "scripts": {
-    "dev": "gatsby clean && gatsby develop -H 0.0.0.0 -p 8008 --verbose",
+    "dev": "gatsby clean && gatsby develop -H 0.0.0.0 -p 8008",
     "develop": "gatsby develop",
     "start": "gatsby develop",
     "build": "gatsby build --prefix-paths --verbose",
     "build:clean": "gatsby clean && gatsby build --prefix-paths --verbose",
-    "serve": "gatsby serve -H 0.0.0.0 -o",
+    "serve": "gatsby build && gatsby serve -H 0.0.0.0 -o",
     "clean": "gatsby clean",
     "info": "gatsby info -C",
     "update-submodule": "git submodule sync && git submodule update --init --recursive",
     "prepare": "husky install",
     "commitlint": "commitlint --edit",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
-    "lint:check": "eslint . --ext .js,.jsx,.ts,.tsx --max-warnings 0",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "fix": "pnpm format && pnpm lint:fix",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint . --ext ts,tsx --fix",
+    "lint:check": "eslint . --ext ts,tsx",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,css,less,json}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,css,less,json}\"",
     "type-check": "tsc --noEmit",
+    "fix": "pnpm format && pnpm lint:fix",
     "test": "echo \"No tests specified\" && exit 0",
-    "ci": "pnpm lint:check && pnpm format:check && pnpm type-check && pnpm build"
+    "pre-commit": "node scripts/pre-commit-checks.js",
+    "validate": "pnpm lint:check && pnpm format:check && pnpm type-check"
   },
   "dependencies": {
     "@ant-design/colors": "^7.2.0",
     "@ant-design/fast-color": "^2.0.6",
     "@ant-design/icons": "^5.6.1",
-    "@codesandbox/sandpack-react": "^2.20.0",
+    "@codesandbox/sandpack-react": "^2.18.3",
     "@giscus/react": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
     "@react-spring/rafz": "^9.7.5",
@@ -93,8 +94,8 @@
     "@types/react": "^18.3.20",
     "@types/react-dom": "^18.3.7",
     "@types/three": "^0.155.1",
-    "@typescript-eslint/eslint-plugin": "^5.62.0",
-    "@typescript-eslint/parser": "^5.62.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
     "dotenv": "^16.5.0",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^9.1.0",
@@ -109,11 +110,17 @@
     "prop-types": "^15.8.1",
     "typescript": "~5.1.6",
     "unified": "10.1.2",
-    "unist-util-visit": "2.0.3"
+    "unist-util-visit": "2.0.3",
+    "webpack": "^5.99.9"
   },
   "engines": {
     "node": ">=18.0.0",
     "pnpm": ">=8.0.0"
   },
-  "packageManager": "pnpm@9.0.0"
+  "packageManager": "pnpm@9.0.0",
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
 }

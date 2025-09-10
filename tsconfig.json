@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "target": "ES2022",
     "lib": ["dom", "dom.iterable", "esnext"],
     "jsx": "react-jsx",
 
@@ -9,11 +9,15 @@
     "moduleResolution": "node",
     "baseUrl": "./",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "env.config": ["./env.config.ts"],
+      "@/assets/*": ["./src/assets/*"],
+      "@/static/*": ["./static/*"]
     },
 
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
 
     /* Type Checking */
     "strict": true,
@@ -25,12 +29,32 @@
     "incremental": true
   },
   "include": [
-    "src/**/*",
-    "**/*.tsx",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.d.ts",
     "gatsby-node.ts",
-    "gatsby-config.ts",
-    "./plugins/**/*",
-    "./src/typings/*.d.ts"
+    "gatsby-config.ts", 
+    "gatsby-browser.tsx",
+    "gatsby-ssr.tsx",
+    "plugins/**/*.ts",
+    "scripts/**/*.js",
+    "*.config.js",
+    "*.config.ts"
   ],
-  "exclude": ["public", "node_modules"]
+  "exclude": [
+    "node_modules",
+    "public",
+    ".cache",
+    "dist",
+    "build",
+    ".git",
+    "*.log",
+    "coverage",
+    ".nyc_output",
+    "storybook-static",
+    ".tasks",
+    ".vscode",
+    ".idea",
+    "*.backup"
+  ]
 }

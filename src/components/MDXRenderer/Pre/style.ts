@@ -72,7 +72,7 @@ export const useStyles = createStyles(
           display: flex;
           align-items: center;
           margin-inline-end: 0.3rem;
-          opacity: 0.8;
+          opacity: 0.6;
 
           &.${prefixCls}-btn {
             color: inherit;

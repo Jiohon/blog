@@ -1,28 +1,29 @@
-import React, { lazy, Suspense, useContext } from "react"
+import React from "react"
 
 import { Skeleton } from "antd"
 
-import PreContext from "@/components/MDXRenderer/Pre/context"
-import { useThemeMode } from "@/hooks/useThemeMode"
-
-import { getReactFiles } from "./files"
 import { useStyles } from "./style"
 
+// 临时注释掉未使用的导入
+// import { lazy, Suspense, useContext } from "react"
+// import PreContext from "@/components/MDXRenderer/Pre/context"
+// import { useThemeMode } from "@/hooks/useThemeMode"
+// import { getReactFiles } from "./files"
 // import type { SandpackProps } from "@codesandbox/sandpack-react"
 
-const OriginSandpack = lazy(() => import("./Sandpack"))
+// const OriginSandpack = lazy(() => import("./Sandpack"))
 
-const SandpackFallback = () => {
-  const { styles } = useStyles()
+// const SandpackFallback = () => {
+//   const { styles } = useStyles()
 
-  return (
-    <div className={styles.fallback}>
-      <Skeleton.Node active style={{ height: 300, width: "100%" }}>
-        <span className={styles.placeholder}>Loading Demo...</span>
-      </Skeleton.Node>
-    </div>
-  )
-}
+//   return (
+//     <div className={styles.fallback}>
+//       <Skeleton.Node active style={{ height: 300, width: "100%" }}>
+//         <span className={styles.placeholder}>Loading Demo...</span>
+//       </Skeleton.Node>
+//     </div>
+//   )
+// }
 
 // interface SandpackSyntaxHighlightProps extends SandpackProps {
 //   codeString: string
@@ -30,6 +31,20 @@ const SandpackFallback = () => {
 
 // const SandpackSyntaxHighlight: React.FC< React.PropsWithChildren<SandpackSyntaxHighlightProps> > = () => {
 const SandpackSyntaxHighlight = () => {
+  const { styles } = useStyles()
+
+  // 临时禁用 Sandpack 功能，直接返回 fallback 组件
+  // 等待 ESM 兼容性问题解决后再启用
+  return (
+    <div className={styles.fallback}>
+      <Skeleton.Node active style={{ height: 300, width: "100%" }}>
+        <span className={styles.placeholder}>Sandpack Demo 暂时禁用 (兼容性问题)</span>
+      </Skeleton.Node>
+    </div>
+  )
+
+  // 原始实现 (暂时注释)
+  /*
   const context = useContext(PreContext)
   const { codeString, lineNumber } = context || {}
 
@@ -81,6 +96,7 @@ const SandpackSyntaxHighlight = () => {
       />
     </Suspense>
   )
+  */
 }
 
 export default SandpackSyntaxHighlight

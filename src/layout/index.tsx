@@ -32,7 +32,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <div className={styles.layout}>
             <Header />
             <main className={styles.content}>{children}</main>
-
             <Footer />
           </div>
         </App>

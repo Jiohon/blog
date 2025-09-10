@@ -2,15 +2,15 @@ import { Space } from "antd"
 import { Link } from "gatsby"
 
 import ThemeSwitch from "@/components/ThemeSwitch"
-import config from "@/config"
+import { siteConfig } from "@/config"
 
 import { useStyles } from "./style"
 
 export const Header = () => {
   const { styles, cx } = useStyles()
 
-  const menu = config.headers.menu.filter((item) => item.show)
-  const social = config.headers.social.filter((item) => item.show)
+  const menu = siteConfig.headers.menu.filter((item) => item.show)
+  const social = siteConfig.headers.social.filter((item) => item.show)
 
   return (
     <>

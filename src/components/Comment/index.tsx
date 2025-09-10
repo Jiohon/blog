@@ -1,6 +1,6 @@
 import Giscus, { type GiscusProps } from "@giscus/react"
 
-import config from "@/config"
+import { siteConfig } from "@/config"
 import { useThemeMode } from "@/hooks/useThemeMode"
 
 import { useStyles } from "./style"
@@ -14,16 +14,16 @@ const Comment: React.FC<CommentProps> = () => {
 
   const { appearance } = useThemeMode()
 
-  if (!config.comment) return <></>
+  if (!siteConfig.comment) return <></>
 
   return (
     <div className={styles.comment}>
       <Giscus
         id="comments"
-        repo="jiohon/blog"
-        repoId="R_kgDOH-t-Jg"
-        category="Announcements"
-        categoryId="DIC_kwDOH-t-Js4CnkmW"
+        repo={process.env.GATSBY_REPO}
+        repoId={process.env.GATSBY_REPO_ID}
+        category={process.env.GATSBY_CATEGORY}
+        categoryId={process.env.GATSBY_CATEGORY_ID}
         mapping="title"
         reactionsEnabled="1"
         inputPosition="top"

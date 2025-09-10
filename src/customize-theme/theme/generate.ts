@@ -1,6 +1,6 @@
 import { generate } from "@ant-design/colors"
 
-import config from "@/config"
+import { siteConfig } from "@/config"
 
 type GenerateColorKeyTypes<T extends string> = {
   [K in `color${T}${
@@ -83,7 +83,7 @@ export const generatePresetPalette = <T extends string>(
 ) => {
   const colors = generate(baseColorHex, {
     theme: theme,
-    backgroundColor: config.themes.light.backgroundColor,
+    backgroundColor: siteConfig.themes.light.colorBgLayout,
   })
 
   const generateColors = presetRelationship(baseColorName, colors)

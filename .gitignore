@@ -112,6 +112,7 @@ content/
 # Cursor
 .cursorrules
 .cursor/
+.tasks
 
 # WebStorm/JetBrains
 .idea/
@@ -144,6 +145,55 @@ Desktop.ini
 
 # Linux
 *~
+
+# ===================================
+# TypeScript 相关
+# ===================================
+
+# TypeScript 编译输出
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# ===================================
+# 测试和覆盖率
+# ===================================
+
+# Jest 覆盖率报告
+coverage/
+*.lcov
+
+# Playwright 测试结果
+test-results/
+playwright-report/
+playwright/.cache/
+
+# ===================================
+# 工具和分析
+# ===================================
+
+# Bundle 分析器输出
+bundle-analyzer-report.html
+stats.json
+
+# 性能分析
+*.cpuprofile
+*.heapsnapshot
+
+# Storybook
+storybook-static/
+
+# ===================================
+# 临时和备份文件
+# ===================================
+
+# 备份文件
+*.bak
+*.backup
+*.orig
+
+# 临时文件
+*.tmp
+*.temp
 
 # ===================================
 # 其他

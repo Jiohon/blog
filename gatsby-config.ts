@@ -1,16 +1,19 @@
-import * as dotenv from "dotenv"
+import dotenv from "dotenv"
 import rehypeKatex from "rehype-katex"
 import remarkGfm from "remark-gfm"
 import remarkMath from "remark-math"
 
+import { getParseEnv } from "./env.config"
 import packageJson from "./package.json"
 import rehypeMetaAttributes from "./plugins/gatsby-rehype-meta-attributes"
 import { SiteMetadataType } from "./src/hooks/useSiteMetadata"
-import { getNotPublished } from "./src/utils/env"
 
 import type { GatsbyConfig } from "gatsby"
 
-dotenv.config({ path: [`.env`, `.env.${process.env.NODE_ENV}`], override: true })
+dotenv.config({
+  path: [".env", `.env.${process.env.NODE_ENV}`],
+  override: true,
+})
 
 type GatsbyConfigType = GatsbyConfig & {
   siteMetadata: SiteMetadataType["site"]["siteMetadata"]
@@ -46,7 +49,7 @@ const config: GatsbyConfigType = {
         ignore: ["**/*.css", "**/*.ts", "!**/index.ts", "**/*.scss", "**/README.md"],
         customMappings: {},
         context: {
-          published: getNotPublished(),
+          published: getParseEnv(process.env.GATSBY_NOT_PUBLISHED) ? [true, false] : [true],
         },
       },
     },

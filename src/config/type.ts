@@ -52,7 +52,7 @@ interface Footers {
  * @interface Config
  * @extends {SiteMetadata}
  */
-interface SiteConfig {
+export interface SiteConfig {
   /**
    * 评论组件
    */
@@ -61,5 +61,3 @@ interface SiteConfig {
   headers: Headers
   footers: Footers
 }
-
-export default SiteConfig

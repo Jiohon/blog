@@ -1,14 +1,19 @@
 declare namespace NodeJS {
   interface ProcessEnv {
     /**
+     * 环境变量
+     */
+    NODE_ENV: "development" | "production" | "staging"
+
+    /**
      * 是否筛选未发布文章
      */
-    GATSBY_NOT_PUBLISHED: "true" | "false"
+    GATSBY_NOT_PUBLISHED: boolean
 
     /**
      * 评论组件 - GitHub 仓库
      */
-    GATSBY_REPO: string
+    GATSBY_REPO: `${string}/${string}`
 
     /**
      * 评论组件 - GitHub 仓库 ID

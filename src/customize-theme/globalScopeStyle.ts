@@ -81,6 +81,7 @@ export const GlobalScopeStyle = createGlobalStyle`
     font-weight: normal;
     font-kerning: normal;
     background-color: ${(p) => p.theme.colorBgLayout};
+    transition: background-color 0.25s ease;
   }
 
   body {

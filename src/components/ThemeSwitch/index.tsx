@@ -23,14 +23,14 @@ const ThemeSwitch: React.FC = () => {
   const onClick = ({ key, domEvent }) => {
     if (isSSR) return
 
-    if (!document.startViewTransition) {
+    if (!document?.startViewTransition) {
       setThemeMode(key)
       return
     }
 
     const { clientX: x, clientY: y } = domEvent
 
-    const transition = document.startViewTransition(() => {
+    const transition = document?.startViewTransition(() => {
       setThemeMode(key)
     })
 

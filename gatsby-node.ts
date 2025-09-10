@@ -1,19 +1,22 @@
 import path, { dirname } from "path"
 import { fileURLToPath } from "url"
 
-import * as dotenv from "dotenv"
+import dotenv from "dotenv"
 import { createFilePath } from "gatsby-source-filesystem"
 import NodePolyfillPlugin from "node-polyfill-webpack-plugin"
 import readingTime from "reading-time"
 
-import { getNotPublished } from "./src/utils/env"
+import { getParseEnv } from "./env.config"
 import { getPostTags, parseFilePath } from "./src/utils/helpers"
 
 import type { GatsbyNode } from "gatsby"
 
-dotenv.config({ path: [`.env`, `.env.${process.env.NODE_ENV}`], override: true })
-
 const __dirname = dirname(fileURLToPath(import.meta.url))
+
+dotenv.config({
+  path: [".env", `.env.${process.env.NODE_ENV}`],
+  override: true,
+})
 
 export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] = ({ actions }) => {
   actions.createTypes(`
@@ -40,12 +43,33 @@ export const onCreateWebpackConfig: GatsbyNode["onCreateWebpackConfig"] = ({ act
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "src"),
-        "@@": path.resolve(__dirname, "src/assets"),
-        "@static": path.resolve(__dirname, "static"),
+        "env.config": path.resolve(__dirname, "env.config.ts"),
+        "@/assets": path.resolve(__dirname, "src/assets"),
+        "@/static": path.resolve(__dirname, "static"),
       },
+      // fallback: {
+      //   fs: false,
+      //   child_process: false,
+      //   module: false,
+      // },
     },
     plugins: [
-      new NodePolyfillPlugin({ includeAliases: ["path", "url", "stream", "buffer", "events"] }),
+      new NodePolyfillPlugin({
+        includeAliases: [
+          "path",
+          "url",
+          "stream",
+          "buffer",
+          "events",
+          "os",
+          "crypto",
+          "vm",
+          // "util",
+          // "assert",
+          // "http",
+          // "https",
+        ],
+      }),
     ],
   })
 }
@@ -57,7 +81,7 @@ export const onCreatePage: GatsbyNode["onCreatePage"] = ({ page, actions }) => {
   if (!Object.prototype.hasOwnProperty.call(page?.context, "published")) {
     deletePage(page)
     // @ts-expect-error: Gatsby页面上下文类型不完整
-    page.context.published = getNotPublished()
+    page.context.published = getParseEnv(process.env.GATSBY_NOT_PUBLISHED) ? [true, false] : [true]
     createPage(page)
   }
 }
@@ -70,7 +94,7 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
   try {
     const { createPage, createRedirect } = actions
 
-    const published = getNotPublished()
+    const published = getParseEnv(process.env.GATSBY_NOT_PUBLISHED) ? [true, false] : [true]
 
     createRedirect({ fromPath: "/rss", toPath: "/rss.xml", statusCode: 200 })
 
