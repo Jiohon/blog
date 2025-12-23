@@ -5,8 +5,9 @@ import color from "color"
 import { SevenSegmentDisplayContext } from "./Provider"
 import Segment from "./Segment"
 import { useStyles } from "./style"
-import { DigitType, SegmentID } from "./types"
 import { isSegmentActive } from "./utils"
+
+import type { DigitType, SegmentID } from "./types"
 
 const segments: SegmentID[] = ["a", "b", "c", "d", "e", "f", "g"]
 

@@ -1,7 +1,8 @@
 import { createContext } from "react"
 
-import type { PreNodeProps } from "./util"
 import type { SandboxEnvironment } from "@codesandbox/sandpack-react"
+
+import type { PreNodeProps } from "./util"
 
 export interface PreContextProps extends PreNodeProps {
   codeString: string

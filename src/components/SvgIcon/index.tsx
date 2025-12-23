@@ -1,6 +1,6 @@
 import type { Language } from "@/utils/prismjsLanguages"
 
-type SVGIconProps = {
+interface SVGIconProps {
   id: Language
   width: string
   height: string

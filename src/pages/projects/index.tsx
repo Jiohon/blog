@@ -1,5 +1,6 @@
+import type { HeadFC, PageProps } from "gatsby"
+
 import { Card, Space, Typography } from "antd"
-import { HeadFC, PageProps } from "gatsby"
 
 import BriefHeader from "@/components/BriefHeader"
 import SEO from "@/components/SEO"

@@ -1,7 +1,8 @@
-import { ClockCircleOutlined } from "@ant-design/icons"
+import type { HeadFC, PageProps } from "gatsby"
+import { graphql, navigate } from "gatsby"
+
 import { Space, Tag, Tooltip, Typography } from "antd"
 import dayjs from "dayjs"
-import { graphql, HeadFC, navigate, PageProps } from "gatsby"
 
 import Comment from "@/components/Comment"
 import Calendar from "@/components/Icons/Calendar"
@@ -10,6 +11,7 @@ import { HeadingProvider } from "@/components/MDXRenderer/Heading/context"
 import SEO from "@/components/SEO"
 import PostSidebar from "@/components/Sidebar/PostSidebar"
 import { filtersItems, simplifiedQueryData } from "@/utils/helpers"
+import { ClockCircleOutlined } from "@ant-design/icons"
 
 import { useStyles } from "./_style"
 
@@ -25,8 +27,8 @@ const PostTemplate: React.FC<
   const { allPost, currentPost } = data
   const { styles } = useStyles()
 
-  const timeToRead = currentPost.fields.timeToRead
-  const frontmatter = currentPost.frontmatter
+  const { timeToRead } = currentPost.fields
+  const { frontmatter } = currentPost
 
   const headings = filtersItems(currentPost.tableOfContents.items)
 
@@ -84,7 +86,7 @@ export default PostTemplate
 
 export const Head: HeadFC<allMdxNodesQuery<"allPost"> & MdxNodesQuery<"currentPost">> = (props) => {
   const { location, data } = props
-  const frontmatter = data.currentPost.frontmatter
+  const { frontmatter } = data.currentPost
 
   return (
     <>

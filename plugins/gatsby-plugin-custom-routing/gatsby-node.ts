@@ -1,9 +1,9 @@
+import type { GatsbyNode } from "gatsby"
+
 import fs from "fs"
 import path from "path"
 
 import { sync } from "glob"
-
-import type { GatsbyNode } from "gatsby"
 
 interface CustomPluginOptions {
   pagesDir: string
@@ -19,10 +19,7 @@ interface CustomPluginOptions {
  * 1. 自动处理pages目录中的index文件夹中的文件映射到根路径
  * 2. 忽略特定文件或文件夹
  */
-export const createPages: GatsbyNode["createPages"] = async (
-  { actions, reporter },
-  pluginOptions
-) => {
+export const createPages: GatsbyNode["createPages"] = ({ actions, reporter }, pluginOptions) => {
   const { createPage } = actions
 
   // 将pluginOptions转换为强类型

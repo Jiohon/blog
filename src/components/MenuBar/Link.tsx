@@ -1,4 +1,4 @@
-import { CSSProperties, FunctionComponent, ReactNode } from "react"
+import type { CSSProperties, FunctionComponent, ReactNode } from "react"
 
 import { Link as GatsbyLink } from "gatsby"
 
@@ -19,6 +19,14 @@ interface LinkProps {
   to: string
 }
 
+const ExtraChildren: React.FC<{ extra: ReactNode }> = ({ extra }) => {
+  if (typeof extra !== "object") {
+    return <span className="extra">{extra}</span>
+  }
+
+  return extra
+}
+
 const Link: FunctionComponent<LinkProps> = ({
   className,
   children,
@@ -28,14 +36,6 @@ const Link: FunctionComponent<LinkProps> = ({
   ...otherProps
 }) => {
   const { styles, cx } = useStyles()
-
-  const ExtraChildren = () => {
-    if (typeof extra !== "object") {
-      return <span className="extra">{extra}</span>
-    }
-
-    return extra
-  }
 
   return (
     <>
@@ -48,10 +48,10 @@ const Link: FunctionComponent<LinkProps> = ({
           activeClassName="active"
         >
           <div>
-            {marker && <span className="inkVisible"></span>}
+            {marker && <span className="inkVisible" />}
             {children}
           </div>
-          <ExtraChildren />
+          <ExtraChildren extra={extra} />
         </GatsbyLink>
       </div>
     </>

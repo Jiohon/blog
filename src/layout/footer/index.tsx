@@ -12,7 +12,7 @@ export const Footer = () => {
 
   const menu = siteConfig.footers.menu.filter((item) => item.show)
   const friend = siteConfig.footers.friend.filter((item) => item.show)
-  const ICPRecord = siteConfig.footers.ICPRecord
+  const { ICPRecord } = siteConfig.footers
 
   return (
     <>

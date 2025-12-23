@@ -1,6 +1,5 @@
-import { generate } from "@ant-design/colors"
-
 import { siteConfig } from "@/config"
+import { generate } from "@ant-design/colors"
 
 type GenerateColorKeyTypes<T extends string> = {
   [K in `color${T}${
@@ -82,7 +81,7 @@ export const generatePresetPalette = <T extends string>(
   theme: "default" | "dark"
 ) => {
   const colors = generate(baseColorHex, {
-    theme: theme,
+    theme,
     backgroundColor: siteConfig.themes.light.colorBgLayout,
   })
 

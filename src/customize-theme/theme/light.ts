@@ -1,9 +1,9 @@
-import { ThemeConfig } from "antd"
-
 import { siteConfig } from "@/config"
 
 import { components } from "./components"
 import { generatePresetPalette } from "./generate"
+
+import type { ThemeConfig } from "antd"
 
 const grayColors = generatePresetPalette("gray", "#bfbfbf", "default")
 

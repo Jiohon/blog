@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react"
 
-import { HeadingItem } from "@/utils/helpers"
+import type { HeadingItem } from "@/utils/helpers"
 
 export const HeadingContext = createContext<HeadingItem[]>([])
 

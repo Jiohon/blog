@@ -5,11 +5,7 @@
  */
 export const isSSR = (function () {
   try {
-    return (
-      typeof window === "undefined" ||
-      !window.navigator ||
-      /ServerSideRendering|^Deno\//.test(window.navigator.userAgent)
-    )
+    return !window?.navigator || /ServerSideRendering|^Deno\//.test(window.navigator.userAgent)
   } catch (e) {
     return true
   }
@@ -28,10 +24,9 @@ export const randomString = () => Math.random().toString(36).slice(2)
  * @return {*}  {string}
  */
 export const randomColor = () =>
-  "#" +
-  Math.floor(Math.random() * 0xffffff)
+  `#${Math.floor(Math.random() * 0xffffff)
     .toString(16)
-    .padEnd(6, "0")
+    .padEnd(6, "0")}`
 
 /**
  * @description 解析url参数

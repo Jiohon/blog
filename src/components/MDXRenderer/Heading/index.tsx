@@ -1,4 +1,5 @@
-import React, { HTMLAttributes, useRef } from "react"
+import type { HTMLAttributes } from "react"
+import React, { useRef } from "react"
 
 import { Typography } from "antd"
 

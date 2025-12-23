@@ -1,4 +1,5 @@
-import React, { createContext, PropsWithChildren } from "react"
+import type { PropsWithChildren } from "react"
+import React, { createContext } from "react"
 
 export interface SevenSegmentDisplayContext {
   digitSize: number

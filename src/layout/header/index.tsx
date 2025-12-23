@@ -1,5 +1,6 @@
-import { Space } from "antd"
 import { Link } from "gatsby"
+
+import { Space } from "antd"
 
 import ThemeSwitch from "@/components/ThemeSwitch"
 import { siteConfig } from "@/config"

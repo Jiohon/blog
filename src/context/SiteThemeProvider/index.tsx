@@ -14,13 +14,13 @@ const SiteThemeProvider = memo<{ children: React.ReactNode }>(({ children }) => 
   return (
     <>
       <ThemeProvider
-        prefixCls={"site"}
+        prefixCls="site"
         themeMode={themeMode}
         theme={getAntdTheme}
         customToken={createCustomToken}
         customStylish={createCustomStylish}
       >
-        <StyleProvider prefix={"site"} cache={extractStaticStyle.cache}>
+        <StyleProvider prefix="site" cache={extractStaticStyle.cache}>
           <GlobalScopeStyle />
           {children}
         </StyleProvider>

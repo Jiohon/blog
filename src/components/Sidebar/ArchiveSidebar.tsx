@@ -1,9 +1,9 @@
-import { Card } from "antd"
 import { navigate } from "gatsby"
+
+import { Card } from "antd"
 
 import MenuBar from "../MenuBar"
 import Sticky from "../Sticky"
-
 import { useStyles } from "./style"
 
 interface ArchiveSidebarProps {

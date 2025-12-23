@@ -12,11 +12,11 @@ const Splitter: React.FC<IconProps> = (props) => {
       style={{ display: "block", marginInline: "auto", marginBlock: "5rem 2rem" }}
       {...props}
     >
-      <line x1="5" y1="5" x2="25" y2="15"></line>
-      <line x1="25" y1="5" x2="45" y2="15"></line>
-      <line x1="45" y1="5" x2="65" y2="15"></line>
-      <line x1="65" y1="5" x2="85" y2="15"></line>
-      <line x1="85" y1="5" x2="105" y2="15"></line>
+      <line x1="5" y1="5" x2="25" y2="15" />
+      <line x1="25" y1="5" x2="45" y2="15" />
+      <line x1="45" y1="5" x2="65" y2="15" />
+      <line x1="65" y1="5" x2="85" y2="15" />
+      <line x1="85" y1="5" x2="105" y2="15" />
     </svg>
   )
 }

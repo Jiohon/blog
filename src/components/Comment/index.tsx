@@ -1,7 +1,6 @@
-import Giscus, { type GiscusProps } from "@giscus/react"
-
 import { siteConfig } from "@/config"
 import { useThemeMode } from "@/hooks/useThemeMode"
+import Giscus, { type GiscusProps } from "@giscus/react"
 
 import { useStyles } from "./style"
 
@@ -14,7 +13,9 @@ const Comment: React.FC<CommentProps> = () => {
 
   const { appearance } = useThemeMode()
 
-  if (!siteConfig.comment) return <></>
+  if (!siteConfig.comment) {
+    return <></>
+  }
 
   return (
     <div className={styles.comment}>

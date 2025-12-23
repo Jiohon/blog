@@ -4,8 +4,8 @@ import { App, message } from "antd"
 import SiteStoreProvider from "@/context/SiteStoreProvider"
 import SiteThemeProvider from "@/context/SiteThemeProvider"
 
-import { Footer } from "./footer/index"
-import { Header } from "./header/index"
+import { Footer } from "./footer"
+import { Header } from "./header"
 import { useStyles } from "./style"
 
 interface LayoutProps {

@@ -1,5 +1,7 @@
-import { Card, Space } from "antd"
 import { graphql, Link } from "gatsby"
+import type { HeadFC, PageProps } from "gatsby"
+
+import { Card, Space } from "antd"
 
 import BriefHeader from "@/components/BriefHeader"
 import Heading from "@/components/Heading"
@@ -10,7 +12,6 @@ import { simplifiedQueryData } from "@/utils/helpers"
 
 import { useStyles } from "./_style"
 
-import type { HeadFC, PageProps } from "gatsby"
 /**
  * @description 首页
  * @date 23/10/2022
@@ -50,16 +51,15 @@ const Home: React.FC<PageProps<allMdxNodesQuery<"latest" | "Highlights"> & MdxNo
                 {item.title}
               </Link>
               <div className={styles.tagLinks}>
-                {item.tags &&
-                  item.tags
-                    .filter((cat) => cat !== "Highlight")
-                    .map((cat) => {
-                      return (
-                        <Link to={`/tags/${cat}`} key={`cat-${cat}`}>
-                          {cat}
-                        </Link>
-                      )
-                    })}
+                {item?.tags
+                  ?.filter((cat) => cat !== "Highlight")
+                  ?.map((cat) => {
+                    return (
+                      <Link to={`/tags/${cat}`} key={`cat-${cat}`}>
+                        {cat}
+                      </Link>
+                    )
+                  })}
               </div>
             </Card>
           )
@@ -74,7 +74,7 @@ const Home: React.FC<PageProps<allMdxNodesQuery<"latest" | "Highlights"> & MdxNo
             {highlightsList.map((item) => {
               return (
                 <Card className={styles.highlightCard} key={`Highlight-${item.slug}`}>
-                  <SVGIcon id={item.icon} width="5em" height="5em"></SVGIcon>
+                  <SVGIcon id={item.icon} width="5em" height="5em" />
                   <div className="content">
                     <time className={styles.time}>{item.date}</time>
                     <Link className={styles.titleLink} to={item.slug}>
@@ -98,7 +98,7 @@ export const Head: HeadFC = (props) => {
 
   return (
     <>
-      <SEO pathName={location.pathname}></SEO>
+      <SEO pathName={location.pathname} />
     </>
   )
 }

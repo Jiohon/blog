@@ -1,4 +1,4 @@
-import { CSSProperties, FunctionComponent, ReactNode } from "react"
+import type { CSSProperties, FunctionComponent, ReactNode } from "react"
 
 import { useStyles } from "./style"
 
@@ -10,6 +10,14 @@ interface TextProps extends React.HTMLAttributes<HTMLDivElement> {
   marker?: boolean
 }
 
+const ExtraChildren: React.FC<{ extra: ReactNode }> = ({ extra }) => {
+  if (typeof extra !== "object") {
+    return <span className="extra">{extra}</span>
+  }
+
+  return extra
+}
+
 const Text: FunctionComponent<TextProps> = ({
   className,
   children,
@@ -19,21 +27,13 @@ const Text: FunctionComponent<TextProps> = ({
 }) => {
   const { styles, cx } = useStyles()
 
-  const ExtraChildren = () => {
-    if (typeof extra !== "object") {
-      return <span className="extra">{extra}</span>
-    }
-
-    return extra
-  }
-
   return (
     <div className={cx(styles.text, className)} {...otherProps}>
       <div>
-        {marker && <span className="inkVisible"></span>}
+        {marker && <span className="inkVisible" />}
         {children}
       </div>
-      <ExtraChildren />
+      <ExtraChildren extra={extra} />
     </div>
   )
 }

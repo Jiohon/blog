@@ -1,5 +1,7 @@
+import type { HeadFC } from "gatsby"
+import { navigate } from "gatsby"
+
 import { Button } from "antd"
-import { HeadFC, navigate } from "gatsby"
 
 import SEO from "@/components/SEO"
 

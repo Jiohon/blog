@@ -3,6 +3,7 @@ import { useMemo, useRef } from "react"
 import PrismSyntaxHighlight from "@/components/PrismSyntaxHighlight"
 import SandpackSyntaxHighlight from "@/components/SandpackSyntaxHighlight"
 import { getPrismjsLanguage } from "@/utils/prismjsLanguages"
+import type { SandboxEnvironment } from "@codesandbox/sandpack-react"
 
 import PreContext from "./context"
 import { useStyles } from "./style"
@@ -10,7 +11,6 @@ import Title from "./Title"
 
 import type { PreContextProps } from "./context"
 import type { PreNodeProps } from "./util"
-import type { SandboxEnvironment } from "@codesandbox/sandpack-react"
 
 export interface PreHighlightProps extends PreNodeProps {
   codeString: string

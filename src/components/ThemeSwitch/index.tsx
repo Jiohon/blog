@@ -21,7 +21,9 @@ const ThemeSwitch: React.FC = () => {
   const Icon = items.find((item) => item?.key === themeMode)?.icon
 
   const onClick = ({ key, domEvent }) => {
-    if (isSSR) return
+    if (isSSR) {
+      return
+    }
 
     if (!document?.startViewTransition) {
       setThemeMode(key)

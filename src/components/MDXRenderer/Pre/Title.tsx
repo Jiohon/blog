@@ -1,11 +1,11 @@
 import { useContext } from "react"
 
-import { CodeSandboxOutlined } from "@ant-design/icons"
-import stackblitzSdk from "@stackblitz/sdk"
 import { Button, Tooltip } from "antd"
 import { getParameters } from "codesandbox/lib/api/define"
 
 import StackblitzSvg from "@/components/Icons/Stackblitz"
+import { CodeSandboxOutlined } from "@ant-design/icons"
+import stackblitzSdk from "@stackblitz/sdk"
 
 import PreContext from "./context"
 import Copy from "./Copy"
@@ -20,7 +20,7 @@ const Title = () => {
   const handleToStackblitz = () => {
     stackblitzSdk.openProject(
       {
-        title: title || "index.js",
+        title: title ?? "index.js",
         description: "",
         template: "javascript",
         files: {
@@ -42,7 +42,7 @@ const Title = () => {
     )
   }
 
-  const handleToCodeSandbox = async () => {
+  const handleToCodeSandbox = () => {
     try {
       const parameters = getParameters({
         files: {

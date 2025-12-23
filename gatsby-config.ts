@@ -1,3 +1,5 @@
+import type { GatsbyConfig } from "gatsby"
+
 import dotenv from "dotenv"
 import rehypeKatex from "rehype-katex"
 import remarkGfm from "remark-gfm"
@@ -6,20 +8,13 @@ import remarkMath from "remark-math"
 import { getParseEnv } from "./env.config"
 import packageJson from "./package.json"
 import rehypeMetaAttributes from "./plugins/gatsby-rehype-meta-attributes"
-import { SiteMetadataType } from "./src/hooks/useSiteMetadata"
-
-import type { GatsbyConfig } from "gatsby"
 
 dotenv.config({
   path: [".env", `.env.${process.env.NODE_ENV}`],
   override: true,
 })
 
-type GatsbyConfigType = GatsbyConfig & {
-  siteMetadata: SiteMetadataType["site"]["siteMetadata"]
-}
-
-const siteMetadata: SiteMetadataType["site"]["siteMetadata"] = {
+const siteMetadata = {
   title: packageJson.title,
   author: packageJson.author,
   description: packageJson.description,
@@ -30,7 +25,7 @@ const siteMetadata: SiteMetadataType["site"]["siteMetadata"] = {
   repository: packageJson.repository.url,
 }
 
-const config: GatsbyConfigType = {
+const config: GatsbyConfig = {
   jsxRuntime: "automatic",
   flags: {
     DEV_SSR: true,

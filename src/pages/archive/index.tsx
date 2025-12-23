@@ -1,6 +1,7 @@
 import React from "react"
 
 import { graphql } from "gatsby"
+import type { HeadFC, PageProps } from "gatsby"
 
 import BriefHeader from "@/components/BriefHeader"
 import PostList from "@/components/PostList"
@@ -9,8 +10,6 @@ import ArchiveSidebar from "@/components/Sidebar/ArchiveSidebar"
 import { simplifiedQueryData } from "@/utils/helpers"
 
 import { useStyles } from "./_style"
-
-import type { HeadFC, PageProps } from "gatsby"
 
 type ArchiveProps = PageProps<allMdxNodesQuery<"archive"> & Record<"tags", Group>>
 

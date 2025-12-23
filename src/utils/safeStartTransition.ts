@@ -1,4 +1,5 @@
-import { startTransition, TransitionFunction } from "react"
+import type { TransitionFunction } from "react"
+import { startTransition } from "react"
 
 export const safeStartTransition = (func: TransitionFunction) => {
   if (typeof startTransition === "function") {

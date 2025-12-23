@@ -1,7 +1,8 @@
 import React from "react"
 
-import { Typography } from "antd"
 import { Link } from "gatsby"
+
+import { Typography } from "antd"
 
 import { useStyles } from "./style"
 

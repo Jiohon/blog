@@ -61,12 +61,12 @@ const NeonLighting = () => {
         segmentActiveColor={colorPattern.activeColor}
         segmentInactiveColor={colorPattern.inactiveColor}
         backgroundColor={colorPattern.background}
-        padding={"10px 14px"}
+        padding="10px 14px"
         glow
       />
-      <div className={cx(styles.twinkling)}></div>
+      <div className={cx(styles.twinkling)} />
       {/* 使中心看起来更亮 */}
-      {isDarkMode && <div className={styles.DarkModeBright}></div>}
+      {isDarkMode && <div className={styles.DarkModeBright} />}
       {/* Glass cover */}
       <div className={cx(styles.GlassCover)}>
         {/* 4 颗小螺丝儿 */}

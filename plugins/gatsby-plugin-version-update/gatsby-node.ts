@@ -1,7 +1,7 @@
+import type { GatsbyNode } from "gatsby"
+
 import { promises as fs } from "fs"
 import path from "path"
-
-import type { GatsbyNode } from "gatsby"
 
 /**
  * 规范化版本号格式

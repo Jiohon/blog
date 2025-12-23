@@ -22,6 +22,20 @@ const camelToKebab = (obj: Record<string, any>): Record<string, any> => {
   return result
 }
 
+export const getRemoteCode = async ({ codeString, codeUrl }) => {
+  if (!codeUrl) {
+    return codeString
+  }
+  try {
+    const response = await fetch(codeUrl)
+
+    return response.text()
+  } catch (error) {
+    console.error("Failed to fetch remote code:", error)
+    return codeString
+  }
+}
+
 const PrismSyntaxHighlight = memo(() => {
   const context = useContext(PreContext)
   const { codeString, language, highlight, lineNumber, codeUrl } = context || {}
@@ -57,6 +71,7 @@ const PrismSyntaxHighlight = memo(() => {
           <code className={cx(context?.className, styles.PrismCode)} {...attributes}>
             {tokens.map((line, i) => (
               <div
+                // eslint-disable-next-line react/no-array-index-key
                 key={`line-${i}`}
                 data-line={i + 1}
                 {...getLineProps({ line })}
@@ -71,6 +86,7 @@ const PrismSyntaxHighlight = memo(() => {
                 }}
               >
                 {line.map((token, key) => (
+                  // eslint-disable-next-line react/no-array-index-key
                   <span key={key} {...getTokenProps({ token })} />
                 ))}
               </div>
@@ -81,19 +97,5 @@ const PrismSyntaxHighlight = memo(() => {
     </>
   )
 })
-
-export const getRemoteCode = async ({ codeString, codeUrl }) => {
-  if (!codeUrl) {
-    return codeString
-  }
-  try {
-    const response = await fetch(codeUrl)
-
-    return response.text()
-  } catch (error) {
-    console.error("Failed to fetch remote code:", error)
-    return codeString
-  }
-}
 
 export default PrismSyntaxHighlight

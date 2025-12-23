@@ -28,7 +28,7 @@ const PostList: React.FC<PostListProps> = ({ list }) => {
           <div className={styles.year}>{year}</div>
           {postByYear[year].map((node) => (
             <Link className={styles.link} to={node.path} key={node.slug}>
-              <SVGIcon id={node.icon} width="3em" height="3em"></SVGIcon>
+              <SVGIcon id={node.icon} width="3em" height="3em" />
               <div className="infos">
                 <h5>{node.title}</h5>
                 <time>{node.date}</time>

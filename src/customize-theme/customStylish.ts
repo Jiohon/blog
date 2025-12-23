@@ -1,4 +1,4 @@
-import { GetCustomStylish } from "antd-style"
+import type { GetCustomStylish } from "antd-style"
 
 declare module "antd-style" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface

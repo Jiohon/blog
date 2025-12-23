@@ -1,6 +1,5 @@
+import type { GeneratePresetTypes } from "@/customize-theme/theme/generate"
 import { FastColor } from "@ant-design/fast-color"
-
-import { GeneratePresetTypes } from "@/customize-theme/theme/generate"
 
 import type { GetCustomToken } from "antd-style"
 

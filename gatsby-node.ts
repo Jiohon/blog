@@ -1,3 +1,5 @@
+import type { GatsbyNode } from "gatsby"
+
 import path, { dirname } from "path"
 import { fileURLToPath } from "url"
 
@@ -8,8 +10,6 @@ import readingTime from "reading-time"
 
 import { getParseEnv } from "./env.config"
 import { getPostTags, parseFilePath } from "./src/utils/helpers"
-
-import type { GatsbyNode } from "gatsby"
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 

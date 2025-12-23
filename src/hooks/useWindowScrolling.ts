@@ -46,7 +46,7 @@ export const useWindowScrolling: UseWindowScrolling = ({
 
   useIsomorphicLayoutEffect(() => {
     const updateScrollDir = () => {
-      const scrollY = window.scrollY
+      const { scrollY } = window
 
       const _direction = scrollY > lastScrollY.current ? "down" : "up"
 

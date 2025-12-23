@@ -4,7 +4,6 @@ import { Card } from "antd"
 
 import MenuBar from "../MenuBar"
 import Sticky from "../Sticky"
-
 import { useStyles } from "./style"
 
 /**

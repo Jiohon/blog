@@ -14,9 +14,8 @@ export const getParseEnv = (value: string | boolean | undefined | null) => {
     return false as never
   } else if (typeof value === "string" && /^\d+$/.test(value) && !isNaN(Number(value))) {
     return Number(value) as never
-  } else {
-    return value
   }
+  return value
 }
 
 /**

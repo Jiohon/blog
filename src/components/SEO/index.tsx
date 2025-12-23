@@ -1,4 +1,4 @@
-import { ReactNode } from "react"
+import type { ReactNode } from "react"
 
 import { useSiteMetadata } from "@/hooks/useSiteMetadata"
 
@@ -15,7 +15,7 @@ interface SchemaOrgJSONLD {
   url?: string
   name?: string
   alternateName?: string
-  itemListElement?: Array<{
+  itemListElement?: {
     "@type": string
     position: number
     item: {
@@ -23,7 +23,7 @@ interface SchemaOrgJSONLD {
       name: string
       image: string
     }
-  }>
+  }[]
   headline?: string
   image?: {
     "@type": string
@@ -107,7 +107,7 @@ const SEO: React.FC<SEOProps> = ({ title, description, pathName, children }) => 
       <meta name="twitter:description" content={seo.description} />
       <meta name="twitter:image" content={seo.image} />
 
-      <link rel="shortcut icon" type="image/png" href={"/favicon.ico"} />
+      <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
 
       <script type="application/ld+json">{JSON.stringify(schemaOrgJSONLD)}</script>
       {children}

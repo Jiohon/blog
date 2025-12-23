@@ -1,13 +1,14 @@
-import { createContext, PropsWithChildren, useRef } from "react"
+import type { PropsWithChildren } from "react"
+import { createContext, useRef } from "react"
 
 import { createStore } from "zustand"
 
-import type { SiteMetadata } from "@/hooks/useSiteMetadata"
 import { useSiteMetadata } from "@/hooks/useSiteMetadata"
+import type { SiteMetadata } from "@/hooks/useSiteMetadata"
 
 import type { ZustandStore } from "./zustandTypes"
 
-export type SiteStore = {
+export interface SiteStore {
   siteMetadata: SiteMetadata
 
   // testing with no store actions

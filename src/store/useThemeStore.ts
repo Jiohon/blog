@@ -3,7 +3,7 @@ import { persist } from "zustand/middleware"
 
 import type { ThemeMode } from "antd-style"
 
-type Store = {
+interface Store {
   storeTheme: ThemeMode
   setStoreTheme: (mode: ThemeMode) => void
 }

@@ -1,4 +1,5 @@
-import React, { AnchorHTMLAttributes } from "react"
+import type { AnchorHTMLAttributes } from "react"
+import React from "react"
 
 import LinkSvg from "@/components/Icons/ALink"
 

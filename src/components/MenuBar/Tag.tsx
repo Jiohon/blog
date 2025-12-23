@@ -1,10 +1,9 @@
-import { FunctionComponent } from "react"
+import type { FunctionComponent } from "react"
 
 import { Link as GatsbyLink } from "gatsby"
+import type { GatsbyLinkProps } from "gatsby"
 
 import { useStyles } from "./style"
-
-import type { GatsbyLinkProps } from "gatsby"
 
 type TagProps = Omit<GatsbyLinkProps<string>, "ref">
 

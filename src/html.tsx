@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default-member */
 import PropTypes from "prop-types"
 
 export default function HTML(props) {
@@ -12,7 +13,7 @@ export default function HTML(props) {
 
       <body {...props.bodyAttributes}>
         {props.preBodyComponents}
-        <div key={`body`} id="___gatsby" dangerouslySetInnerHTML={{ __html: props.body }} />
+        <div key="body" id="___gatsby" dangerouslySetInnerHTML={{ __html: props.body }} />
         {props.postBodyComponents}
       </body>
     </html>

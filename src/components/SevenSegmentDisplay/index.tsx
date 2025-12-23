@@ -3,7 +3,8 @@ import React from "react"
 import Digit from "./Digit"
 import SevenSegmentDisplayProvider from "./Provider"
 import { useStyles } from "./style"
-import { DigitType } from "./types"
+
+import type { DigitType } from "./types"
 
 export interface RetroHitCounterProps {
   value: number
@@ -53,6 +54,7 @@ const RetroHitCounter: React.FC<RetroHitCounterProps> = (props) => {
         style={{ padding, backgroundColor, gap: digitSpacing }}
       >
         {individualDigits.map((digit, idx) => (
+          // eslint-disable-next-line react/no-array-index-key
           <Digit key={idx} value={Number(digit) as DigitType} />
         ))}
       </div>

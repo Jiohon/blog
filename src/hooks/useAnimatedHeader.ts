@@ -1,11 +1,15 @@
-import { SpringValue, useSpring } from "@react-spring/web"
 import { useResponsive } from "antd-style"
+
+import { useSpring } from "@react-spring/web"
+import type { SpringValue } from "@react-spring/web"
 
 import { useIsomorphicLayoutEffect } from "./useIsomorphicEffect"
 import { useStickyHeader } from "./useStickyHeader"
-import { SCROLL_DIR, useWindowScrolling } from "./useWindowScrolling"
+import { useWindowScrolling } from "./useWindowScrolling"
 
-type UseAnimatedHeaderProps = {
+import type { SCROLL_DIR } from "./useWindowScrolling"
+
+interface UseAnimatedHeaderProps {
   isHeader?: boolean
   heights: [desktop: number, mobile: number]
 }

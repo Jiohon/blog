@@ -1,6 +1,6 @@
 import { graphql, useStaticQuery } from "gatsby"
 
-export type SiteMetadata = {
+export interface SiteMetadata {
   /**
    * @title 站点作者
    */
@@ -35,7 +35,7 @@ export type SiteMetadata = {
   version: string
 }
 
-export type SiteMetadataType = {
+export interface SiteMetadataType {
   site: {
     siteMetadata: SiteMetadata
   }

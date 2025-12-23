@@ -7,10 +7,12 @@ import type { AnchorLinkItemProps } from "antd/es/anchor/Anchor"
  * @return {*}  {PathFrontmatter[]}
  */
 export const simplifiedQueryData = (
-  nodes: ReadonlyArray<GraphqlNode>,
+  nodes: readonly GraphqlNode[],
   callback?: (e: GraphqlNode) => PathFrontmatter
 ): PathFrontmatter[] => {
-  if (!nodes) return []
+  if (!nodes) {
+    return []
+  }
   const result = nodes
     .map((node) => {
       const { frontmatter, fields } = node as GraphqlNode
@@ -110,7 +112,7 @@ export function filtersItems(
       href: `${item.url}`,
       title: item.title,
       className: `level-${level} ${item.url.replace("#", "anchor-")}`,
-      level: level,
+      level,
     }
 
     // 处理子项
@@ -172,7 +174,7 @@ export const groupPostsByYear = (posts: PathFrontmatter[]): YearListData => {
 export const parseFilePath = (node: GraphqlNode): string => {
   const pathList = ["blog/content", "blog"]
   const filePath = node.internal.contentFilePath
-  const slug = node.frontmatter.slug
+  const { slug } = node.frontmatter
 
   const _path = pathList.find((path) => filePath.includes(path))
 

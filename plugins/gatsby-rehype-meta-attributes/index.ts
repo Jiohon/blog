@@ -10,10 +10,12 @@ import type { Plugin, Transformer } from "unified"
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const parseMetaProps = (node: any): Record<string, any> => {
   // 快速返回空对象，如果条件不满足
-  if (node?.tagName !== "code" || !node?.data?.meta) return {}
+  if (node?.tagName !== "code" || !node?.data?.meta) {
+    return {}
+  }
 
   const { meta } = node.data
-  const props: Record<string, any> = {}
+  const props: Record<string, unknown> = {}
 
   // 优化正则表达式捕获键值对、简写属性和花括号内容
   const META_PROPS_REGEX = /(\w+)(?:=({[^}]*}|"[^"]*"|\S+))?|({[^}]*})/g
@@ -32,14 +34,22 @@ const parseMetaProps = (node: any): Record<string, any> => {
           }
 
           // 布尔值处理
-          props[key] = value === "true" ? true : value === "false" ? false : value
+          if (value === "true") {
+            props[key] = true
+          } else if (value === "false") {
+            props[key] = false
+          } else {
+            props[key] = value
+          }
         } else {
           props[key] = value
         }
       } else if (bracesContent) {
         // 处理高亮语法简写 ({2-4}) 的情况
         const highlightValue = bracesContent.match(/^\{([^}]+)\}$/)?.[1]
-        if (highlightValue) props.highlight = highlightValue
+        if (highlightValue) {
+          props.highlight = highlightValue
+        }
       }
 
       return ""
@@ -55,7 +65,9 @@ const parseMetaProps = (node: any): Record<string, any> => {
 const transformer: Transformer = (ast) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   visit(ast, "element", (node: any) => {
-    if (node?.tagName !== "code") return
+    if (node?.tagName !== "code") {
+      return
+    }
 
     // 节点属性合并
     const props = node.properties || {}

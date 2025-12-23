@@ -1,4 +1,4 @@
-import { CSSProperties, FunctionComponent, ReactNode } from "react"
+import type { CSSProperties, FunctionComponent, ReactNode } from "react"
 
 import { useStyles } from "./style"
 

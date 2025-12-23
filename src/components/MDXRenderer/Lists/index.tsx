@@ -7,7 +7,7 @@ import { useStyles } from "./style"
  */
 export const UL: React.FC<React.HTMLAttributes<HTMLUListElement>> = (props) => {
   const { styles } = useStyles()
-  return <ul {...props} className={styles.ul}></ul>
+  return <ul {...props} className={styles.ul} />
 }
 /**
  * @description 无序列表元素
@@ -16,7 +16,7 @@ export const UL: React.FC<React.HTMLAttributes<HTMLUListElement>> = (props) => {
  */
 const OL: React.FC<React.OlHTMLAttributes<HTMLOListElement>> = (props) => {
   const { styles } = useStyles()
-  return <ol {...props} className={styles.ol}></ol>
+  return <ol {...props} className={styles.ol} />
 }
 
 /**
@@ -26,7 +26,7 @@ const OL: React.FC<React.OlHTMLAttributes<HTMLOListElement>> = (props) => {
  */
 const LI: React.FC<React.LiHTMLAttributes<HTMLLIElement>> = (props) => {
   const { styles } = useStyles()
-  return <li {...props} className={styles.li}></li>
+  return <li {...props} className={styles.li} />
 }
 
 const lists = {

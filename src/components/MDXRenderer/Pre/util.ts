@@ -1,4 +1,4 @@
-import { PreHighlightProps } from "@/components/MDXRenderer/Pre"
+import type { PreHighlightProps } from "@/components/MDXRenderer/Pre"
 import type { Language } from "@/utils/prismjsLanguages"
 
 export type LanguageInput = `language-${Language}` | `language-${string}`
@@ -40,8 +40,12 @@ export const ToPreParams = (preProps): PreHighlightProps => {
   const { children, className, ...props } = preProps.children.props
 
   for (const key in props) {
-    if (props[key] === "true") props[key] = true
-    if (props[key] === "false") props[key] = false
+    if (props[key] === "true") {
+      props[key] = true
+    }
+    if (props[key] === "false") {
+      props[key] = false
+    }
   }
 
   return {

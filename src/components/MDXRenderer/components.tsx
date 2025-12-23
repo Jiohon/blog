@@ -32,7 +32,7 @@ const components = {
     )
   },
   p: (props) => {
-    return <p {...props}></p>
+    return <p {...props} />
   },
   a: A,
   blockquote: Blockquote,

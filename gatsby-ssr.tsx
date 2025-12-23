@@ -1,8 +1,8 @@
+import type { GatsbySSR } from "gatsby"
+
 import { extractStaticStyle } from "antd-style"
 
 import Layout from "./src/layout"
-
-import type { GatsbySSR } from "gatsby"
 
 export const wrapPageElement: GatsbySSR["wrapPageElement"] = ({ element, props }) => {
   return <Layout {...props}>{element}</Layout>

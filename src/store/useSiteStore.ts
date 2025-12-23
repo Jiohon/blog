@@ -1,10 +1,12 @@
-import React, { startTransition, useContext, useEffect } from "react"
+import type React from "react"
+import { startTransition, useContext, useEffect } from "react"
 
 import { useDebounceEffect } from "ahooks"
 import { useStoreWithEqualityFn } from "zustand/traditional"
 
-import { SiteStore, StoreContext, StoreType } from "@/context/SiteStoreProvider"
-import { ExtractState } from "@/context/SiteStoreProvider/zustandTypes"
+import type { SiteStore, StoreType } from "@/context/SiteStoreProvider"
+import { StoreContext } from "@/context/SiteStoreProvider"
+import type { ExtractState } from "@/context/SiteStoreProvider/zustandTypes"
 import { isSSR } from "@/utils/func"
 
 const SSRInit: Record<string, boolean> = {}
@@ -66,7 +68,9 @@ export function useSyncState<T extends keyof SiteStore>(
 
 export function useSiteStore<U>(selector: (state: ExtractState<StoreType>) => U) {
   const store = useContext(StoreContext)
-  if (!store) throw "Missing SiteStoreProvider"
+  if (!store) {
+    throw "Missing SiteStoreProvider"
+  }
   //@deprecated...
   //return useStore(store, selector);
   return useStoreWithEqualityFn(store, selector)

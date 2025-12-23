@@ -9,7 +9,7 @@ interface CodeHighlightProps {
 const CodeHighlight: React.FC<CodeHighlightProps> = ({ codeString, ...props }) => {
   const { styles } = useStyles()
 
-  return <code {...props} className={styles.code}></code>
+  return <code {...props} className={styles.code} />
 }
 
 export default CodeHighlight

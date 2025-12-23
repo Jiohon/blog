@@ -4,7 +4,7 @@ import { MDXProvider } from "@mdx-js/react"
 
 import components from "./components"
 
-export type MDXRendererProps = {
+export interface MDXRendererProps {
   children: React.ReactNode
 }
 

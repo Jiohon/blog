@@ -1,14 +1,13 @@
 import React from "react"
 
 import { graphql } from "gatsby"
+import type { HeadFC, PageProps } from "gatsby"
 
 import PrismSyntaxHighlight from "@/components/MDXRenderer"
 import SEO from "@/components/SEO"
 import MeSidebar from "@/components/Sidebar/MeSidebar"
 
 import { useStyles } from "./_style"
-
-import type { HeadFC, PageProps } from "gatsby"
 
 /**
  * @description 个人介绍页面
@@ -35,7 +34,7 @@ const AboutTemplate: React.FC<PageProps<MdxNodesQuery<"me">, MdxQuery>> = (props
 export default AboutTemplate
 
 export const Head: HeadFC<MdxQuery> = ({ location, data }) => {
-  const frontmatter = data.frontmatter
+  const { frontmatter } = data
 
   return (
     <>

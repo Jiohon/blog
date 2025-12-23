@@ -1,7 +1,8 @@
 import { useRef } from "react"
 
-import { Anchor, Card } from "antd"
 import { Link } from "gatsby"
+
+import { Anchor, Card } from "antd"
 
 import { findItem, scrollToCenter } from "@/utils/func"
 import { findMaxLevel } from "@/utils/helpers"
@@ -11,7 +12,6 @@ import type { Language } from "@/utils/prismjsLanguages"
 import MenuBar from "../MenuBar"
 import Sticky from "../Sticky"
 import SVGIcon from "../SvgIcon"
-
 import { useStyles } from "./style"
 
 interface PostSidebarProps {
@@ -51,7 +51,7 @@ const PostSidebar: React.FC<PostSidebarProps> = ({ icon, headings, posts }) => {
 
   return (
     <Sticky>
-      <SVGIcon id={icon} width="8em" height="8em" style={{ marginBlock: "0 1rem" }}></SVGIcon>
+      <SVGIcon id={icon} width="8em" height="8em" style={{ marginBlock: "0 1rem" }} />
       {/* <Card className={styles.card}>
           <h2>About me</h2>
         </Card> */}
@@ -77,7 +77,7 @@ const PostSidebar: React.FC<PostSidebarProps> = ({ icon, headings, posts }) => {
           <MenuBar.Title>近期发布</MenuBar.Title>
           {latest.map((l) => (
             <Link className={styles.latest} to={l.path} key={l.slug}>
-              <SVGIcon id={l.icon} width="1.8em" height="1.8em"></SVGIcon>
+              <SVGIcon id={l.icon} width="1.8em" height="1.8em" />
               <div className="title">{l.title.split("-")[1] || l.title}</div>
             </Link>
           ))}

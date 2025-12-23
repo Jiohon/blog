@@ -1,7 +1,7 @@
 type FCFiles = (
   dark: boolean,
   children: string
-) => Record<"customSetup" | "files", Record<string, any>>
+) => Record<"customSetup" | "files", Record<string, unknown>>
 
 /**
  * @description 获取React的files

@@ -3,22 +3,27 @@
   "extends": [
     "eslint:recommended",
     "plugin:import/recommended",
+    "plugin:import/typescript",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
     "plugin:react-hooks/recommended"
   ],
-  "plugins": ["react", "@typescript-eslint", "react-hooks", "prettier"],
+  "plugins": ["react", "@typescript-eslint", "react-hooks", "prettier", "@graphql-eslint"],
   "parserOptions": {
     "sourceType": "module",
     "ecmaVersion": 2022,
     "ecmaFeatures": {
       "jsx": true
-    }
+    },
+    "project": "./tsconfig.json"
   },
   "settings": {
     "react": {
       "version": "detect"
+    },
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
     },
     "import/resolver": {
       "typescript": {
@@ -27,12 +32,18 @@
       },
       "node": {
         "paths": ["src"],
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        "extensions": [".js", ".jsx", ".ts", ".tsx", ".json"]
       }
     },
-    "import/internal-regex": "^@/|^src/"
+    "import/internal-regex": "^@/|^src/|^env.config"
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2022": true
   },
   "rules": {
+    // ==================== Prettier ====================
     "prettier/prettier": [
       "error",
       {
@@ -42,6 +53,8 @@
         "usePrettierrc": true
       }
     ],
+
+    // ==================== Import 排序规则 ====================
     "sort-imports": [
       "error",
       {
@@ -59,17 +72,10 @@
           "builtin",
           "external",
           "internal",
-          "parent",
-          "sibling",
-          "index",
+          ["parent", "sibling", "index"],
           "object",
           "type"
         ],
-        "newlines-between": "always",
-        "alphabetize": {
-          "order": "asc",
-          "caseInsensitive": true
-        },
         "pathGroups": [
           {
             "pattern": "react",
@@ -77,38 +83,248 @@
             "position": "before"
           },
           {
+            "pattern": "gatsby",
+            "group": "builtin",
+            "position": "before"
+          },
+          {
+            "pattern": "@**/**",
+            "group": "internal",
+            "position": "before"
+          },
+          {
             "pattern": "@/**",
             "group": "internal",
-            "position": "after"
+            "position": "before"
+          },
+          {
+            "pattern": "env.config",
+            "group": "internal",
+            "position": "before"
           }
         ],
-        "pathGroupsExcludedImportTypes": ["react"]
+        "pathGroupsExcludedImportTypes": ["react", "gatsby"],
+        "distinctGroup": true,
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        },
+        "newlines-between": "always",
+        "warnOnUnassignedImports": true
       }
     ],
+
+    // ==================== Import 检查规则 ====================
+    "import/no-unresolved": "error",
+    "import/named": "error",
+    "import/namespace": "error",
+    "import/default": "error",
+    "import/export": "error",
+    "import/no-duplicates": "error",
+    "import/no-cycle": ["warn", { "maxDepth": 2 }],
+    "import/no-self-import": "error",
+    "import/no-useless-path-segments": [
+      "error",
+      {
+        "noUselessIndex": true
+      }
+    ],
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "import/no-default-export": "off",
+    "import/prefer-default-export": "off",
+
+    // ==================== React Hooks 规则 ====================
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
+
+    // ==================== React 规则 ====================
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "react/display-name": "off",
+    "react/no-unescaped-entities": "off",
+    "react/jsx-key": [
+      "error",
+      {
+        "checkFragmentShorthand": true,
+        "checkKeyMustBeforeSpread": true,
+        "warnOnDuplicates": true
+      }
+    ],
+    "react/jsx-no-target-blank": [
+      "warn",
+      {
+        "allowReferrer": true
+      }
+    ],
+    "react/jsx-curly-brace-presence": [
+      "warn",
+      {
+        "props": "never",
+        "children": "never"
+      }
+    ],
+    "react/self-closing-comp": [
+      "warn",
+      {
+        "component": true,
+        "html": true
+      }
+    ],
+    "react/jsx-boolean-value": ["warn", "never"],
+    "react/jsx-fragments": ["warn", "syntax"],
+    "react/no-array-index-key": "warn",
+    "react/no-unstable-nested-components": "warn",
+
+    // ==================== TypeScript 规则 ====================
     "@typescript-eslint/no-unused-vars": [
       "error",
       {
         "argsIgnorePattern": "^_",
         "varsIgnorePattern": "^_",
-        "ignoreRestSiblings": true
+        "ignoreRestSiblings": true,
+        "destructuredArrayIgnorePattern": "^_"
       }
     ],
-    "no-console": ["warn", { "allow": ["warn", "error"] }],
-    "react/react-in-jsx-scope": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-explicit-any": "warn",
-    "react/prop-types": "off",
     "@typescript-eslint/no-non-null-assertion": "warn",
-    "@typescript-eslint/ban-ts-comment": "warn",
-    "react/display-name": "off",
-    "react/no-unescaped-entities": "off",
+    "@typescript-eslint/ban-ts-comment": [
+      "warn",
+      {
+        "ts-expect-error": "allow-with-description",
+        "ts-ignore": true,
+        "ts-nocheck": true,
+        "ts-check": false,
+        "minimumDescriptionLength": 3
+      }
+    ],
+    "@typescript-eslint/consistent-type-imports": [
+      "warn",
+      {
+        "prefer": "type-imports",
+        "disallowTypeAnnotations": true,
+        "fixStyle": "separate-type-imports"
+      }
+    ],
+    "@typescript-eslint/consistent-type-definitions": ["warn", "interface"],
+    "@typescript-eslint/array-type": [
+      "warn",
+      {
+        "default": "array"
+      }
+    ],
+    "@typescript-eslint/no-inferrable-types": "warn",
+    "@typescript-eslint/prefer-nullish-coalescing": "warn",
+    "@typescript-eslint/prefer-optional-chain": "warn",
+
+    // ==================== JavaScript 基础规则 ====================
+    "no-console": [
+      "warn",
+      {
+        "allow": ["warn", "error"]
+      }
+    ],
     "no-unused-vars": "off",
-    "import/no-unresolved": "error",
-    "import/named": "error",
-    "import/namespace": "error",
-    "import/default": "error",
-    "import/export": "error"
-  }
+    "no-debugger": "warn",
+    "no-alert": "warn",
+    "no-var": "error",
+    "prefer-const": "error",
+    "prefer-arrow-callback": "warn",
+    "prefer-template": "warn",
+    "prefer-destructuring": [
+      "warn",
+      {
+        "array": false,
+        "object": true
+      }
+    ],
+    "object-shorthand": ["warn", "always"],
+    "no-nested-ternary": "warn",
+    "no-unneeded-ternary": "warn",
+    "eqeqeq": ["error", "always", { "null": "ignore" }],
+    "curly": ["warn", "all"],
+    "no-else-return": "warn",
+    "no-lonely-if": "warn",
+
+    // ==================== 代码质量规则 ====================
+    "no-duplicate-imports": "off",
+    "no-promise-executor-return": "warn",
+    "require-atomic-updates": "warn",
+    "no-constructor-return": "error",
+    "no-unreachable-loop": "warn",
+    "no-unused-private-class-members": "warn",
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": [
+      "error",
+      {
+        "functions": false,
+        "classes": true,
+        "variables": true
+      }
+    ],
+
+    // ==================== 性能优化规则 ====================
+    "no-await-in-loop": "warn",
+    "require-await": "off",
+    "@typescript-eslint/require-await": "warn",
+    "@typescript-eslint/no-floating-promises": "off",
+
+    // ==================== 安全规则 ====================
+    "no-eval": "error",
+    "no-implied-eval": "error",
+    "no-new-func": "error",
+    "no-script-url": "error"
+  },
+  "overrides": [
+    {
+      "files": ["*.graphql"],
+      "parser": "@graphql-eslint/eslint-plugin",
+      "plugins": ["@graphql-eslint"],
+      "rules": {
+        "@graphql-eslint/known-type-names": "error",
+        "@graphql-eslint/no-anonymous-operations": "warn",
+        "@graphql-eslint/naming-convention": [
+          "warn",
+          {
+            "OperationDefinition": {
+              "style": "PascalCase",
+              "forbiddenPrefixes": ["get", "fetch"],
+              "forbiddenSuffixes": ["Query", "Mutation", "Fragment"]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "files": ["gatsby-*.ts", "gatsby-*.tsx", "gatsby-*.js"],
+      "rules": {
+        "import/no-default-export": "off",
+        "@typescript-eslint/no-var-requires": "off"
+      }
+    },
+    {
+      "files": ["*.config.ts", "*.config.js"],
+      "rules": {
+        "import/no-default-export": "off"
+      }
+    },
+    {
+      "files": ["scripts/**/*.js"],
+      "rules": {
+        "no-console": "off",
+        "@typescript-eslint/no-var-requires": "off"
+      }
+    }
+  ],
+  "ignorePatterns": [
+    "node_modules/",
+    "public/",
+    ".cache/",
+    "dist/",
+    "build/",
+    "coverage/",
+    "*.min.js",
+    "*.d.ts"
+  ]
 }
