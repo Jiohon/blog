@@ -80,7 +80,8 @@ export const GlobalScopeStyle = createGlobalStyle`
     font-size: ${(p) => p.theme.fontSize}px;
     font-weight: normal;
     font-kerning: normal;
-    background-color: ${(p) => p.theme.colorBgLayout};
+    background: ${(p) => p.theme.pageBackground};
+    background-attachment: fixed;
     transition: background-color 0.25s ease;
   }
 

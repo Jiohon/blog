@@ -16,6 +16,6 @@ export const useThemeStore = create<Store>()(
         set({ storeTheme: mode })
       },
     }),
-    { name: "SITE_THEME_MODE" }
+    { name: "SITE_THEME_MODE", skipHydration: true }
   )
 )

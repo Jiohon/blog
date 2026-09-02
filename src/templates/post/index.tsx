@@ -39,32 +39,39 @@ const PostTemplate: React.FC<
     <HeadingProvider value={headings}>
       <div className={styles.post}>
         <div className="content">
-          <Typography.Title level={2} className={styles.title}>
-            {frontmatter?.title}
-          </Typography.Title>
+          <header className={styles.hero}>
+            <span className={styles.eyebrow}>ARTICLE / NOTE</span>
+            <Typography.Title level={1} className={styles.title}>
+              {frontmatter?.title}
+              <span>.</span>
+            </Typography.Title>
+            {frontmatter.description && (
+              <p className={styles.description}>{frontmatter.description}</p>
+            )}
 
-          <div className={styles.information}>
-            <Space className="times" align="center">
-              <Tooltip
-                placement="bottom"
-                title={`发布于 ${dayjs(frontmatter?.date).format("YYYY-MM-DD")}`}
-              >
-                <Space>
-                  <Calendar />
-                  {frontmatter?.lastUpdated}
-                </Space>
-              </Tooltip>
+            <div className={styles.information}>
+              <Space className="times" align="center">
+                <Tooltip
+                  placement="bottom"
+                  title={`发布于 ${dayjs(frontmatter?.date).format("YYYY-MM-DD")}`}
+                >
+                  <Space>
+                    <Calendar />
+                    {frontmatter?.lastUpdated}
+                  </Space>
+                </Tooltip>
 
-              <ClockCircleOutlined style={{ marginLeft: "1rem" }} />
-              {timeToRead.text}
-            </Space>
+                <ClockCircleOutlined style={{ marginLeft: "1rem" }} />
+                {timeToRead.text}
+              </Space>
 
-            {tags.map((i) => (
-              <Tag key={i.path} bordered={false} onClick={() => navigate(i.path)}>
-                #<span>{i.name}</span>
-              </Tag>
-            ))}
-          </div>
+              {tags.map((i) => (
+                <Tag key={i.path} bordered={false} onClick={() => navigate(i.path)}>
+                  #<span>{i.name}</span>
+                </Tag>
+              ))}
+            </div>
+          </header>
 
           <MDXRenderer>{children}</MDXRenderer>
 

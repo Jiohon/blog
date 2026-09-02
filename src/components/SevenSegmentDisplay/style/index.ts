@@ -19,6 +19,10 @@ export const useStyles = createStyles(({ css, cx, prefixCls }) => {
           position: absolute;
         }
 
+        .depth {
+          position: absolute;
+        }
+
         .lighted {
           position: relative;
         }

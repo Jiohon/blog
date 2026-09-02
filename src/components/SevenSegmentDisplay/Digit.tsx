@@ -23,6 +23,15 @@ const Digit: React.FC<DigitProps> = ({ value }) => {
 
   const width = digitSize * 0.5
   const height = digitSize
+  const glowFilter = glow
+    ? `drop-shadow(0 0 ${segmentThickness}px ${color(segmentActiveColor)
+        .fade(0.15)
+        .hexa()}) drop-shadow(0 0 ${segmentThickness * 1.75}px ${color(segmentActiveColor)
+        .fade(0.45)
+        .hexa()}) drop-shadow(0 0 ${segmentThickness * 2.75}px ${color(segmentActiveColor)
+        .fade(0.7)
+        .hexa()})`
+    : "none"
 
   const activeSegments = useMemo(
     () => segments.filter((seg) => isSegmentActive(seg, value)),
@@ -34,7 +43,7 @@ const Digit: React.FC<DigitProps> = ({ value }) => {
   )
 
   return (
-    <div className={styles.digit} style={{ width, height }}>
+    <div className={styles.digit} style={{ width, height, lineHeight: `${height}px` }}>
       {/* 未点亮的 */}
       <svg
         className="NotLitUp"
@@ -47,16 +56,26 @@ const Digit: React.FC<DigitProps> = ({ value }) => {
           <Segment key={seg} segmentId={seg} isActive={false} />
         ))}
       </svg>
+      <svg
+        className="depth"
+        style={{
+          filter: "brightness(0.55) saturate(1.2)",
+          opacity: 0.7,
+          transform: `translateY(${segmentThickness * 0.45}px)`,
+        }}
+        width={width}
+        height={height}
+        viewBox={`0 0 ${width} ${height}`}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        {activeSegments.map((seg) => (
+          <Segment key={seg} segmentId={seg} isActive />
+        ))}
+      </svg>
       {/* 点亮的 */}
       <svg
         className="lighted"
-        style={{
-          filter: glow
-            ? `drop-shadow(0 0 ${segmentThickness * 1.5}px ${color(segmentActiveColor)
-                .fade(0.25)
-                .hexa()})`
-            : "none",
-        }}
+        style={{ filter: glowFilter, transform: "translateY(-0.25px)" }}
         width={width}
         height={height}
         viewBox={`0 0 ${width} ${height}`}

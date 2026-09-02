@@ -25,6 +25,17 @@ const projectList = [
       },
     ],
   },
+  {
+    name: "Schemx",
+    description: "A schema-driven dynamic form engine",
+    url: "https://github.com/schemx-labs/schemx",
+    tags: [
+      {
+        name: "Source",
+        url: "https://github.com/schemx-labs/schemx",
+      },
+    ],
+  },
 ]
 
 export default projectList

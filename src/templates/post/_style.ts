@@ -22,22 +22,16 @@ export const useStyles = createStyles(({ css, cx, token, stylish, responsive: r,
     `${prefixCls}-post-title`,
     css`
       &.${prefixCls}-typography {
-        padding-block-start: 7rem;
-        padding-block-end: 4rem;
         margin: 0;
-        font-weight: bold;
-        font-family: ${token.fontFamilyCode};
+        font-family: Rubik Glitch;
+        font-size: clamp(2rem, 4vw, 2.6rem);
+        font-weight: normal;
+        letter-spacing: 0.3rem;
+        line-height: 1.2;
 
-        ${r({
-          tablet: css`
-            padding-block-start: 5rem;
-            padding-block-end: 3rem;
-            font-size: 29px;
-          `,
-          mobile: css`
-            font-size: 28px;
-          `,
-        })}
+        span {
+          color: ${token.colorPrimary};
+        }
       }
     `
   ),
@@ -46,30 +40,77 @@ export const useStyles = createStyles(({ css, cx, token, stylish, responsive: r,
     `${prefixCls}-post-information`,
     css`
       width: 100%;
-      border-block-end: 1px dashed ${token.colorBorder};
-      padding-block-end: 3.2rem;
-      margin-block-end: 3.2rem;
+      padding-block: 0.75rem;
+      border-block: 1px solid ${token.colorBorderSecondary};
       font-size: 13px;
 
       .times {
         width: 100%;
-        padding-block-end: 1.5rem;
+        padding-block-end: 0.75rem;
         color: ${token.colorTextDescription};
       }
 
       .${prefixCls}-tag {
-        color: ${token.colorTextSecondary};
+        display: inline-flex;
+        align-items: center;
+        min-height: 1.9rem;
+        margin-block: 0.3rem;
+        margin-inline-end: 0.35rem;
         padding-block: 0.1rem;
-        padding-inline: 0.7rem;
-        border-radius: ${token.borderRadius}px;
-        font-weight: 500;
+        padding-inline: 0.6rem;
+        border: 1px solid ${token.colorBorderSecondary};
+        border-radius: 999px;
+        background: color-mix(in srgb, ${token.colorBgContainer} 78%, transparent);
+        color: ${token.colorTextSecondary};
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.01em;
         cursor: pointer;
+        transition: transform 0.2s ease, color 0.2s ease, background-color 0.2s ease,
+          border-color 0.2s ease;
 
         &:hover {
-          color: ${token.colorPrimaryHover};
-          background-color: ${token.colorPrimaryBg};
+          border-color: ${token.colorPrimaryBorder};
+          background: ${token.colorPrimaryBg};
+          color: ${token.colorPrimary};
+          transform: translateY(-1px);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+
+          &:hover {
+            transform: none;
+          }
         }
       }
+    `
+  ),
+  hero: cx(
+    `${prefixCls}-post-hero`,
+    css`
+      display: grid;
+      gap: 1.25rem;
+      padding-block: clamp(1rem, 3vw, 2.5rem) 2rem;
+    `
+  ),
+  eyebrow: cx(
+    `${prefixCls}-post-eyebrow`,
+    css`
+      color: ${token.colorPrimary};
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+    `
+  ),
+  description: cx(
+    `${prefixCls}-post-description`,
+    css`
+      max-width: 42rem;
+      margin: 0;
+      color: ${token.colorTextSecondary};
+      font-size: 1rem;
+      line-height: 1.65;
     `
   ),
 }))

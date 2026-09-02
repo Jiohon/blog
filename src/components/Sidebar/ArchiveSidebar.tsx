@@ -40,7 +40,8 @@ const ArchiveSidebar: React.FC<ArchiveSidebarProps> = ({ tags }) => {
               onClick={(e) => handleClickTag(e, t)}
               className={styles.tag}
             >
-              #{t.name}
+              <span>#{t.name}</span>
+              <span className={styles.tagCount}>{t.totalCount}</span>
             </MenuBar.Tag>
           ))}
         </MenuBar>
