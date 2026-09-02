@@ -7,12 +7,45 @@ export const useStyles = createStyles(({ css, stylish, cx, responsive: r, token,
       ${stylish.container}
     `
   ),
+  hero: cx(
+    `${prefixCls}-home-hero`,
+    css`
+      width: 100%;
+      padding-block: clamp(1rem, 3vw, 2.5rem) 0;
+
+      .${prefixCls}-briefHeader {
+        padding-block: 1.25rem 2rem;
+      }
+    `
+  ),
+  eyebrow: cx(
+    `${prefixCls}-home-eyebrow`,
+    css`
+      color: ${token.colorPrimary};
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+    `
+  ),
+  heroMeta: cx(
+    `${prefixCls}-home-heroMeta`,
+    css`
+      display: flex;
+      justify-content: space-between;
+      padding-block: 0.75rem;
+      border-block: 1px solid ${token.colorBorderSecondary};
+      color: ${token.colorTextQuaternary};
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    `
+  ),
 
   briefDescription: cx(
     `${prefixCls}-home-description`,
     css`
       -webkit-font-smoothing: antialiased;
-      margin-block-start: 2rem;
+      margin-block-start: 1rem;
       margin-block-end: 0;
       font-size: 1rem;
       line-height: 1.4;
@@ -27,25 +60,33 @@ export const useStyles = createStyles(({ css, stylish, cx, responsive: r, token,
       })}
     `
   ),
+  section: cx(
+    `${prefixCls}-home-section`,
+    css`
+      width: 100%;
+      margin-block-start: 3.5rem;
+    `
+  ),
 
   wrapper: cx(
     `${prefixCls}-home-wrapper`,
     css`
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 2.5rem;
+      margin-block-start: 1.25rem;
+      gap: 1.25rem;
 
       ${r({
         laptop: css`
-          gap: 2.5rem;
+          gap: 1.5rem;
         `,
         tablet: css`
           grid-template-columns: repeat(2, 1fr);
-          gap: 2rem;
+          gap: 1rem;
         `,
         mobile: css`
           grid-template-columns: repeat(1, 1fr);
-          gap: 1.5rem;
+          gap: 0.875rem;
         `,
       })}
     `
@@ -54,7 +95,13 @@ export const useStyles = createStyles(({ css, stylish, cx, responsive: r, token,
   latestCard: cx(
     `${prefixCls}-home-latest-card`,
     css`
-      min-height: 10rem;
+      height: 11rem;
+
+      &.${prefixCls}-card {
+        border: 1px solid ${token.colorBorderSecondary};
+        background: color-mix(in srgb, ${token.colorBgContainer} 84%, transparent);
+        box-shadow: ${token.boxShadowTertiary};
+      }
 
       .${prefixCls}-card-body {
         display: flex;
@@ -66,13 +113,13 @@ export const useStyles = createStyles(({ css, stylish, cx, responsive: r, token,
 
       ${r({
         laptop: css`
-          min-height: 9rem;
+          height: 9rem;
         `,
         tablet: css`
-          min-height: 8.5rem;
+          height: 8.5rem;
         `,
         mobile: css`
-          min-height: 8rem;
+          height: 8rem;
         `,
       })}
     `
@@ -81,7 +128,13 @@ export const useStyles = createStyles(({ css, stylish, cx, responsive: r, token,
   highlightCard: cx(
     `${prefixCls}-home-highlight-card`,
     css`
-      min-height: 10rem;
+      min-height: 11rem;
+
+      &.${prefixCls}-card {
+        border: 1px solid ${token.colorBorderSecondary};
+        background: color-mix(in srgb, ${token.colorBgContainer} 84%, transparent);
+        box-shadow: ${token.boxShadowTertiary};
+      }
 
       .${prefixCls}-card-body {
         display: flex;
@@ -105,8 +158,10 @@ export const useStyles = createStyles(({ css, stylish, cx, responsive: r, token,
     css`
       display: block;
       width: 100%;
-      color: ${token.magenta5};
+      color: ${token.colorPrimary};
       font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
 
       ${r({
         tablet: css`
@@ -121,9 +176,10 @@ export const useStyles = createStyles(({ css, stylish, cx, responsive: r, token,
     css`
       display: inline-flex;
       align-items: center;
-      font-size: 0.95rem;
+      font-size: 1rem;
       color: ${token.colorText};
-      font-weight: 600;
+      font-weight: 650;
+      letter-spacing: -0.01em;
       padding: 0;
       border: 0;
       background: linear-gradient(

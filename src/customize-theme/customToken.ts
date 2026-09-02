@@ -40,6 +40,11 @@ export interface SiteToken {
   gradientLogo: string
 
   /**
+   * @title 页面背景
+   */
+  pageBackground: string
+
+  /**
    * @title 代码块高亮背景色
    */
   colorBgCodeHighlight: string
@@ -71,6 +76,19 @@ export const createCustomToken: GetCustomToken<SiteToken> = ({ isDarkMode, token
     footerHeightMobile: 130,
 
     gradientLogo: `linear-gradient(45deg,#90d5ff 20%,${token.colorPrimary})`,
+
+    pageBackground: `radial-gradient(600px 400px at 15% -5%, color-mix(in srgb, ${token.colorPrimary} 14%, transparent), transparent 65%),
+    radial-gradient(700px 500px at 90% 10%, color-mix(in srgb, ${token.colorSuccess} 10%, transparent), transparent 65%),
+    radial-gradient(360px 260px at 42% 24%, color-mix(in srgb, ${token.colorPrimary} 5%, transparent), transparent 72%),
+    radial-gradient(520px 380px at 6% 55%, color-mix(in srgb, ${token.colorInfo} 7%, transparent), transparent 70%),
+    radial-gradient(400px 300px at 70% 42%, color-mix(in srgb, ${token.colorSuccess} 4%, transparent), transparent 74%),
+    radial-gradient(560px 400px at 96% 60%, color-mix(in srgb, ${token.colorWarning} 6%, transparent), transparent 70%),
+    radial-gradient(300px 240px at 28% 78%, color-mix(in srgb, ${token.colorInfo} 4%, transparent), transparent 75%),
+    radial-gradient(380px 280px at 76% 88%, color-mix(in srgb, ${token.colorWarning} 3%, transparent), transparent 76%),
+    radial-gradient(500px 360px at 8% 100%, color-mix(in srgb, ${token.colorError} 6%, transparent), transparent 70%),
+    radial-gradient(340px 260px at 38% 108%, color-mix(in srgb, ${token.colorError} 4%, transparent), transparent 76%),
+    radial-gradient(680px 440px at 50% 108%, color-mix(in srgb, ${token.colorError} 6%, transparent), transparent 70%),
+    ${token.colorBgLayout}`,
 
     fontFamilyCode: `SF Mono Medium,${token.fontFamilyCode}`,
 

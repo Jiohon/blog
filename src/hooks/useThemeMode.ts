@@ -1,4 +1,4 @@
-import { useCallback } from "react"
+import { useCallback, useEffect, useState } from "react"
 
 import { useThemeMode as useAntdThemeMode } from "antd-style"
 
@@ -17,6 +17,19 @@ export const useThemeMode = (): ThemeContextState => {
   const { storeTheme, setStoreTheme } = useThemeStore()
 
   const themes = useAntdThemeMode()
+  const [isThemeHydrated, setIsThemeHydrated] = useState(false)
+
+  useEffect(() => {
+    const hydrateTheme = async () => {
+      if (!useThemeStore.persist.hasHydrated()) {
+        await useThemeStore.persist.rehydrate()
+      }
+
+      setIsThemeHydrated(true)
+    }
+
+    void hydrateTheme()
+  }, [])
 
   const setThemeMode = useCallback(
     (mode: ThemeMode) =>
@@ -26,5 +39,5 @@ export const useThemeMode = (): ThemeContextState => {
     [setStoreTheme]
   )
 
-  return { ...themes, themeMode: storeTheme, setThemeMode }
+  return { ...themes, themeMode: isThemeHydrated ? storeTheme : "light", setThemeMode }
 }

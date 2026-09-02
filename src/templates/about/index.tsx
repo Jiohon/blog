@@ -22,7 +22,20 @@ const AboutTemplate: React.FC<PageProps<MdxNodesQuery<"me">, MdxQuery>> = (props
   return (
     <div className={styles.about}>
       <div>
-        <h2 className={styles.title}>{data.me.frontmatter.title}</h2>
+        <header className={styles.hero}>
+          <span className={styles.eyebrow}>ABOUT / PROFILE</span>
+          <div className={styles.heroContent}>
+            <h1 className={styles.heroTitle}>
+              {data.me.frontmatter.title}
+              <span>.</span>
+            </h1>
+            <p className={styles.heroDescription}>{data.me.frontmatter.description}</p>
+          </div>
+          <div className={styles.heroMeta}>
+            <span>Personal profile</span>
+            <span>Get to know me</span>
+          </div>
+        </header>
         <PrismSyntaxHighlight>{children}</PrismSyntaxHighlight>
       </div>
 

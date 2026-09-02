@@ -13,7 +13,6 @@ const Tag: FunctionComponent<TagProps> = ({ to, children, className, ...otherPro
   return (
     <>
       <GatsbyLink
-        state={to}
         className={cx(`${prefixCls}-tag`, styles.tag, className)}
         to={to}
         getProps={({ isCurrent }) => ({

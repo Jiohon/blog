@@ -129,12 +129,70 @@ export const useStyles = createStyles(
       ),
 
       tag: cx(
-        `.${prefixCls}-sidebar-tag`,
+        `${prefixCls}-sidebar-tag`,
         css`
-          &.${prefixCls}-tag {
-            padding-block: 0.15rem;
-            padding-inline: 0.7rem;
+          &.${prefixCls}-menuBar-tag.${prefixCls}-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            min-height: 1.9rem;
+            margin-block: 0.3rem;
+            margin-inline-end: 0.35rem;
+            padding-block: 0.1rem;
+            padding-inline: 0.6rem 0.35rem;
+            border: 1px solid ${token.colorBorderSecondary};
+            background: color-mix(in srgb, ${token.colorBgContainer} 78%, transparent);
+            color: ${token.colorTextSecondary};
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            line-height: 1.5;
+            transition: transform 0.2s ease, color 0.2s ease, background-color 0.2s ease,
+              border-color 0.2s ease;
+
+            &:hover {
+              border-color: ${token.colorPrimaryBorder};
+              background: ${token.colorPrimaryBg};
+              color: ${token.colorPrimary};
+              transform: translateY(-1px);
+            }
+
+            &:focus-visible {
+              outline: 2px solid ${token.colorPrimaryBorder};
+              outline-offset: 2px;
+            }
+
+            &.${prefixCls}-tag-checked {
+              border-color: ${token.colorPrimaryBorder};
+              background: ${token.colorPrimaryBg};
+              color: ${token.colorPrimary};
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+              transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+
+              &:hover {
+                transform: none;
+              }
+            }
           }
+        `
+      ),
+
+      tagCount: cx(
+        `${prefixCls}-sidebar-tagCount`,
+        css`
+          display: inline-grid;
+          min-width: 1.15rem;
+          height: 1.15rem;
+          place-items: center;
+          border-radius: 999px;
+          background: ${token.colorFillSecondary};
+          color: ${token.colorTextQuaternary};
+          font-family: ${token.fontFamilyCode};
+          font-size: 0.65rem;
+          font-weight: 600;
+          line-height: 1;
         `
       ),
 

@@ -3,7 +3,6 @@ import React from "react"
 import { graphql } from "gatsby"
 import type { HeadFC, PageProps } from "gatsby"
 
-import BriefHeader from "@/components/BriefHeader"
 import PostList from "@/components/PostList"
 import SEO from "@/components/SEO"
 import ArchiveSidebar from "@/components/Sidebar/ArchiveSidebar"
@@ -32,7 +31,20 @@ const Archive: React.FC<ArchiveProps> = (props) => {
   return (
     <div className={styles.archive}>
       <div>
-        <BriefHeader title={title} description="过往的记录。" />
+        <header className={styles.hero}>
+          <span className={styles.eyebrow}>ARCHIVE / NOTES</span>
+          <div className={styles.heroContent}>
+            <h1 className={styles.heroTitle}>
+              {title}
+              <span>.</span>
+            </h1>
+            <p className={styles.heroDescription}>过往的记录</p>
+          </div>
+          <div className={styles.heroMeta}>
+            <span>{String(frontmatterList.length).padStart(2, "0")} published notes</span>
+            <span>Browse by year</span>
+          </div>
+        </header>
         <PostList list={frontmatterList} />
       </div>
 

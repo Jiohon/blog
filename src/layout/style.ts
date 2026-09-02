@@ -8,18 +8,6 @@ export const useStyles = createStyles(({ css, prefixCls, cx, responsive: r }) =>
         display: flex;
         flex-direction: column;
         min-height: 100vh;
-
-        ${r({
-          laptop: css`
-            padding-inline: 2.5rem;
-          `,
-          tablet: css`
-            padding-inline: 2rem;
-          `,
-          mobile: css`
-            padding-inline: 1.5rem;
-          `,
-        })}
       `
     ),
 
@@ -31,6 +19,13 @@ export const useStyles = createStyles(({ css, prefixCls, cx, responsive: r }) =>
         ${r({
           mobile: css`
             min-height: calc(100vh - 50px);
+            padding-inline: 1.5rem;
+          `,
+          laptop: css`
+            padding-inline: 2.5rem;
+          `,
+          tablet: css`
+            padding-inline: 2rem;
           `,
         })}
       `
