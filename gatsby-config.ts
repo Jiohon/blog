@@ -42,7 +42,7 @@ const config: GatsbyConfig = {
       options: {
         nestedIndexToRoot: true,
         ignore: ["**/*.css", "**/*.ts", "!**/index.ts", "**/*.scss", "**/README.md"],
-        customMappings: {},
+        customMappings: { "src/templates/home/index.tsx": "/" },
         context: {
           published: getParseEnv(process.env.GATSBY_NOT_PUBLISHED) ? [true, false] : [true],
         },

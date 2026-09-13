@@ -122,11 +122,6 @@ export const useStyles = createStyles(({ css, cx, stylish, responsive: r, prefix
         padding: 1.25rem;
       }
 
-      &:active .${prefixCls}-card {
-        transform: scale(0.985);
-        transition-duration: 0.1s;
-      }
-
       @media (prefers-reduced-motion: reduce) {
         .${prefixCls}-card {
           transition: border-color 0.2s ease;
